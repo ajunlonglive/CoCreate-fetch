@@ -35,24 +35,21 @@
 		</div>
 
 ------------------- FetchArray (json) ----------------------------
-		<div 
-			class="card"
+		<div class="card"
 			data-template_id="temp2"
 			data-fetch_collection="render_test"
 			data-filter_value="5f5aeace3a7246b7cf2e3ffc"
 			data-filter_name="_id"
 			data-filter_operator="$eq"
-			data-fetch_name="jsonArray"
-		>
-			<div class="template" data-template_id="temp2" data-value="email">
-				<h4 value="email" name="email"></h4>
-				<h4 value="home" name="home"></h4>
+			data-fetch_name="jsonArray">
+			<div class="template" data-template_id="temp2" data-value="{{email}}">
+				<h4 value="{{email}}" name="email"></h4>
+				<h4 value="{{home}}" name="home"></h4>
 			</div>	
 		</div>
 		
 ------------------- Documents ------------------------------		
-		<div 
-			class="card"
+		<div class="card"
 			data-template_id="render_testing"
 			data-fetch_collection="render_test"
 			data-filter_value="render"
@@ -65,12 +62,8 @@
 				data-value="_id"
 			>
 				<h3 data-attribute="email" data-value="email" name="email" value="email"></h3>
-				<h4 name="home" value="home"></h4>
-				<p>----------------- Object case ---------------------</p>
+				<h4 name="home" value="{{home}}"></h4>
 				<h4 name="other_email" value="personal_info.email"></h4>
-				
-				
-				<p>----------------- JSON Array case ---------------------</p>
 				<div 
 					class="template display:flex justify-content:space-between"
 					data-render_array="jsonArray"
