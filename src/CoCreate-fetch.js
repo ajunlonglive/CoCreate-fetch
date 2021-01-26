@@ -376,11 +376,7 @@ const CoCreateFetch = {
 }
 
 
-<<<<<<< HEAD
 // CoCreateInit.register('CoCreateFetch', CoCreateFetch, CoCreateFetch.initElement);
-=======
-CoCreateInit.register('CoCreateFetch', CoCreateFetch, CoCreateFetch.initElement);
->>>>>>> c8ee3f07216cf7f7c43428eb75b44ba2ee576a63
 
 CoCreateObserver.add({ 
 	name: 'CoCreateFetchObserver', 
@@ -391,7 +387,6 @@ CoCreateObserver.add({
 	}
 })
 
-<<<<<<< HEAD
 CoCreateObserver.add({ 
 	name: 'CoCreateFetchInit', 
 	observe: ['subtree', 'childList'],
@@ -406,6 +401,3 @@ CoCreateObserver.add({
 CoCreateFetch.init();
 
 export default CoCreateFetch;
-=======
-CoCreateFetch.init();
->>>>>>> c8ee3f07216cf7f7c43428eb75b44ba2ee576a63
