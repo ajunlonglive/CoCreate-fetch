@@ -1,10 +1,20 @@
 # CoCreate-fetch
+<<<<<<< HEAD
 A simple fetch component in vanilla javascript. Easily configured using HTML5 data-attributes and/or JavaScript API. Take it for a spin in our [playground!](https://cocreate.app/docs/fetch)
 
 ![GitHub file size in bytes](https://img.shields.io/github/size/CoCreate-app/CoCreate-fetch/dist/CoCreate-fetch.min.js?label=minified%20size&style=for-the-badge) 
 ![GitHub latest release](https://img.shields.io/github/v/release/CoCreate-app/CoCreate-fetch?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/CoCreate-app/CoCreate-fetch?style=for-the-badge) 
 ![GitHub labels](https://img.shields.io/github/labels/CoCreate-app/CoCreate-fetch/help%20wanted?style=for-the-badge)
+=======
+A simple HTML5 and pure javascript component. Easy configuration using data-attributes and highly styleable.
+
+![GitHub file size in bytes](https://img.shields.io/github/size/CoCreate-app/CoCreate-boilerplate/dist/CoCreate-boilerplate.min.js?label=minified%20size) 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/CoCreate-app/CoCreate-boilerplate)
+![GitHub](https://img.shields.io/github/license/CoCreate-app/CoCreate-boilerplate) 
+![GitHub labels](https://img.shields.io/github/labels/CoCreate-app/CoCreate-boilerplate/help%20wanted)
+
+>>>>>>> c8ee3f07216cf7f7c43428eb75b44ba2ee576a63
 
 ![CoCreate](https://cdn.cocreate.app/logo.png)
 
