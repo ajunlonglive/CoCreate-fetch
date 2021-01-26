@@ -17,11 +17,7 @@ const CoCreateFetch = {
 			return;     
 		}
 		let wrappers = mainContainer.querySelectorAll(this.selector);
-<<<<<<< HEAD
 		if (wrappers.length == 0 && mainContainer != document && mainContainer.hasAttribute('data-template_id') && mainContainer.hasAttribute('data-fetch_collection')) {
-=======
-		if (wrappers.length == 0 && mainContainer != document && mainContainer.hasAttribute('date-template_id') && mainContainer.hasAttribute('date-fetch_collection')) {
->>>>>>> c8ee3f07216cf7f7c43428eb75b44ba2ee576a63
 			wrappers = [mainContainer];
 		}
 		wrappers.forEach((wrapper) => {
@@ -98,11 +94,7 @@ const CoCreateFetch = {
 		
 		if (!element.getAttribute('data-fetch_collection')) return;
 		
-<<<<<<< HEAD
 		if (CoCreateObserver.getInitialized(element, 'fetch') && isInit){
-=======
-		if (CoCreateInit.getInitialized(element, 'fetch') && isInit){
->>>>>>> c8ee3f07216cf7f7c43428eb75b44ba2ee576a63
 			return;	
 		} 
 		
@@ -115,11 +107,7 @@ const CoCreateFetch = {
 		}
 		
 		// if (checkInit) {  
-<<<<<<< HEAD
 			CoCreateObserver.setInitialized(element, 'fetch')
-=======
-			CoCreateInit.setInitialized(element, 'fetch')
->>>>>>> c8ee3f07216cf7f7c43428eb75b44ba2ee576a63
 		// }
 
 		if (!item) {
@@ -204,21 +192,12 @@ const CoCreateFetch = {
 		
 		let passTo = wrapper.getAttribute('data-pass_to');
 		let renderData = renderId ? {[renderId] : data} : data;
-<<<<<<< HEAD
 		
 		type = type || "data";
 		type = renderId ? `${renderId}.${type}` : type;
 
 		let cloneWrapper = this.__cloneElement(template, templateId, type);
 		
-=======
-		
-		type = type || "data";
-		type = renderId ? `${renderId}.${type}` : type;
-
-		let cloneWrapper = this.__cloneElement(template, templateId, type);
-		
->>>>>>> c8ee3f07216cf7f7c43428eb75b44ba2ee576a63
 		CoCreateRender.setValue(cloneWrapper.children, renderData, passTo, cloneWrapper);
 		let removeableTemplate = cloneWrapper.querySelector(`.template[data-template_id="${templateId}"]`);
 		if (removeableTemplate) {
@@ -282,26 +261,13 @@ const CoCreateFetch = {
 	__createItem: function(data) {
 		let collection = data['collection'];
 		const self = this;
-<<<<<<< HEAD
-		let itemData = data.data;
-		let render_data = data;
-		render_data.data = [itemData];
-		
-=======
->>>>>>> c8ee3f07216cf7f7c43428eb75b44ba2ee576a63
+
 		this.items.forEach((item) => {
 			const {filter} = item;
 			let ids = [];
 			item.fetch_ids = [];
-<<<<<<< HEAD
 			if (filter.collection === collection && !item.el.getAttribute('data-fetch_name') && self.__checkItemByFilters(itemData, filter.filters)) {
 				// ids.push(data['document_id']);
-=======
-			if (filter.collection === collection && !item.el.getAttribute('data-fetch_name') && self.__checkItemByFilters(data.data, filter.filters)) {
-				// ids.push(data['document_id']);
-				let render_data = data;
-				render_data.data = [data.data];
->>>>>>> c8ee3f07216cf7f7c43428eb75b44ba2ee576a63
 				self.__renderData(item.el, render_data)
 			}
 		})
