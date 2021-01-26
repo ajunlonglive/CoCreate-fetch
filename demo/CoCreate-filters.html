@@ -92,64 +92,8 @@
               <option value="desc">DESC</option>
         	</select>
 
-    <!-- render.js
-    div class="template-wrapper display:flex flex-wrap"
+    <div class="display:flex flex-wrap:wrap"
       data-fetch_collection="module_activity"
-      data-pass_to="me1234" 
-      data-fetch_name="data-module_id" 
-      data-fetch_value="5deb167e189f212c8ebd0137" 
-      data-fetch_operator="or"
-      data-fetch_value_type="string"
-      data-fetch_count=""
-      data-order_by="name" 
-      data-order_type="asc"
-      
-      data-filter_name
-      data-fitler_value
-      data-filter_value_type="string"
-
-      data-filter_operator="contain/eq/...."
-      data-template_id="filter_test">
-      
-      </div>
-      
-      
-      <div data-filter_name="price" data-filter_value_type="number" data-filter_value="12" data-filter_operator="lt" placeholder="Max" class="floating-label">
-      -->
-      
-    
-    <!-- filter.js
-    <input data-filter_name="price" data-value_type="number" data-operator="lt" placeholder="Max" class="floating-label">-->
-    
-    <!-- render.js
-    div class="template-wrapper display:flex flex-wrap"
-      data-filter_collection="module_activity"
-      data-filter_name
-      data-fitler_value
-      data-filter_value_type="string"
-      data-filter_operator="or"
-      data-filter_count=""
-      data-order_by="name" 
-      data-order_type="asc"
-      
-      data-template_id="filter_test"
-      data-pass_to="me1234">
-      
-      </div>
-      
-      
-      <div data-filter_name="price" data-filter_value_type="number" data-filter_value="12" data-filter_operator="lt">
-      -->
-      
-    
-    <!-- filter.js
-    <input data-filter_name="price" data-value_type="number" data-operator="lt" placeholder="Max" class="floating-label">-->
-      
-    <div class="template-wrapper display:flex flex-wrap"
-      data-fetch_collection="module_activity"
-      data-pass_to="me1234" 
-      data-fetch_name="data-module_id" 
-      data-fetch_value="5deb167e189f212c8ebd0137" 
       data-fetch_count=""
       data-order_by="name" 
       data-order_type="asc"
@@ -157,13 +101,13 @@
       data-search_type="or"
       >
       
-        <div class="card template margin:10px">
-          <img name="name" data-document_id="" data-pass_id="me1234" src="http://via.placeholder.com/250x250/BF00FF/ffffff/" class="card-img-top" alt="...">
-          <div class="card-body padding:15px">
-            <h5 class="card-title" data-document_id="" name="name" data-pass_id="me1234">Item Name</h5>
-            <p class="card-text" data-document_id="" name="color" data-pass_id="me1234"></p>
-            <p class="card-text" data-document_id="" name="price" data-pass_id="me1234">$0</p>
-            <p class="card-text" data-document_id="" name="description" data-pass_id="me1234"></p>
+        <div class="card template margin:10px flex-grow:1 min-width:250px" data-template_id="filter_test">
+          <img name="name" data-document_id="" src="http://via.placeholder.com/250x250/BF00FF/ffffff/" width="100%" alt="...">
+          <div class="padding:15px">
+            <h5 class="" data-collection="{{collection}}" data-document_id="{{data._id}}" name="{{data.name}}" value="{{data.name}}">Item Name</h5>
+            <p class="" data-document_id="_id" name="color" value="color"></p>
+            <p class="" data-document_id="_id" name="price" value="price">$0</p>
+            <p class="" data-document_id="_id" name="description" value="description"></p>
 
             <a href="#" class="btn btn-primary">More details</a>
           </div>
@@ -180,8 +124,7 @@
       }
     </script>
    
-    <!--<script src="https://server.cocreate.app/js/CoCreate.min.js"></script>-->
-  
+
     <script src="https://server.cocreate.app/js/CoCreate.min.js"></script>
     <!--<script src="https://server.cocreate.app/CoCreateJS/src/CoCreate-socket.js"></script>-->
     <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-logic/CoCreate-logic.js"></script>-->
@@ -207,7 +150,6 @@
   
     <!--<script src="https://server.cocreate.app/CoCreate-components/CoCreate-init/CoCreate-init.js"></script>-->
   
-    <script src="https://cdn.cocreate.app/CoCreateUI.min.js"></script>
     <script src="https://server.cocreate.app/CoCreate-components/CoCreate-select/src/CoCreate-select.js"></script>
   
   </body>

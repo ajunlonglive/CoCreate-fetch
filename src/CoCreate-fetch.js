@@ -17,18 +17,32 @@ const CoCreateFetch = {
 			return;     
 		}
 		let wrappers = mainContainer.querySelectorAll(this.selector);
-		if (wrappers.length == 0 && mainContainer != document && mainContainer.hasAttributes('date-template_id') && mainContainer.hasAttributes('date-fetch_collection')) {
+		if (wrappers.length == 0 && mainContainer != document && mainContainer.hasAttribute('data-template_id') && mainContainer.hasAttribute('data-fetch_collection')) {
 			wrappers = [mainContainer];
 		}
-		wrappers.forEach((wrapper) => self.__initEachElement(wrapper, true, true))
+		wrappers.forEach((wrapper) => {
+			self.__initEachElement(wrapper, true, true)
+		})
+	},
+	
+	refershElement: function(mutation ) {
+		const { target } = mutation;
+		if (!target) return;
+		if (!target.hasAttribute('data-fetch_collection')) return;
+		
+		this.__initEachElement(target, false, false, true);
+		
 	},
 	
 	//. public functions....
 	reload: function(element) {
+		return;
 		if (!element || !element.getAttribute) {
 			return;
 		}
-		this.__initEachElement(element, true)
+		if (element.hasAttribute('date-template_id') && element.hasAttribute('date-fetch_collection')) {
+			this.__initEachElement(element, true)
+		}
 	},
 	
 	__initSocketEvent: function() {
@@ -51,9 +65,10 @@ const CoCreateFetch = {
 	
 	__initEvents: function() {
 		const self = this;
-		document.addEventListener('dndsuccess', function(e) {
+		window.addEventListener('dndsuccess', function(e) {
 			const {dropedEl, dragedEl} = e.detail;
-			let dragElTemplate = self.findTemplateElByChild(dragedEl);
+			let dragedElTemplatId = dragedEl.getAttribute('data-template_id')
+			let dragElTemplate = document.querySelector(`[data-fetch_collection][data-template_id='${dragedElTemplatId}']`);
 			let dropElTemplate = self.findTemplateElByChild(dropedEl);
 			
 			if (!dragElTemplate || !dropElTemplate) {
@@ -62,7 +77,7 @@ const CoCreateFetch = {
 			
 			if (!dragElTemplate.isSameNode(dropElTemplate)) {
 				//. save template id
-				self.updateParentTemplateOfChild(dragElTemplate, dragedEl)
+				self.updateParentTemplateOfChild(dropElTemplate, dragedEl)
 				
 				//. reordering
 				self.reorderChildrenOfTemplate(dragElTemplate);
@@ -73,26 +88,32 @@ const CoCreateFetch = {
 		})
 	},
 	
-	__initEachElement: function(element, isInit, checkInit) {
+	__initEachElement: function(element, isInit, checkInit, refresh) {
 		let item_id = element.getAttribute('data-template_id');
 		if (!item_id) return;
-
+		
+		if (!element.getAttribute('data-fetch_collection')) return;
+		
+		if (CoCreateObserver.getInitialized(element, 'fetch') && isInit){
+			return;	
+		} 
+		
 		let item = CoCreateFilter.getObjectByFilterId(this.items, item_id);
 		let filter = null;
 		const self = this;
 		
-		if (checkInit && CoCreateInit.getInitialized(element)){
-			return;	
-		} 
+		if (isInit && item) {
+			return;
+		}
+		
+		// if (checkInit) {  
+			CoCreateObserver.setInitialized(element, 'fetch')
+		// }
 
 		if (!item) {
 			filter = CoCreateFilter.setFilter(element, "data-template_id", "template");
 			let fetch_type = element.getAttribute('data-fetch_value_type') || "string";
 			if (!filter) return;
-
-			// if (checkInit) {  
-				CoCreateInit.setInitialized(element)
-			// }
 			
 			if (fetch_type === 'collection') {
 				filter.is_collection = true;
@@ -110,17 +131,21 @@ const CoCreateFetch = {
 			element.addEventListener("changeFilterInput", function(e) {
 				self.__removeOldData(item.el)
 				item.filter.startIndex = 0;
+				item.filter.isRefresh = true;
 				CoCreateFilter.fetchData(item.filter);
 			})
 			
 		} else {
 			filter = item.filter
 			CoCreateFilter.changeCollection(filter);
-			if (isInit) {
+			if (refresh) {
+				item.filter.isRefresh = true;
 				self.__removeOldData(element);
+				filter.isRefresh = true;
 				filter.startIndex = 0;
 			}
 		}
+		
 		CoCreateFilter.fetchData(filter);
 	},
 	
@@ -140,12 +165,12 @@ const CoCreateFetch = {
 		elements.forEach((el) => el.remove())
 	},
 	
-	__cloneElement: function(clone_node, templateId, type = "data") {
-		let itemTemplateDiv = document.createElement('div');
+	__cloneElement: function(clone_node, templateId, type) {
+		let itemTemplateDiv = document.createElement(clone_node.parentNode.tagName || 'div');
+		// let itemTemplateDiv = document.createElement('tbody');
 		let template = clone_node.cloneNode(true);
 		template.setAttribute('templateId', templateId);
-		template.removeAttribute('id');
-		
+
 		if (!type) type = "data"
 		if (!template.getAttribute('data-render_array')) {
 			template.setAttribute('data-render_array', type);
@@ -155,23 +180,36 @@ const CoCreateFetch = {
 		return itemTemplateDiv;
 	},
 	
-	__renderData: function(wrapper, data, type) {
+	__renderData: function(wrapper, data, type = "data") {
 
-		let template = wrapper.querySelector('.template');
-		if (!template) return;
-		
 		let templateId = wrapper.getAttribute('data-template_id');
-		let cloneWrapper = this.__cloneElement(template, templateId, type);
-		let passTo = wrapper.getAttribute('data-pass_to');
-		CoCreateRender.setValue(cloneWrapper.children, data, cloneWrapper, passTo);
-		cloneWrapper.querySelector('.template').remove();
-	
-		template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
+		let template = wrapper.querySelector(`.template[data-template_id='${templateId}'`);// || wrapper.querySelector('.template');
+		// let template = wrapper.querySelector('.template');
+		if (!template)  {
+			return;
+		}
+		let renderId = wrapper.getAttribute('data-render_id');
 		
+		let passTo = wrapper.getAttribute('data-pass_to');
+		let renderData = renderId ? {[renderId] : data} : data;
+		
+		type = type || "data";
+		type = renderId ? `${renderId}.${type}` : type;
+
+		let cloneWrapper = this.__cloneElement(template, templateId, type);
+		
+		CoCreateRender.setValue(cloneWrapper.children, renderData, passTo, cloneWrapper);
+		let removeableTemplate = cloneWrapper.querySelector(`.template[data-template_id="${templateId}"]`);
+		if (removeableTemplate) {
+			removeableTemplate.remove();
+		} else {
+			return;
+		}
+
+		template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
 		var evt = new CustomEvent('fetchedTemplate', { bubbles: true });
 		wrapper.dispatchEvent(evt);
-		this.__initNewAtags(wrapper.parentNode);
-		
+
 		/// init passValueBtns
 		let forms = wrapper.parentNode.getElementsByTagName('form');
 		
@@ -181,21 +219,9 @@ const CoCreateFetch = {
 			if (valuePassBtn) CoCreateLogic.__registerValuePassBtnEvent(form, valuePassBtn);
 		}
 		
-		this.initElement(wrapper)
+		// this.initElement(wrapper)
 	},
-	
-	__initNewAtags: function(parent) {
-		let aTags = parent.querySelectorAll('a');
-		aTags.forEach(aTag => {
-			if (aTag.classList.contains('newLink')) {
-				aTag.addEventListener('click', function(e) {
-					e.preventDefault();
-					CoCreateLogic.setLinkProcess(this);
-				})
-			}
-		})
-	},
-	
+
 	__deleteItem: function(data) {
 		let collection = data['collection'];
 		let document_id = data['document_id'];
@@ -224,24 +250,28 @@ const CoCreateFetch = {
 			if (fetch_name) {
 				data = data.data[0];
 			}
+			
+			if (data.metadata && data.metadata.isRefresh) {
+				this.__removeOldData(item.el);
+			}
 			this.__renderData(item.el, data, fetch_name);
 		}
 	},
 
 	__createItem: function(data) {
 		let collection = data['collection'];
+		const self = this;
+		let itemData = data.data;
+		let render_data = data;
+		render_data.data = [itemData];
+		
 		this.items.forEach((item) => {
 			const {filter} = item;
 			let ids = [];
 			item.fetch_ids = [];
-			if (filter.collection === collection && filter.fetch.value && filter.fetch.value === data['data'][filter.fetch.name]) {
-				ids.push(data['document_id']); 
-			}
-			
-			if (ids.length > 0) {
-				let info = CoCreateFilter.makeFetchOptions(item.item);
-				info['created_ids'] = ids;
-				CoCreate.readDocumentList(info);
+			if (filter.collection === collection && !item.el.getAttribute('data-fetch_name') && self.__checkItemByFilters(itemData, filter.filters)) {
+				// ids.push(data['document_id']);
+				self.__renderData(item.el, render_data)
 			}
 		})
 	},
@@ -251,13 +281,16 @@ const CoCreateFetch = {
 	},
 	
 	updateParentTemplateOfChild: function(template, element) {
-		const name = template.getAttribute('data-fetch_name')
-		if (!name) return;
+		const name = template.getAttribute('data-filter_name')
+		const value = template.getAttribute('data-filter_value')
+		const operator = template.getAttribute('data-filter_operator')
+		if (!name || operator != "$eq") return;
+		
 		CoCreate.replaceDataCrdt({
 			collection	: template.getAttribute('data-fetch_collection'), 
 			document_id : element.getAttribute('data-document_id'), 
 			name, 
-			value		: template.getAttribute('data-fetch_value'), 
+			value		: value, 
 			broadcast	: false,
 			update_crud	: true
 		})
@@ -269,10 +302,13 @@ const CoCreateFetch = {
 		if (!orderField || !template_id) {
 			return;
 		}
-		const children = template.querySelectorAll(`[data-template_id="${template_id}"][data-document_id]`)
+		const children = template.querySelectorAll(`[data-template_id="${template_id}"][data-document_id]:not(.template)`)
 		
 		const coff = template.getAttribute('data-order_type') !== 'asc' ? -1 : 1;
 		children.forEach((item, index) => {
+			if (item.classList.contains('template')) {
+				return
+			}
 			CoCreate.replaceDataCrdt({
 				collection : template.getAttribute('data-fetch_collection'), 
 				document_id : item.getAttribute('data-document_id'), 
@@ -282,8 +318,89 @@ const CoCreateFetch = {
 				update_crud: true
 			})
 		})
+	},
+	
+	__checkItemByFilters: function(item, filters) {
+		//. $contain, $range, $eq, $ne, $lt, $lte, $gt, $gte, $in, $nin, $geoWithin
+		let flag = true;
+		if (!item || !filters) {
+			return false;
+		}
+		
+		if (Array.isArray(item)) return false;
+		filters.forEach(({name, operator, type, value}) => {
+			
+			const fieldValue = item[name]
+			if (!flag) return;
+			
+			switch (operator) {
+				case '$contain':
+					if (!Array.isArray(fieldValue) || !fieldValue.some(x => value.includes(x))) flag = false;
+					break;
+				case '$range':
+					if (value[0] !== null && value[1] !== null) {
+						if (value[0] > fieldValue || value[1] <= fieldValue)
+							flag = false;
+					} else if (item.value[0] == null && value[1] >= fieldValue) {
+						flag = false;
+					} else if (item.value[1] == null && value[0] <= fieldValue) {
+						flag = false;
+					}
+					break;
+				case '$eq':
+					if (fieldValue != value[0]) flag = false; 
+					break;
+				case '$ne':
+					if (fieldValue == null || fieldValue == value[0]) flag = false;
+					break;
+				case '$lt':
+					if (fieldValue >= value[0]) flag = false;
+					break;
+				case '$lte':
+					if (fieldValue > value[0]) flag = false;
+					break;
+				case '$gt':
+					if (fieldValue <= value[0]) flag = false;
+					break;
+				case '$gte':
+					if (fieldValue < value[0]) flag = false;
+					break;
+				case '$in':
+					if (!Array.isArray(fieldValue) || !fieldValue.some(x => value.includes(x))) flag = false;
+					break;
+				case '$nin':
+					if (Array.isArray(fieldValue) && fieldValue.some(x => value.includes(x))) flag = false;
+					break;
+
+			}
+		})
+		return flag;
 	}
 }
 
+
+// CoCreateInit.register('CoCreateFetch', CoCreateFetch, CoCreateFetch.initElement);
+
+CoCreateObserver.add({ 
+	name: 'CoCreateFetchObserver', 
+	observe: ['attributes'],
+	attributes: ['data-fetch_collection', 'data-filter_name'],
+	task: function(mutation) {
+		CoCreateFetch.refershElement(mutation)
+	}
+})
+
+CoCreateObserver.add({ 
+	name: 'CoCreateFetchInit', 
+	observe: ['subtree', 'childList'],
+	include: "[data-fetch_collection]",
+	task: function(mutation) {
+		console.log('created element----------------');
+		console.log(mutation.target)
+		CoCreateFetch.initElement(mutation.target)
+	}
+})
+
 CoCreateFetch.init();
-// CoCreateInit.register('CoCreateTemplate', CoCreateTemplate, CoCreateTemplate.initElement);
+
+export default CoCreateFetch;
