@@ -47,18 +47,18 @@ const CoCreateFetch = {
 	
 	__initSocketEvent: function() {
 		const self = this;
-		CoCreateSocket.listen('readDocumentList', function(data) {
+		CoCreate.socket.listen('readDocumentList', function(data) {
 			self.__fetchedItem(data)
 		})
-		CoCreateSocket.listen('readCollectionList', function(data) {
+		CoCreate.socket.listen('readCollectionList', function(data) {
 			self.__fetchedItem(data)
 		})
 		
-		CoCreateSocket.listen('createDocument', function(data) {
+		CoCreate.socket.listen('createDocument', function(data) {
 			self.__createItem(data)
 		})
 	
-		CoCreateSocket.listen('deleteDocument', function(data) {
+		CoCreate.socket.listen('deleteDocument', function(data) {
 			self.__deleteItem(data);
 		})
 	},
@@ -94,11 +94,11 @@ const CoCreateFetch = {
 		
 		if (!element.getAttribute('data-fetch_collection')) return;
 		
-		if (CoCreateObserver.getInitialized(element, 'fetch') && isInit){
+		if (CoCreate.observer.getInitialized(element, 'fetch') && isInit){
 			return;	
 		} 
 		
-		let item = CoCreateFilter.getObjectByFilterId(this.items, item_id);
+		let item = CoCreate.filter.getObjectByFilterId(this.items, item_id);
 		let filter = null;
 		const self = this;
 		
@@ -107,11 +107,11 @@ const CoCreateFetch = {
 		}
 		
 		// if (checkInit) {  
-			CoCreateObserver.setInitialized(element, 'fetch')
+			CoCreate.observer.setInitialized(element, 'fetch')
 		// }
 
 		if (!item) {
-			filter = CoCreateFilter.setFilter(element, "data-template_id", "template");
+			filter = CoCreate.filter.setFilter(element, "data-template_id", "template");
 			let fetch_type = element.getAttribute('data-fetch_value_type') || "string";
 			if (!filter) return;
 			
@@ -132,7 +132,7 @@ const CoCreateFetch = {
 				self.__removeOldData(item.el)
 				item.filter.startIndex = 0;
 				item.filter.isRefresh = true;
-				CoCreateFilter.fetchData(item.filter);
+				CoCreate.filter.fetchData(item.filter);
 			})
 			
 		} else {
@@ -146,16 +146,16 @@ const CoCreateFetch = {
 			}
 		}
 		
-		CoCreateFilter.fetchData(filter);
+		CoCreate.filter.fetchData(filter);
 	},
 	
 	__runLoadMore: function(templateId) {
 		if (!templateId) return;
-		let item = CoCreateFilter.getObjectByFilterId(this.items, templateId);
+		let item = CoCreate.filter.getObjectByFilterId(this.items, templateId);
 		
 		if (!item) return;
 		if (item.filter.count > 0) {
-			CoCreateFilter.fetchData(item.filter)
+			CoCreate.filter.fetchData(item.filter)
 		}
 	},
 	
@@ -198,7 +198,7 @@ const CoCreateFetch = {
 
 		let cloneWrapper = this.__cloneElement(template, templateId, type);
 		
-		CoCreateRender.setValue(cloneWrapper.children, renderData, passTo, cloneWrapper);
+		CoCreate.render.setValue(cloneWrapper.children, renderData, passTo, cloneWrapper);
 		let removeableTemplate = cloneWrapper.querySelector(`.template[data-template_id="${templateId}"]`);
 		if (removeableTemplate) {
 			removeableTemplate.remove();
@@ -216,7 +216,7 @@ const CoCreateFetch = {
 		for (let i = 0; i < forms.length; i++) {
 			let form = forms[i];
 			let valuePassBtn = form.querySelector('.passValueBtn');
-			if (valuePassBtn) CoCreateLogic.__registerValuePassBtnEvent(form, valuePassBtn);
+			if (valuePassBtn) CoCreate.logic.__registerValuePassBtnEvent(form, valuePassBtn);
 		}
 		
 		// this.initElement(wrapper)
@@ -242,8 +242,7 @@ const CoCreateFetch = {
 	
 	__fetchedItem: function(data) {
 		let item_id = data['element'];
-		let item = CoCreateFilter.getObjectByFilterId(this.items, item_id);
-		
+		let item = CoCreate.filter.getObjectByFilterId(this.items, item_id);
 		if (item) {
 			item.filter.startIndex += data['data'].length;
 			let fetch_name = item.el.getAttribute('data-fetch_name');
@@ -251,16 +250,22 @@ const CoCreateFetch = {
 				data = data.data[0];
 			}
 			
-			if (data.metadata && data.metadata.isRefresh) {
-				this.__removeOldData(item.el);
+			if (data) {
+				if (data.metadata && data.metadata.isRefresh) {
+					this.__removeOldData(item.el);
+				}
+				this.__renderData(item.el, data, fetch_name);
 			}
-			this.__renderData(item.el, data, fetch_name);
+			
 		}
 	},
 
 	__createItem: function(data) {
 		let collection = data['collection'];
 		const self = this;
+		let itemData = data.data;
+		let render_data = data;
+		render_data.data = [itemData];
 
 		this.items.forEach((item) => {
 			const {filter} = item;
@@ -274,7 +279,7 @@ const CoCreateFetch = {
 	},
 
 	findTemplateElByChild: function(element) {
-		return CoCreateUtils.getParentFromElement(element, null, ['data-template_id', 'data-fetch_collection']);
+		return CoCreate.utils.getParentFromElement(element, null, ['data-template_id', 'data-fetch_collection']);
 	},
 	
 	updateParentTemplateOfChild: function(template, element) {
@@ -283,7 +288,7 @@ const CoCreateFetch = {
 		const operator = template.getAttribute('data-filter_operator')
 		if (!name || operator != "$eq") return;
 		
-		CoCreate.replaceDataCrdt({
+		CoCreate.crdt.replace({
 			collection	: template.getAttribute('data-fetch_collection'), 
 			document_id : element.getAttribute('data-document_id'), 
 			name, 
@@ -306,7 +311,7 @@ const CoCreateFetch = {
 			if (item.classList.contains('template')) {
 				return
 			}
-			CoCreate.replaceDataCrdt({
+			CoCreate.crdt.replace({
 				collection : template.getAttribute('data-fetch_collection'), 
 				document_id : item.getAttribute('data-document_id'), 
 				name: orderField, 
@@ -376,22 +381,21 @@ const CoCreateFetch = {
 }
 
 
-// CoCreateInit.register('CoCreateFetch', CoCreateFetch, CoCreateFetch.initElement);
 
-CoCreateObserver.add({ 
+CoCreate.observer.add({ 
 	name: 'CoCreateFetchObserver', 
 	observe: ['attributes'],
 	attributes: ['data-fetch_collection', 'data-filter_name'],
-	task: function(mutation) {
+	callback: function(mutation) {
 		CoCreateFetch.refershElement(mutation)
 	}
 })
 
-CoCreateObserver.add({ 
+CoCreate.observer.add({ 
 	name: 'CoCreateFetchInit', 
 	observe: ['subtree', 'childList'],
 	include: "[data-fetch_collection]",
-	task: function(mutation) {
+	callback: function(mutation) {
 		console.log('created element----------------');
 		console.log(mutation.target)
 		CoCreateFetch.initElement(mutation.target)
