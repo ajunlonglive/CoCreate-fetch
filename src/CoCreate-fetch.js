@@ -137,7 +137,7 @@ const CoCreateFetch = {
 			
 		} else {
 			filter = item.filter
-			CoCreateFilter.changeCollection(filter);
+			CoCreate.filter.changeCollection(filter);
 			if (refresh) {
 				item.filter.isRefresh = true;
 				self.__removeOldData(element);
@@ -198,7 +198,13 @@ const CoCreateFetch = {
 
 		let cloneWrapper = this.__cloneElement(template, templateId, type);
 		
-		CoCreate.render.setValue(cloneWrapper.children, renderData, passTo, cloneWrapper);
+		// CoCreate.render.setValue(cloneWrapper.children, renderData, passTo, cloneWrapper);
+		
+		CoCreate.render.data({
+			elements: cloneWrapper.children,
+			data: renderData,
+			passTo: passTo
+		})
 		let removeableTemplate = cloneWrapper.querySelector(`.template[data-template_id="${templateId}"]`);
 		if (removeableTemplate) {
 			removeableTemplate.remove();
@@ -288,7 +294,7 @@ const CoCreateFetch = {
 		const operator = template.getAttribute('data-filter_operator')
 		if (!name || operator != "$eq") return;
 		
-		CoCreate.crdt.replace({
+		CoCreate.crdt.replaceText({
 			collection	: template.getAttribute('data-fetch_collection'), 
 			document_id : element.getAttribute('data-document_id'), 
 			name, 
@@ -311,7 +317,7 @@ const CoCreateFetch = {
 			if (item.classList.contains('template')) {
 				return
 			}
-			CoCreate.crdt.replace({
+			CoCreate.crdt.replaceText({
 				collection : template.getAttribute('data-fetch_collection'), 
 				document_id : item.getAttribute('data-document_id'), 
 				name: orderField, 
@@ -396,8 +402,6 @@ CoCreate.observer.add({
 	observe: ['subtree', 'childList'],
 	include: "[data-fetch_collection]",
 	callback: function(mutation) {
-		console.log('created element----------------');
-		console.log(mutation.target)
 		CoCreateFetch.initElement(mutation.target)
 	}
 })
