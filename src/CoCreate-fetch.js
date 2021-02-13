@@ -388,7 +388,7 @@ const CoCreateFetch = {
 
 
 
-CoCreate.observer.add({ 
+CoCreate.observer.init({ 
 	name: 'CoCreateFetchObserver', 
 	observe: ['attributes'],
 	attributes: ['data-fetch_collection', 'data-filter_name'],
@@ -397,7 +397,7 @@ CoCreate.observer.add({
 	}
 })
 
-CoCreate.observer.add({ 
+CoCreate.observer.init({ 
 	name: 'CoCreateFetchInit', 
 	observe: ['subtree', 'childList'],
 	include: "[data-fetch_collection]",
