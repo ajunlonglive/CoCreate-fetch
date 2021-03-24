@@ -1,4 +1,11 @@
+import observer from '../../CoCreate-observer/src'
+import ccfilter from '../../CoCreate-filter/src'
+import utils from '../../../CoCreateJS/src/utils';
+import {socket, crud} from '../../../CoCreateJS/src';
+import logic from '../../CoCreate-logic/src';
+import render from '../../CoCreate-render/src';
 
+console.log(socket)
 const CoCreateFetch = {
 	selector: '[data-template_id][data-fetch_collection]',
 	items: [],
@@ -47,18 +54,18 @@ const CoCreateFetch = {
 	
 	__initSocketEvent: function() {
 		const self = this;
-		CoCreate.socket.listen('readDocumentList', function(data) {
+		socket.listen('readDocumentList', function(data) {
 			self.__fetchedItem(data)
 		})
-		CoCreate.socket.listen('readCollectionList', function(data) {
+		socket.listen('readCollectionList', function(data) {
 			self.__fetchedItem(data)
 		})
 		
-		CoCreate.socket.listen('createDocument', function(data) {
+		socket.listen('createDocument', function(data) {
 			self.__createItem(data)
 		})
 	
-		CoCreate.socket.listen('deleteDocument', function(data) {
+		socket.listen('deleteDocument', function(data) {
 			self.__deleteItem(data);
 		})
 	},
@@ -94,11 +101,11 @@ const CoCreateFetch = {
 		
 		if (!element.getAttribute('data-fetch_collection')) return;
 		
-		if (CoCreate.observer.getInitialized(element, 'fetch') && isInit){
+		if (observer.getInitialized(element, 'fetch') && isInit){
 			return;	
 		} 
 		
-		let item = CoCreate.filter.getObjectByFilterId(this.items, item_id);
+		let item = ccfilter.getObjectByFilterId(this.items, item_id);
 		let filter = null;
 		const self = this;
 		
@@ -107,11 +114,11 @@ const CoCreateFetch = {
 		}
 		
 		// if (checkInit) {  
-			CoCreate.observer.setInitialized(element, 'fetch')
+			observer.setInitialized(element, 'fetch')
 		// }
 
 		if (!item) {
-			filter = CoCreate.filter.setFilter(element, "data-template_id", "template");
+			filter = ccfilter.setFilter(element, "data-template_id", "template");
 			let fetch_type = element.getAttribute('data-fetch_value_type') || "string";
 			if (!filter) return;
 			
@@ -132,12 +139,12 @@ const CoCreateFetch = {
 				self.__removeOldData(item.el)
 				item.filter.startIndex = 0;
 				item.filter.isRefresh = true;
-				CoCreate.filter.fetchData(item.filter);
+				ccfilter.fetchData(item.filter);
 			})
 			
 		} else {
 			filter = item.filter
-			CoCreate.filter.changeCollection(filter);
+			ccfilter.changeCollection(filter);
 			if (refresh) {
 				item.filter.isRefresh = true;
 				self.__removeOldData(element);
@@ -146,16 +153,16 @@ const CoCreateFetch = {
 			}
 		}
 		
-		CoCreate.filter.fetchData(filter);
+		ccfilter.fetchData(filter);
 	},
 	
 	__runLoadMore: function(templateId) {
 		if (!templateId) return;
-		let item = CoCreate.filter.getObjectByFilterId(this.items, templateId);
+		let item = ccfilter.getObjectByFilterId(this.items, templateId);
 		
 		if (!item) return;
 		if (item.filter.count > 0) {
-			CoCreate.filter.fetchData(item.filter)
+			ccfilter.fetchData(item.filter)
 		}
 	},
 	
@@ -198,9 +205,9 @@ const CoCreateFetch = {
 
 		let cloneWrapper = this.__cloneElement(template, templateId, type);
 		
-		// CoCreate.render.setValue(cloneWrapper.children, renderData, passTo, cloneWrapper);
+		// render.setValue(cloneWrapper.children, renderData, passTo, cloneWrapper);
 		
-		CoCreate.render.data({
+		render.data({
 			elements: cloneWrapper.children,
 			data: renderData,
 			passTo: passTo
@@ -222,7 +229,7 @@ const CoCreateFetch = {
 		for (let i = 0; i < forms.length; i++) {
 			let form = forms[i];
 			let valuePassBtn = form.querySelector('.passValueBtn');
-			if (valuePassBtn) CoCreate.logic.__registerValuePassBtnEvent(form, valuePassBtn);
+			if (valuePassBtn) logic.__registerValuePassBtnEvent(form, valuePassBtn);
 		}
 		
 		// this.initElement(wrapper)
@@ -248,7 +255,7 @@ const CoCreateFetch = {
 	
 	__fetchedItem: function(data) {
 		let item_id = data['element'];
-		let item = CoCreate.filter.getObjectByFilterId(this.items, item_id);
+		let item = ccfilter.getObjectByFilterId(this.items, item_id);
 		if (item) {
 			item.filter.startIndex += data['data'].length;
 			let fetch_name = item.el.getAttribute('data-fetch_name');
@@ -285,7 +292,7 @@ const CoCreateFetch = {
 	},
 
 	findTemplateElByChild: function(element) {
-		return CoCreate.utils.getParentFromElement(element, null, ['data-template_id', 'data-fetch_collection']);
+		return utils.getParentFromElement(element, null, ['data-template_id', 'data-fetch_collection']);
 	},
 	
 	updateParentTemplateOfChild: function(template, element) {
@@ -293,14 +300,14 @@ const CoCreateFetch = {
 		const value = template.getAttribute('data-filter_value')
 		const operator = template.getAttribute('data-filter_operator')
 		if (!name || operator != "$eq") return;
-		
-		CoCreate.crdt.replaceText({
+
+		crud.updateDocument({
 			collection	: template.getAttribute('data-fetch_collection'), 
 			document_id : element.getAttribute('data-document_id'), 
-			name, 
-			value		: value, 
-			broadcast	: false,
-			update_crud	: true
+			data: {
+				[name]: value	
+			},
+			broadcast	: false
 		})
 	},
 	
@@ -317,13 +324,13 @@ const CoCreateFetch = {
 			if (item.classList.contains('template')) {
 				return
 			}
-			CoCreate.crdt.replaceText({
+			crud.updateDocument({
 				collection : template.getAttribute('data-fetch_collection'), 
 				document_id : item.getAttribute('data-document_id'), 
-				name: orderField, 
-				value: index * coff, 
+				data: {
+					[orderField]: index * coff	
+				},
 				broadcast: false,
-				update_crud: true
 			})
 		})
 	},
@@ -388,7 +395,7 @@ const CoCreateFetch = {
 
 
 
-CoCreate.observer.init({ 
+observer.init({ 
 	name: 'CoCreateFetchObserver', 
 	observe: ['attributes'],
 	attributes: ['data-fetch_collection', 'data-filter_name'],
@@ -397,7 +404,7 @@ CoCreate.observer.init({
 	}
 })
 
-CoCreate.observer.init({ 
+observer.init({ 
 	name: 'CoCreateFetchInit', 
 	observe: ['subtree', 'childList'],
 	include: "[data-fetch_collection]",
