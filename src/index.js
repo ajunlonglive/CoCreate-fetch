@@ -1,9 +1,15 @@
-import observer from '../../CoCreate-observer/src'
-import ccfilter from '../../CoCreate-filter/src'
-import utils from '../../../CoCreateJS/src/utils';
+import observer from '@cocreate/observer'
+import ccfilter from '@cocreate/filter'
+import utils from '@cocreate/utils';
 import {socket, crud} from '../../../CoCreateJS/src';
-import logic from '../../CoCreate-logic/src';
-import render from '../../CoCreate-render/src';
+// import CoCreateSocket from '@cocreate/socket';
+// import CoCreateCrud from '@cocreate/crud';
+import crudUtils from '@cocreate/crud/src/utils.crud.js'
+import logic from '@cocreate/logic';
+import render from '@cocreate/render';
+
+// let socket = new CoCreateSocket('ws');
+// let crud = CoCreateCrud(socket);
 
 console.log(socket)
 const CoCreateFetch = {
