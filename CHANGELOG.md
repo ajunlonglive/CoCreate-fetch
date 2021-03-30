@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.1...v1.0.2) (2021-03-30)
+
+
+### Bug Fixes
+
+* cocreatejs from npm ([6e3ec72](https://github.com/CoCreate-app/CoCreate-fetch/commit/6e3ec72a6c7a5f6e5d41778e1fd71c8946123c46))
+
 ## [1.0.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.0...v1.0.1) (2021-03-29)
 
 
