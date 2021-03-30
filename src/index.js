@@ -1,7 +1,7 @@
 import observer from '@cocreate/observer'
 import ccfilter from '@cocreate/filter'
 import utils from '@cocreate/utils';
-import {socket, crud} from '../../../CoCreateJS/src';
+import {socket, crud} from '@cocreate/cocreatejs';
 // import CoCreateSocket from '@cocreate/socket';
 // import CoCreateCrud from '@cocreate/crud';
 import crudUtils from '@cocreate/crud/src/utils.crud.js'
