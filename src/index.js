@@ -1,17 +1,11 @@
 import observer from '@cocreate/observer'
 import ccfilter from '@cocreate/filter'
 import utils from '@cocreate/utils';
-import {socket, crud} from '@cocreate/cocreatejs';
-// import CoCreateSocket from '@cocreate/socket';
-// import CoCreateCrud from '@cocreate/crud';
-import crudUtils from '@cocreate/crud/src/utils.crud.js'
+import crud from '@cocreate/crud';
 import logic from '@cocreate/logic';
 import render from '@cocreate/render';
 
-// let socket = new CoCreateSocket('ws');
-// let crud = CoCreateCrud(socket);
-
-console.log(socket)
+// console.log(socket)
 const CoCreateFetch = {
 	selector: '[data-template_id][data-fetch_collection]',
 	items: [],
@@ -60,18 +54,18 @@ const CoCreateFetch = {
 	
 	__initSocketEvent: function() {
 		const self = this;
-		socket.listen('readDocumentList', function(data) {
+		crud.listen('readDocumentList', function(data) {
 			self.__fetchedItem(data)
 		})
-		socket.listen('readCollectionList', function(data) {
+		crud.listen('readCollectionList', function(data) {
 			self.__fetchedItem(data)
 		})
 		
-		socket.listen('createDocument', function(data) {
+		crud.listen('createDocument', function(data) {
 			self.__createItem(data)
 		})
 	
-		socket.listen('deleteDocument', function(data) {
+		crud.listen('deleteDocument', function(data) {
 			self.__deleteItem(data);
 		})
 	},
