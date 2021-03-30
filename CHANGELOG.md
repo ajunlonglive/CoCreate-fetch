@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.2...v1.0.3) (2021-03-30)
+
+
+### Bug Fixes
+
+* import paths using npm ([a8f8a36](https://github.com/CoCreate-app/CoCreate-fetch/commit/a8f8a36989072cc1e99f29e81a8a028802e4fc47))
+
 ## [1.0.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.1...v1.0.2) (2021-03-30)
 
 
