@@ -1,7 +1,7 @@
 import observer from '@cocreate/observer'
 import ccfilter from '@cocreate/filter'
 import utils from '@cocreate/utils';
-import crud from '@cocreate/crud';
+import crud from '@cocreate/crud-client';
 import logic from '@cocreate/logic';
 import render from '@cocreate/render';
 
