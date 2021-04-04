@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.4...v1.0.5) (2021-04-04)
+
+
+### Bug Fixes
+
+* Remove crud from package.json ([c4a3a05](https://github.com/CoCreate-app/CoCreate-fetch/commit/c4a3a05e0d7438d0ee0e80f27edcce9d4f79f537))
+
 ## [1.0.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.3...v1.0.4) (2021-04-04)
 
 
