@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.3...v1.0.4) (2021-04-04)
+
+
+### Bug Fixes
+
+* update socket to socket-lient and crud to crud client" ([dece5af](https://github.com/CoCreate-app/CoCreate-fetch/commit/dece5af3e1f3568550b1fb8cf6fe69112919a918))
+
 ## [1.0.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.2...v1.0.3) (2021-03-30)
 
 
