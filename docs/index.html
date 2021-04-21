@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,14 +10,7 @@
 	<meta name="keywords" content="drag and drop, colaboration, dnd utility, drag and drop utility" />
 	<meta name="robots" content="index,follow" />
 	<!-- CoCreate CSS -->
-	<link rel="stylesheet" href="https://cdn.cocreate.app/latest/CoCreate.min.css" type="text/css" />
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" crossorigin="anonymous" />
-	<!-- Codemirror -->
-	<link rel="stylesheet" href="https://server.cocreate.app/CoCreate-plugins/CoCreate-codemirror/src/CoCreate-codemirror.css" type="text/css" />
-	<link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css" async defer>
-	<!-- prism -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.cocreate.app/latest/CoCreate.min.css" type="text/css"/>
 </head>
 
 <body>
@@ -32,13 +24,21 @@
 		<p class="max-width:500px margin:20px_10px">CoCreate-fetch javascript component. Easy configuration using data-attributes and highly styleable.</p>
 		<div id="fetch-section" class="display:flex flex-wrap:wrap">
 			<div class="flex-grow:1 width:300px padding:0px_10px margin:20px_0px">
-				<h2 class="border-bottom:1px_solid_lightgrey padding:5px_0px">Install</h2>
-				<pre><code class="language-javascript">npm install cocreate-fetch</code></pre>
+
+				<div>
+			       <h2 id="fetch-installation" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey padding:5px_0px">Install</h2>
+			       <a class="display:none" href="#fetch-installation"><i class="fas fa-link"></i></a>
+			    </div>
+				<pre><code class="language-javascript">npm install @cocreate/cocreate-fetch</code></pre>
 				<p class="padding:10px_0px">Or you can use cdn link:</p>
-				<pre><code class="language-javascript">https://cdn.cocreate.app/CoCreate-fetch.min.js</code></pre>
+				<pre><code class="language-javascript">https://cdn.cocreate.app/latest/cocreate.min.js</code></pre>
 				<p class="padding:10px_0px">for styling please refer to #id-style</p>
-				
-				<h2 class="border-bottom:1px_solid_lightgrey margin-top:80px padding:5px_0px">Dependencies components</h2>
+
+				<div>
+			       <h2 id="fetch-dependencies" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey padding:5px_0px">Dependencies</h2>
+			       <a class="display:none" href="#fetch-dependencies"><i class="fas fa-link"></i></a>
+			    </div>
+			    
 				<p class="padding:10px_0px">
 				    <strong>CoCreate.js</strong>, 
 				     <strong>CoCreate-logic.js</strong>, 
@@ -48,7 +48,10 @@
 				</p>
 				
 
-				<h2 class="border-bottom:1px_solid_lightgrey margin-top:80px padding:5px_0px">Usage</h2>
+				<div>
+			       <h2 id="fetch-usage" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey padding:5px_0px">Usage</h2>
+			       <a class="display:none" href="#fetch-usage"><i class="fas fa-link"></i></a>
+			    </div>
 				<p class="padding:10px_0px">
 					CoCreate-fetch would fetch data from db by attributes, and then render data into the elements based on CoCreate-render.js
 				</p>
@@ -100,7 +103,10 @@
 &lt;/div&gt;
 				</code></pre>
 
-				<h3 class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Attributes</h3>
+				<div>
+			       <h2 id="fetch-attributes" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Attributes</h2>
+			       <a class="display:none" href="#fetch-attributes"><i class="fas fa-link"></i></a>
+			    </div>
 				
                 <ul class="list-style-type:none ">
 					<li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
@@ -141,12 +147,18 @@
 					</li>
                 </ul>
 
-				<h2 class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">How Does It Works</h2>
+				<div>
+			       <h2 id="fetch-how" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">How Does It Works</h2>
+			       <a class="display:none" href="#fetch-how"><i class="fas fa-link"></i></a>
+			    </div>
 				<p>CoCreate-fetch works based on cocreate.js and template. </p>
 				
 				<p>To fetch the array data, the template wrapper should define <code>data-fetch_document</code>. <code>data-template_id</code></p>
 
-				<h2 class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Effects and Styles</h2>
+				<div>
+			       <h2 id="fetch-effects" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Effects and Styles</h2>
+			       <a class="display:none" href="#fetch-effects"><i class="fas fa-link"></i></a>
+			    </div>
                 
 				<h2 class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Events</h2>
 				<h4><span>fetchedTemplate</span><span class="cocreate-badge success"></span></h4>
@@ -154,8 +166,12 @@
 			</div>
 			
 			<div class="flex-grow:1 width:300px padding:0px_10px margin:20px_0px  border-bottom:1px_solid_lightgrey">
+				
 				<!-- SandBox -->
-				<h2 class="border-bottom:1px_solid_lightgrey padding:5px_0px">Demo</h2>
+				<div>
+			       <h2 id="fetch-demo" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Demo</h2>
+			       <a class="display:none" href="#fetch-demo"><i class="fas fa-link"></i></a>
+			    </div>
 				<div class="position:sticky top:0 padding:15px_0px height:100vh">
 					<div class="container svColumn overflow:hidden card border-radius:2px width:auto height:100%" id="sandbox">
 						<div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" data-show="preview" data-hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px hidden" id="code" data-show="code" data-hide="preview"><i class="fas fa-code"></i></a>
@@ -186,24 +202,7 @@
 		}
 	</script>
 	<!--CoCreateJS-->
-	<script src="https://cdn.cocreate.app/latest/CoCreate.min.js"></script>
-	<!-- CoCreate CodeMiirror -->
-	<script type="text/javascript" src="https://server.cocreate.app/CoCreate-plugins/CoCreate-codemirror/dist/CoCreate-codemirror.js" async></script>
-	<!-- Prism -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js"></script>
-	<script>
-		//     Prism.plugins.NormalizeWhitespace.setDefaults({
-		//         'remove-trailing': true,
-		//         'remove-indent': true,
-		//         'left-trim': true,
-		//         'right-trim': true,
-		//         /*'break-lines': 80,
-		//         'indent': 2,
-		//         'remove-initial-line-feed': false,
-		//         'tabs-to-spaces': 4,
-		//         'spaces-to-tabs': 4*/
-		//     });
-	</script>
+	<script src="https://cdn.cocreate.app/latest/CoCreate.min.js" ></script>
 </body>
 
 </html>
