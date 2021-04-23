@@ -1,3 +1,13 @@
+## [1.0.6](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.5...v1.0.6) (2021-04-23)
+
+
+### Bug Fixes
+
+* add missing packages ([f88a5f9](https://github.com/CoCreate-app/CoCreate-fetch/commit/f88a5f96068fdc49847edbbffa63a796d5ea0c7d))
+* ci and build process ([4ec2f7d](https://github.com/CoCreate-app/CoCreate-fetch/commit/4ec2f7d3c167e844988f1b78d0616b97dc164321))
+* npm publish and cdn deployment ([fce317a](https://github.com/CoCreate-app/CoCreate-fetch/commit/fce317a81b7a0a0141b694c634a2f783072e3863))
+* readme and documentation. Removed securitykeys ([2000a7d](https://github.com/CoCreate-app/CoCreate-fetch/commit/2000a7d0f6aff6cde99b6a12a9a80f619e8b4505))
+
 ## [1.0.5](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.4...v1.0.5) (2021-04-04)
 
 
