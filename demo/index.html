@@ -5,31 +5,15 @@
 	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  
-	  <title>CoCreate-fetch | CoCreateJS</title>
+	  <title>Fetch | CoCreateJS</title>
 	  
-  		<style type="text/css">
-			.template{
-				display:none;
-			}
-			div[data-render_array] {
-				margin-left: 2rem;
-				border: 1px solid gray;
-				padding: 10px;
-			}
-			
-			h5, h4 {
-				padding: 5px;
-				margin: 0;
-			}
-			p {
-				margin-top: 0;
-			}
-		</style>
+	  <!-- CoCreate Favicon -->
+	  <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
 	  
 	</head>
 	<body>
 
-------------------- FetchArray (string) ----------------------------
+<!--------------------- FetchArray (string) ------------------------------>
 		<div 
 			class="card"
 			data-template_id="temp1"
@@ -44,7 +28,7 @@
 			</div>	
 		</div>
 
-------------------- FetchArray (json) ----------------------------
+<!--------------------- FetchArray (json) ------------------------------>
 		<div class="card"
 			data-template_id="temp2"
 			data-fetch_collection="render_test"
@@ -58,7 +42,7 @@
 			</div>	
 		</div>
 		
-------------------- Documents ------------------------------		
+<!--------------------- Documents ------------------------------->
 		<div class="card"
 			data-template_id="render_testing"
 			data-fetch_collection="render_test"
@@ -82,7 +66,7 @@
 					<h5 name="home" value="home"></h5>
 				</div>
 				
-				<p>----------------- String Array case ---------------------</p>
+				<!--<p>----------------- String Array case ---------------------</p>-->
 				<div 
 					class="template display:flex justify-content:space-between"
 					data-render_array="stringArray"
@@ -106,6 +90,5 @@
 	<!-- CoCreate JS CDN -->
     <script src="https://cdn.cocreate.app/fetch/latest/CoCreate-fetch.min.js" ></script>
 
-		 
 	</body>
 </html>
