@@ -400,6 +400,7 @@ observer.init({
 	observe: ['attributes'],
 	attributes: ['data-fetch_collection', 'data-filter_name'],
 	callback: function(mutation) {
+    if(!mutation.isRemoved)
 		CoCreateFetch.refershElement(mutation)
 	}
 })
@@ -409,6 +410,7 @@ observer.init({
 	observe: ['subtree', 'childList'],
 	include: "[data-fetch_collection]",
 	callback: function(mutation) {
+    if(!mutation.isRemoved)
 		CoCreateFetch.initElement(mutation.target)
 	}
 })
