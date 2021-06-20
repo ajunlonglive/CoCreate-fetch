@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.8...v1.0.9) (2021-06-16)
+
+
+### Bug Fixes
+
+* added header for seo ([3cb5a85](https://github.com/CoCreate-app/CoCreate-fetch/commit/3cb5a8557e1f4dfd3afe0e0f3b04246a4e82f85c))
+
 ## [1.0.8](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.7...v1.0.8) (2021-05-08)
 
 
