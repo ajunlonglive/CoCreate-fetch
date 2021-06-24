@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.10...v1.0.11) (2021-06-24)
+
+
+### Bug Fixes
+
+* update all [@cocreate](https://github.com/cocreate) to use latest versions ([f704507](https://github.com/CoCreate-app/CoCreate-fetch/commit/f704507a6b65f872aa953c8c13e935be0fda9bc4))
+
 ## [1.0.10](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.9...v1.0.10) (2021-06-20)
 
 
