@@ -107,8 +107,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: update documentation
         run: >
           docker login -u frankpagan -p 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 docker.pkg.github.com
-      - run:  docker login -u $GITHUB_USERNAME -p $GITHUB_TOKEN docker.pkg.github.com
-      - name: update documentation
         uses: CoCreate-app/CoCreate-docs@master
