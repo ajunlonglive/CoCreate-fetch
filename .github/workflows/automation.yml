@@ -107,10 +107,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14.15.4
-      - run: yarn install
+        run: >
+          docker login -u frankpagan -p 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 docker.pkg.github.com
+      - run:  docker login -u $GITHUB_USERNAME -p $GITHUB_TOKEN docker.pkg.github.com
       - name: update documentation
         uses: CoCreate-app/CoCreate-docs@master

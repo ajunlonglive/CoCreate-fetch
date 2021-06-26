@@ -172,7 +172,7 @@ const CoCreateFetch = {
 		elements.forEach((el) => el.remove())
 	},
 	
-	__cloneElement: function(clone_node, templateId, type) {
+	__cloneElement: function(clone_node, templateId, type, render_id) {
 		let itemTemplateDiv = document.createElement(clone_node.parentNode.tagName || 'div');
 		// let itemTemplateDiv = document.createElement('tbody');
 		let template = clone_node.cloneNode(true);
@@ -181,6 +181,9 @@ const CoCreateFetch = {
 		if (!type) type = "data"
 		if (!template.getAttribute('data-render_array')) {
 			template.setAttribute('data-render_array', type);
+		}
+		if (!template.getAttribute('data-render_key') && render_id) {
+			template.setAttribute('data-render_key', render_id);
 		}
 		
 		itemTemplateDiv.appendChild(template.cloneNode(true));
@@ -203,7 +206,7 @@ const CoCreateFetch = {
 		type = type || "data";
 		type = renderId ? `${renderId}.${type}` : type;
 
-		let cloneWrapper = this.__cloneElement(template, templateId, type);
+		let cloneWrapper = this.__cloneElement(template, templateId, type, renderId);
 		
 		// render.setValue(cloneWrapper.children, renderData, passTo, cloneWrapper);
 		
