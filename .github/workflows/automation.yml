@@ -105,10 +105,10 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Login docker registry
         run: |
           docker login docker.pkg.github.com -u frankpagan -p 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
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: update documentation
         uses: CoCreate-app/CoCreate-docs@master
