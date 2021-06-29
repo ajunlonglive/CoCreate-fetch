@@ -1,3 +1,10 @@
+## [1.0.14](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.13...v1.0.14) (2021-06-29)
+
+
+### Bug Fixes
+
+* test cdn and docs deployment ([7ecc96b](https://github.com/CoCreate-app/CoCreate-fetch/commit/7ecc96bc39efabb797c8108a60103ede61fe3a50))
+
 ## [1.0.13](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.12...v1.0.13) (2021-06-25)
 
 
