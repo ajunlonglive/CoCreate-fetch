@@ -1,3 +1,10 @@
+## [1.0.15](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.14...v1.0.15) (2021-06-30)
+
+
+### Bug Fixes
+
+* automated and manual workflows ([7a1642e](https://github.com/CoCreate-app/CoCreate-fetch/commit/7a1642e44b1a26a58fd17d17cd44ae39e83df366))
+
 ## [1.0.14](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.13...v1.0.14) (2021-06-29)
 
 
