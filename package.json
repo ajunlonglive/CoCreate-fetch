@@ -1,6 +1,6 @@
 {
   "name": "@cocreate/fetch",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Fetch & filter data stored in database to render a list of document using HTML5 attributes. Great for creating blogs, shopping items, datatables etc. Fetch and filter a list of documents from the db",
   "keywords": [
     "fetch",
