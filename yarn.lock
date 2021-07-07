@@ -868,13 +868,13 @@
     "@babel/helper-validator-identifier" "^7.14.5"
     to-fast-properties "^2.0.0"
 
-"@cocreate/action@^1.0.0", "@cocreate/action@^1.1.10":
-  version "1.1.10"
-  resolved "https://registry.yarnpkg.com/@cocreate/action/-/action-1.1.10.tgz#1b2fe224cffec17abf16873049676c12b9cef3b5"
-  integrity sha512-EquHIrZmBjfbK78tsoln4mw6xiYo9gMI8COiRSfeau/i+jE5Mg4/kz6j1RzzsN9t7SdGxZhZ3D+DnSvD24xpkQ==
+"@cocreate/action@^1.1.10", "@cocreate/action@^1.1.13":
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/@cocreate/action/-/action-1.1.13.tgz#8b085f50f286466a262463780185c8270da19fd3"
+  integrity sha512-66NJNKN6ZvewyrYlTVwUsL0P1FGl8MEN5+vbF7ckIXMpFK9CfRmRugqpfboSpdt5Q5ua5g9bRvrhHeNe4+1GQw==
   dependencies:
-    "@cocreate/docs" "^1.1.13"
-    "@cocreate/hosting" "^1.1.3"
+    "@cocreate/docs" "^1.1.14"
+    "@cocreate/hosting" "^1.1.4"
 
 "@cocreate/crud-client@^1.0.0", "@cocreate/crud-client@^1.1.9":
   version "1.1.9"
@@ -884,7 +884,15 @@
     "@cocreate/docs" "^1.0.0"
     "@cocreate/socket-client" "^1.0.0"
 
-"@cocreate/docs@^1.0.0", "@cocreate/docs@^1.1.13", "@cocreate/docs@^1.1.14":
+"@cocreate/crud-client@^1.1.10", "@cocreate/crud-client@^1.1.12":
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/@cocreate/crud-client/-/crud-client-1.1.12.tgz#c897e897ce5fba4fc8d0bfe32ff0117c13cbbabe"
+  integrity sha512-QECgF4uBovtaIGb595a4enMP/OAXHJsKaVmqRpkI0bHW7HhoYoqpNfMdjAIrr1eZlDEL+p5Dwl1Kmcsejk/ZOA==
+  dependencies:
+    "@cocreate/docs" "^1.1.14"
+    "@cocreate/socket-client" "^1.1.5"
+
+"@cocreate/docs@^1.0.0", "@cocreate/docs@^1.1.14":
   version "1.1.14"
   resolved "https://registry.yarnpkg.com/@cocreate/docs/-/docs-1.1.14.tgz#992e6e2e2d9b848e3ba65ff4f4abff07dc3ec6ab"
   integrity sha512-MBSzKticJG8bzfqdN/A1jyLaz5k140S3O6pcN67C1muYfqUpZGxA8Fb4MGZ8QlKjx90De8GgHvZ6XP/x3I4FXw==
@@ -896,15 +904,26 @@
     parse-html-comments "^1.3.1"
     ws "^7.3.1"
 
-"@cocreate/filter@^1.0.13":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@cocreate/filter/-/filter-1.0.13.tgz#3d8bf764b528aae477720ac815e6a0b351936604"
-  integrity sha512-BcbYN3+HSYyCxZpb8dcsiCJXyYkFVBuZjwd6bHPXgFWK0rSp2U7pbvRK4ED1C5pxis4prEUryX66eXcnnXozFw==
+"@cocreate/docs@^1.1.29":
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/@cocreate/docs/-/docs-1.1.29.tgz#010c3495ce54dedab69bbabc2073c067ae90b64b"
+  integrity sha512-+d+ocGp9RgJpZcwFkXZenjPlgKmnhsyGFl/mGpwjLYpK/X2nS08jt0XSSZP88B+g7NhcVnOs/oYaD1KZKxH7+w==
   dependencies:
-    "@cocreate/crud-client" "^1.0.0"
-    "@cocreate/docs" "^1.0.0"
-    "@cocreate/utils" "^1.0.0"
-    mini-css-extract-plugin "^1.5.0"
+    "@cocreate/crud-client" "^1.1.10"
+    "@cocreate/hosting" "^1.1.3"
+    extract-comments "^1.1.0"
+    glob "^7.1.6"
+    parse-html-comments "^1.3.1"
+    ws "^7.3.1"
+
+"@cocreate/filter@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@cocreate/filter/-/filter-1.0.16.tgz#759cf3f37e7d3bf38327e367840d4dc581ef54f8"
+  integrity sha512-bVKPfuG2gIo+TVVcZd/RHQ5OS7JSwsVFjLljbx6s3iUzHeuVOSPcgIx8N+0GWYr5KwoDEVjF9f3sYa+fH5l6oA==
+  dependencies:
+    "@cocreate/crud-client" "^1.1.9"
+    "@cocreate/docs" "^1.1.14"
+    "@cocreate/utils" "^1.0.13"
 
 "@cocreate/hosting@^1.0.0", "@cocreate/hosting@^1.1.3":
   version "1.1.4"
@@ -916,31 +935,48 @@
     "@cocreate/socket-client" "^1.0.0"
     mime-types "^2.1.30"
 
-"@cocreate/logic@^1.0.14":
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/@cocreate/logic/-/logic-1.0.14.tgz#266f53e29e0de9bb7d60cb3abf22b6e12d618763"
-  integrity sha512-/6gWYYvX8hcDtp9OYwmfwNU/SJvHQg1guiMhMjkM76lT44K4F+9eHI4GUWcNiRkbrJ7rt0ic8/vUdzAlTmVgeg==
+"@cocreate/hosting@^1.1.4":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@cocreate/hosting/-/hosting-1.1.8.tgz#3d019c56113516d141902a933df453cae1847e2c"
+  integrity sha512-is2cM+M6bv5cSGdSTtPpKijFhLDsPBNq49fZwMllVVAUCrLbCFdIPwmBd30swSJu8HX0C1Fp22eKAuO2jaMGZg==
   dependencies:
-    "@cocreate/action" "^1.0.0"
-    "@cocreate/crud-client" "^1.0.0"
-    "@cocreate/docs" "^1.0.0"
-    "@cocreate/observer" "^1.0.0"
-    "@cocreate/utils" "^1.0.0"
+    "@cocreate/crud-client" "^1.1.9"
+    "@cocreate/docs" "^1.1.14"
+    "@cocreate/socket-client" "^1.1.5"
+    mime-types "^2.1.30"
 
-"@cocreate/observer@^1.0.0", "@cocreate/observer@^1.2.4":
+"@cocreate/logic@^1.0.17":
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/@cocreate/logic/-/logic-1.0.17.tgz#b767fb4a9137df98205690e7099092d3c41e48d8"
+  integrity sha512-YCdK3BXdM3/k9SesAOpEv07vLG1Dzfn1fn87M6gqF+pjq9TPY+atXadrFmlukkEReuSF3igH18x+sR/3sTlang==
+  dependencies:
+    "@cocreate/action" "^1.1.10"
+    "@cocreate/crud-client" "^1.1.9"
+    "@cocreate/docs" "^1.1.14"
+    "@cocreate/observer" "^1.2.4"
+    "@cocreate/utils" "^1.0.13"
+
+"@cocreate/observer@^1.2.4":
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@cocreate/observer/-/observer-1.2.4.tgz#d54a364164e2d555e58b7a15223d674353332d1a"
   integrity sha512-90VeQv6B2V2dVlCGrDCTfbJjCnbHx0iRL/ETWKRmrijmkqgrbUTCHVCk8ABg5sCyL6bRPaTPaWzgdMiB24yQuQ==
   dependencies:
     "@cocreate/docs" "^1.0.0"
 
-"@cocreate/render@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@cocreate/render/-/render-1.0.9.tgz#833071dc0047b987d151dfc540342d69f922db2b"
-  integrity sha512-K11TyD21vcQWaL+VNbwmBotAx/ofnN0HlkpPRlqEwFCCmhdon5ymb3K0YCLN7O+BnHUcJjFjw3ubKDpaGH4IYg==
+"@cocreate/observer@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@cocreate/observer/-/observer-1.2.8.tgz#e6e8a2c447bc694cc1477395a66a212ef6b11e5e"
+  integrity sha512-IJmjE1lmYVf7w93MOSwaw5ZbGaULnAuGQ8bduURQMH3lpnhdSPgZ2sNdAajbM0ROtW/GAfkKgdJ5szkCYfhocQ==
   dependencies:
-    "@cocreate/docs" "^1.0.0"
-    mini-css-extract-plugin "^1.5.0"
+    "@cocreate/docs" "^1.1.14"
+    "@cocreate/utils" "^1.0.14"
+
+"@cocreate/render@^1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@cocreate/render/-/render-1.0.12.tgz#169a6b998502f8fbca0e1e2feff9b14d7e9e1eb1"
+  integrity sha512-3nPPWKdhIhM4muvjF8eOJ7tG2Yr/Vzu7g5fgkGBIcA292E3qcIFS3AJC+E6sFiO5Ies5YND/tHSMH4iHqVec/g==
+  dependencies:
+    "@cocreate/docs" "^1.1.14"
 
 "@cocreate/socket-client@^1.0.0":
   version "1.1.5"
@@ -951,13 +987,29 @@
     "@cocreate/uuid" "^1.0.0"
     ws "^7.4.4"
 
-"@cocreate/utils@^1.0.0", "@cocreate/utils@^1.0.13":
+"@cocreate/socket-client@^1.1.5":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@cocreate/socket-client/-/socket-client-1.1.8.tgz#b887fa80d7bc311c163a62b1302dbbd9e12e891a"
+  integrity sha512-ia3ipeemqJ9GXqBz38/YU468cuUkRcDwMVdPAR7zaLkSiU5pP0KJNaOrs6/JsSJ4/t+yKnxRpzalOQIQsGvzhw==
+  dependencies:
+    "@cocreate/docs" "^1.1.14"
+    "@cocreate/uuid" "^1.0.9"
+    ws "^7.4.4"
+
+"@cocreate/utils@^1.0.13":
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/@cocreate/utils/-/utils-1.0.13.tgz#02ecd32c1b24d35ebcd180af2b6ffe14aac23d86"
   integrity sha512-n6MFGlu1/0dMxHH6VgloHepMHCR9sb9UP1xz9n37+BHjl7NJDEUutLSazg2B/p2K+IAyVuAebF80sfziHYi3mQ==
   dependencies:
     "@cocreate/docs" "^1.0.0"
     mini-css-extract-plugin "^1.5.0"
+
+"@cocreate/utils@^1.0.14", "@cocreate/utils@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@cocreate/utils/-/utils-1.0.16.tgz#853caa17015e7987a26a0455767bb33ef65345f8"
+  integrity sha512-clu7JIfPD4E5BMv/4BvcYXUrrB2111Axb2RMiWFIjJJPpqTDRcLzX0jKz/pX3+fz6A1KQ8KwzAI0+a+bnDONYg==
+  dependencies:
+    "@cocreate/docs" "^1.1.14"
 
 "@cocreate/uuid@^1.0.0":
   version "1.0.9"
@@ -966,6 +1018,13 @@
   dependencies:
     "@cocreate/docs" "^1.0.0"
     mini-css-extract-plugin "^1.5.0"
+
+"@cocreate/uuid@^1.0.9":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@cocreate/uuid/-/uuid-1.0.12.tgz#785e152d2b21a34e34133b490b97b0f189ef363a"
+  integrity sha512-KvUs05kp1L4kS7JW19EnDS81tpnmAY9Xmg2xnAuw9U1QMFlwsZdwN6Xdn9smNwLi73KUL6+FBlfkW4Bd6y+pEA==
+  dependencies:
+    "@cocreate/docs" "^1.1.14"
 
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.3"
