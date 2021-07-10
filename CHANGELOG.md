@@ -1,3 +1,10 @@
+## [1.0.18](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.17...v1.0.18) (2021-07-10)
+
+
+### Bug Fixes
+
+* gitignore all logs ([bd3f715](https://github.com/CoCreate-app/CoCreate-fetch/commit/bd3f715566822795524b09812af957d3a3e248fe))
+
 ## [1.0.17](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.16...v1.0.17) (2021-07-07)
 
 
