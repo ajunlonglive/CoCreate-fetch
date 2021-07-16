@@ -11,25 +11,19 @@ const CoCreateFetch = {
 	items: [],
 
 	init: function() {
-		this.initElement();
+		let elements =  document.querySelectorAll(this.selector);
+		this.initElements(elements);
 		this.__initSocketEvent();
 		this.__initEvents()
 	},
-	
-	initElement: function(container) {
+	initElements: function(elements){
+		for(let el of elements)
+			this.initElement(el)
+	},
+	initElement: function(el) {
 		
-		let mainContainer = container || document;
-		const self = this;
-		if (!mainContainer.querySelectorAll) {
-			return;     
-		}
-		let wrappers = mainContainer.querySelectorAll(this.selector);
-		if (wrappers.length == 0 && mainContainer != document && mainContainer.hasAttribute('data-template_id') && mainContainer.hasAttribute('data-fetch_collection')) {
-			wrappers = [mainContainer];
-		}
-		wrappers.forEach((wrapper) => {
-			self.__initEachElement(wrapper, true, true)
-		})
+			this.__initEachElement(el, true, true)
+		
 	},
 	
 	refershElement: function(mutation ) {
@@ -401,7 +395,7 @@ const CoCreateFetch = {
 observer.init({ 
 	name: 'CoCreateFetchObserver', 
 	observe: ['attributes'],
-	attributesFilter: ['data-fetch_collection', 'data-filter_name'],
+	attributeName: ['data-fetch_collection', 'data-filter_name'],
 	callback: function(mutation) {
 		CoCreateFetch.refershElement(mutation)
 	}
@@ -410,7 +404,7 @@ observer.init({
 observer.init({ 
 	name: 'CoCreateFetchInit', 
 	observe: ['addedNodes'],
-	attributes: ['data-fetch_collection'],
+	target: '[data-fetch_collection]',
 	callback: function(mutation) {
 
 		CoCreateFetch.initElement(mutation.target)
