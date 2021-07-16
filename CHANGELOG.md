@@ -1,3 +1,18 @@
+## [1.0.20](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.19...v1.0.20) (2021-07-14)
+
+
+### Bug Fixes
+
+* upgrade all packages ([718578f](https://github.com/CoCreate-app/CoCreate-fetch/commit/718578f413acb76eb1bc76ce95968a21ce7e484b))
+
+## [1.0.19](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.18...v1.0.19) (2021-07-13)
+
+
+### Bug Fixes
+
+* add yarn lockfile to git ignore ([7caa8d6](https://github.com/CoCreate-app/CoCreate-fetch/commit/7caa8d609a9491539108cf1384aa8ae34ed8c67d))
+* remove yarn.lock ([5e22426](https://github.com/CoCreate-app/CoCreate-fetch/commit/5e22426b2193ebbe8fb6fb6646db318e968fde2c))
+
 ## [1.0.18](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.17...v1.0.18) (2021-07-10)
 
 

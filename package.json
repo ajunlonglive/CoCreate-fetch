@@ -1,6 +1,6 @@
 {
   "name": "@cocreate/fetch",
-  "version": "1.0.18",
+  "version": "1.0.20",
   "description": "Fetch & filter data stored in database to render a list of document using HTML5 attributes. Great for creating blogs, shopping items, datatables etc. Fetch and filter a list of documents from the db",
   "keywords": [
     "fetch",
@@ -61,7 +61,7 @@
     "webpack-log": "^3.0.1"
   },
   "dependencies": {
-    "@cocreate/action": "^1.1.13",
+    "@cocreate/action": "^1.1.16",
     "@cocreate/crud-client": "^1.1.12",
     "@cocreate/docs": "^1.1.29",
     "@cocreate/filter": "^1.0.16",
