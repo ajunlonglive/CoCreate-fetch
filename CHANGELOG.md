@@ -1,3 +1,12 @@
+## [1.0.21](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.20...v1.0.21) (2021-07-17)
+
+
+### Bug Fixes
+
+* crud.listen updateDocument ([eab92c9](https://github.com/CoCreate-app/CoCreate-fetch/commit/eab92c9621cdb103efa5341824af6631cdc5d431))
+* init and update demos scripts ([d00aafc](https://github.com/CoCreate-app/CoCreate-fetch/commit/d00aafc033715c731800a62667fcd81dd3d53b98))
+* workflows ([3060364](https://github.com/CoCreate-app/CoCreate-fetch/commit/3060364f28f10daee1fb5a0527f93b366e160cd4))
+
 ## [1.0.20](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.19...v1.0.20) (2021-07-14)
 
 
