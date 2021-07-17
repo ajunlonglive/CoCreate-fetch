@@ -58,6 +58,10 @@ const CoCreateFetch = {
 		crud.listen('createDocument', function(data) {
 			self.__createItem(data)
 		})
+		
+		crud.listen('updateDocument', function(data) {
+			self.__createItem(data)
+		})
 	
 		crud.listen('deleteDocument', function(data) {
 			self.__deleteItem(data);
@@ -95,9 +99,9 @@ const CoCreateFetch = {
 		
 		if (!element.getAttribute('data-fetch_collection')) return;
 		
-		if (observer.getInitialized(element, 'fetch') && isInit){
-			return;	
-		} 
+		// if (observer.getInitialized(element, 'fetch') && isInit){
+		// 	return;	
+		// } 
 		
 		let item = ccfilter.getObjectByFilterId(this.items, item_id);
 		let filter = null;
@@ -108,7 +112,7 @@ const CoCreateFetch = {
 		}
 		
 		// if (checkInit) {  
-			observer.setInitialized(element, 'fetch')
+			// observer.setInitialized(element, 'fetch')
 		// }
 
 		if (!item) {
