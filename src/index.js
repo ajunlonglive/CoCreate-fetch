@@ -59,9 +59,9 @@ const CoCreateFetch = {
 			self.__createItem(data)
 		})
 		
-		crud.listen('updateDocument', function(data) {
-			self.__createItem(data)
-		})
+		// crud.listen('updateDocument', function(data) {
+		// 	self.__createItem(data)
+		// })
 	
 		crud.listen('deleteDocument', function(data) {
 			self.__deleteItem(data);
