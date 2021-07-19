@@ -1,3 +1,10 @@
+## [1.0.22](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.21...v1.0.22) (2021-07-19)
+
+
+### Bug Fixes
+
+* attributeObserver ([8224bc1](https://github.com/CoCreate-app/CoCreate-fetch/commit/8224bc1ce9384ba61de11f53108d77b48798a828))
+
 ## [1.0.21](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.20...v1.0.21) (2021-07-17)
 
 
