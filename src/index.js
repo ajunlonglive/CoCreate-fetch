@@ -401,7 +401,7 @@ observer.init({
 	observe: ['attributes'],
 	attributeName: ['data-fetch_collection', 'data-filter_name'],
 	callback: function(mutation) {
-		CoCreateFetch.refershElement(mutation)
+		CoCreateFetch.refershElement(mutation.target)
 	}
 })
 
