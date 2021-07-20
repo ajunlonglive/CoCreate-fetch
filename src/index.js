@@ -16,84 +16,19 @@ const CoCreateFetch = {
 		this.__initSocketEvent();
 		this.__initEvents()
 	},
+	
 	initElements: function(elements){
 		for(let el of elements)
 			this.initElement(el)
 	},
+	
 	initElement: function(el) {
-		
-			this.__initEachElement(el, true, true)
-		
+		// this.__initEachElement(el, true, true)
+		this.__initEachElement(el)
 	},
 	
-	refershElement: function(mutation ) {
-		const { target } = mutation;
-		if (!target) return;
-		if (!target.hasAttribute('data-fetch_collection')) return;
-		
-		this.__initEachElement(target, false, false, true);
-		
-	},
-	
-	//. public functions....
-	reload: function(element) {
-		return;
-		if (!element || !element.getAttribute) {
-			return;
-		}
-		if (element.hasAttribute('date-template_id') && element.hasAttribute('date-fetch_collection')) {
-			this.__initEachElement(element, true)
-		}
-	},
-	
-	__initSocketEvent: function() {
-		const self = this;
-		crud.listen('readDocumentList', function(data) {
-			self.__fetchedItem(data)
-		})
-		crud.listen('readCollectionList', function(data) {
-			self.__fetchedItem(data)
-		})
-		
-		crud.listen('createDocument', function(data) {
-			self.__createItem(data)
-		})
-		
-		// crud.listen('updateDocument', function(data) {
-		// 	self.__createItem(data)
-		// })
-	
-		crud.listen('deleteDocument', function(data) {
-			self.__deleteItem(data);
-		})
-	},
-	
-	__initEvents: function() {
-		const self = this;
-		window.addEventListener('dndsuccess', function(e) {
-			const {dropedEl, dragedEl} = e.detail;
-			let dragedElTemplatId = dragedEl.getAttribute('data-template_id')
-			let dragElTemplate = document.querySelector(`[data-fetch_collection][data-template_id='${dragedElTemplatId}']`);
-			let dropElTemplate = self.findTemplateElByChild(dropedEl);
-			
-			if (!dragElTemplate || !dropElTemplate) {
-				return;
-			}
-			
-			if (!dragElTemplate.isSameNode(dropElTemplate)) {
-				//. save template id
-				self.updateParentTemplateOfChild(dropElTemplate, dragedEl)
-				
-				//. reordering
-				self.reorderChildrenOfTemplate(dragElTemplate);
-				self.reorderChildrenOfTemplate(dropElTemplate);
-			} else {
-				self.reorderChildrenOfTemplate(dropElTemplate);
-			}
-		})
-	},
-	
-	__initEachElement: function(element, isInit, checkInit, refresh) {
+	// __initEachElement: function(element, isInit, checkInit, refresh) {
+	__initEachElement: function(element) {
 		let item_id = element.getAttribute('data-template_id');
 		if (!item_id) return;
 		
@@ -107,9 +42,9 @@ const CoCreateFetch = {
 		let filter = null;
 		const self = this;
 		
-		if (isInit && item) {
-			return;
-		}
+		// if (isInit && item) {
+		// 	return;
+		// }
 		
 		// if (checkInit) {  
 			// observer.setInitialized(element, 'fetch')
@@ -143,16 +78,80 @@ const CoCreateFetch = {
 		} else {
 			filter = item.filter
 			ccfilter.changeCollection(filter);
-			if (refresh) {
+			// if (refresh) {
 				item.filter.isRefresh = true;
 				self.__removeOldData(element);
 				filter.isRefresh = true;
 				filter.startIndex = 0;
-			}
+			// }
 		}
 		
 		ccfilter.fetchData(filter);
 	},
+
+	// refershElement: function(target ) {
+	// 	// const { target } = mutation.target;
+	// 	if (!target) return;
+	// 	if (!target.hasAttribute('data-fetch_collection')) return;
+		
+	// 	this.__initEachElement(target, false, false, true);
+		
+	// },
+	
+	//. Todo: not used anywhere maybe can depreciate
+	// reload: function(element) {
+	// 	return;
+	// 	if (!element || !element.getAttribute) {
+	// 		return;
+	// 	}
+	// 	if (element.hasAttribute('date-template_id') && element.hasAttribute('date-fetch_collection')) {
+	// 		this.__initEachElement(element, true)
+	// 	}
+	// },
+	
+	__initSocketEvent: function() {
+		const self = this;
+		crud.listen('readDocumentList', function(data) {
+			self.__fetchedItem(data)
+		})
+		crud.listen('readCollectionList', function(data) {
+			self.__fetchedItem(data)
+		})
+		
+		crud.listen('createDocument', function(data) {
+			self.__createItem(data)
+		})
+		
+		crud.listen('deleteDocument', function(data) {
+			self.__deleteItem(data);
+		})
+	},
+	
+	__initEvents: function() {
+		const self = this;
+		window.addEventListener('dndsuccess', function(e) {
+			const {dropedEl, dragedEl} = e.detail;
+			let dragedElTemplatId = dragedEl.getAttribute('data-template_id')
+			let dragElTemplate = document.querySelector(`[data-fetch_collection][data-template_id='${dragedElTemplatId}']`);
+			let dropElTemplate = self.findTemplateElByChild(dropedEl);
+			
+			if (!dragElTemplate || !dropElTemplate) {
+				return;
+			}
+			
+			if (!dragElTemplate.isSameNode(dropElTemplate)) {
+				//. save template id
+				self.updateParentTemplateOfChild(dropElTemplate, dragedEl)
+				
+				//. reordering
+				self.reorderChildrenOfTemplate(dragElTemplate);
+				self.reorderChildrenOfTemplate(dropElTemplate);
+			} else {
+				self.reorderChildrenOfTemplate(dropElTemplate);
+			}
+		})
+	},
+	
 	
 	__runLoadMore: function(templateId) {
 		if (!templateId) return;
@@ -225,13 +224,13 @@ const CoCreateFetch = {
 		wrapper.dispatchEvent(evt);
 
 		/// init passValueBtns
-		let forms = wrapper.parentNode.getElementsByTagName('form');
+		// let forms = wrapper.parentNode.getElementsByTagName('form');
 		
-		for (let i = 0; i < forms.length; i++) {
-			let form = forms[i];
-			let valuePassBtn = form.querySelector('.passValueBtn');
-			if (valuePassBtn) logic.__registerValuePassBtnEvent(form, valuePassBtn);
-		}
+		// for (let i = 0; i < forms.length; i++) {
+		// 	let form = forms[i];
+		// 	let valuePassBtn = form.querySelector('.passValueBtn');
+		// 	if (valuePassBtn) logic.__registerValuePassBtnEvent(form, valuePassBtn);
+		// }
 		
 		// this.initElement(wrapper)
 	},
@@ -296,6 +295,7 @@ const CoCreateFetch = {
 		return utils.getParentFromElement(element, null, ['data-template_id', 'data-fetch_collection']);
 	},
 	
+	// changes position of documents
 	updateParentTemplateOfChild: function(template, element) {
 		const name = template.getAttribute('data-filter_name')
 		const value = template.getAttribute('data-filter_value')
@@ -312,6 +312,7 @@ const CoCreateFetch = {
 		})
 	},
 	
+	// changes position of documents
 	reorderChildrenOfTemplate: function (template) {
 		const orderField = template.getAttribute('data-order_by')
 		const template_id = template.getAttribute('data-template_id')
@@ -336,6 +337,7 @@ const CoCreateFetch = {
 		})
 	},
 	
+	// ToDo: Looks like it should be a utility of filter.. 
 	__checkItemByFilters: function(item, filters) {
 		//. $contain, $range, $eq, $ne, $lt, $lte, $gt, $gte, $in, $nin, $geoWithin
 		let flag = true;
@@ -395,13 +397,12 @@ const CoCreateFetch = {
 }
 
 
-
 observer.init({ 
 	name: 'CoCreateFetchObserver', 
 	observe: ['attributes'],
-	attributeName: ['data-fetch_collection', 'data-filter_name'],
+	attributeName: ['data-fetch_collection', 'data-fetch_name', 'data-filter_name', 'data-filter_value'],
 	callback: function(mutation) {
-		CoCreateFetch.refershElement(mutation.target)
+		CoCreateFetch.initElement(mutation.target)
 	}
 })
 
@@ -410,7 +411,6 @@ observer.init({
 	observe: ['addedNodes'],
 	target: '[data-fetch_collection]',
 	callback: function(mutation) {
-
 		CoCreateFetch.initElement(mutation.target)
 	}
 })
