@@ -5,7 +5,6 @@ import crud from '@cocreate/crud-client';
 import logic from '@cocreate/logic';
 import render from '@cocreate/render';
 
-// console.log(socket)
 const CoCreateFetch = {
 	selector: '[data-template_id][data-fetch_collection]',
 	items: [],
@@ -28,22 +27,10 @@ const CoCreateFetch = {
 		
 		if (!element.getAttribute('data-fetch_collection')) return;
 		
-		// if (observer.getInitialized(element, 'fetch') && isInit){
-		// 	return;	
-		// } 
-		
 		let item = ccfilter.getObjectByFilterId(this.items, item_id);
 		let filter = null;
 		const self = this;
 		
-		// if (isInit && item) {
-		// 	return;
-		// }
-		
-		// if (checkInit) {  
-			// observer.setInitialized(element, 'fetch')
-		// }
-
 		if (!item) {
 			filter = ccfilter.setFilter(element, "data-template_id", "template");
 			let fetch_type = element.getAttribute('data-fetch_value_type') || "string";
@@ -63,7 +50,7 @@ const CoCreateFetch = {
 			this.items.push(item);
 
 			element.addEventListener("changeFilterInput", function(e) {
-				self.__removeOldData(item.el)
+				self.__removeAllElements(item.el)
 				item.filter.startIndex = 0;
 				item.filter.isRefresh = true;
 				ccfilter.fetchData(item.filter);
@@ -74,7 +61,7 @@ const CoCreateFetch = {
 			ccfilter.changeCollection(filter);
 			// if (refresh) {
 				item.filter.isRefresh = true;
-				self.__removeOldData(element);
+				self.__removeAllElements(element);
 				filter.isRefresh = true;
 				filter.startIndex = 0;
 			// }
@@ -82,45 +69,67 @@ const CoCreateFetch = {
 		
 		ccfilter.fetchData(filter);
 	},
-
-	// refershElement: function(target ) {
-	// 	// const { target } = mutation.target;
-	// 	if (!target) return;
-	// 	if (!target.hasAttribute('data-fetch_collection')) return;
-		
-	// 	this.__initEachElement(target, false, false, true);
-		
-	// },
 	
-	//. Todo: not used anywhere maybe can depreciate
-	// reload: function(element) {
-	// 	return;
-	// 	if (!element || !element.getAttribute) {
-	// 		return;
-	// 	}
-	// 	if (element.hasAttribute('date-template_id') && element.hasAttribute('date-fetch_collection')) {
-	// 		this.__initEachElement(element, true)
-	// 	}
-	// },
-	
-	__initSocketEvent: function() {
-		const self = this;
-		crud.listen('readDocumentList', function(data) {
-			self.__fetchedItem(data)
-		})
-		crud.listen('readCollectionList', function(data) {
-			self.__fetchedItem(data)
-		})
-		
-		crud.listen('createDocument', function(data) {
-			self.__createItem(data)
-		})
-		
-		crud.listen('deleteDocument', function(data) {
-			self.__deleteItem(data);
-		})
+	__removeAllElements: function(wrapper) {
+		let item_id = wrapper.getAttribute('data-template_id');
+		let elements = wrapper.querySelectorAll("[templateId='" + item_id + "']");
+		elements.forEach((el) => el.remove())
 	},
+
+	__renderElements: function(wrapper, data, type = "data") {
+
+		let templateId = wrapper.getAttribute('data-template_id');
+		let template = wrapper.querySelector(`.template[data-template_id='${templateId}'`);// || wrapper.querySelector('.template');
+		if (!template)  {
+			return;
+		}
+		
+		let renderId = wrapper.getAttribute('data-render_id');
+		
+		let passTo = wrapper.getAttribute('data-pass_to');
+		let renderData = renderId ? {[renderId] : data} : data;
+		
+		type = type || "data";
+		type = renderId ? `${renderId}.${type}` : type;
+
+		let cloneWrapper = this.__cloneTemplate(template, templateId, type, renderId);
+		
+		render.data({
+			elements: cloneWrapper.children,
+			data: renderData,
+			passTo: passTo
+		})
+		let removeableTemplate = cloneWrapper.querySelector(`.template[data-template_id="${templateId}"]`);
+		if (removeableTemplate) {
+			removeableTemplate.remove();
+		} else {
+			return;
+		}
+
+		template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
+		var evt = new CustomEvent('fetchedTemplate', { bubbles: true });
+		wrapper.dispatchEvent(evt);
+
+	},
+
+	__cloneTemplate: function(clone_node, templateId, type, render_id) {
 	
+		let itemTemplateDiv = document.createElement(clone_node.parentNode.tagName || 'div');
+		let template = clone_node.cloneNode(true);
+		template.setAttribute('templateId', templateId);
+
+		if (!type) type = "data"
+		if (!template.getAttribute('data-render_array')) {
+			template.setAttribute('data-render_array', type);
+		}
+		if (!template.getAttribute('data-render_key') && render_id) {
+			template.setAttribute('data-render_key', render_id);
+		}
+		
+		itemTemplateDiv.appendChild(template.cloneNode(true));
+		return itemTemplateDiv;
+	},
+
 	__initEvents: function() {
 		const self = this;
 		window.addEventListener('dndsuccess', function(e) {
@@ -146,90 +155,25 @@ const CoCreateFetch = {
 		})
 	},
 	
-	
-	__runLoadMore: function(templateId) {
-		if (!templateId) return;
-		let item = ccfilter.getObjectByFilterId(this.items, templateId);
-		
-		if (!item) return;
-		if (item.filter.count > 0) {
-			ccfilter.fetchData(item.filter)
-		}
-	},
-	
-	__removeOldData: function(wrapper) {
-		let item_id = wrapper.getAttribute('data-template_id');
-		let elements = wrapper.querySelectorAll("[templateId='" + item_id + "']");
-		elements.forEach((el) => el.remove())
-	},
-	
-	__cloneElement: function(clone_node, templateId, type, render_id) {
-		let itemTemplateDiv = document.createElement(clone_node.parentNode.tagName || 'div');
-		// let itemTemplateDiv = document.createElement('tbody');
-		let template = clone_node.cloneNode(true);
-		template.setAttribute('templateId', templateId);
-
-		if (!type) type = "data"
-		if (!template.getAttribute('data-render_array')) {
-			template.setAttribute('data-render_array', type);
-		}
-		if (!template.getAttribute('data-render_key') && render_id) {
-			template.setAttribute('data-render_key', render_id);
-		}
-		
-		itemTemplateDiv.appendChild(template.cloneNode(true));
-		return itemTemplateDiv;
-	},
-	
-	__renderData: function(wrapper, data, type = "data") {
-
-		let templateId = wrapper.getAttribute('data-template_id');
-		let template = wrapper.querySelector(`.template[data-template_id='${templateId}'`);// || wrapper.querySelector('.template');
-		// let template = wrapper.querySelector('.template');
-		if (!template)  {
-			return;
-		}
-		let renderId = wrapper.getAttribute('data-render_id');
-		
-		let passTo = wrapper.getAttribute('data-pass_to');
-		let renderData = renderId ? {[renderId] : data} : data;
-		
-		type = type || "data";
-		type = renderId ? `${renderId}.${type}` : type;
-
-		let cloneWrapper = this.__cloneElement(template, templateId, type, renderId);
-		
-		// render.setValue(cloneWrapper.children, renderData, passTo, cloneWrapper);
-		
-		render.data({
-			elements: cloneWrapper.children,
-			data: renderData,
-			passTo: passTo
+	__initSocketEvent: function() {
+		const self = this;
+		crud.listen('readDocumentList', function(data) {
+			self.__fetchedItem(data)
 		})
-		let removeableTemplate = cloneWrapper.querySelector(`.template[data-template_id="${templateId}"]`);
-		if (removeableTemplate) {
-			removeableTemplate.remove();
-		} else {
-			return;
-		}
-
-		template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
-		var evt = new CustomEvent('fetchedTemplate', { bubbles: true });
-		wrapper.dispatchEvent(evt);
-
-		/// init passValueBtns
-		// let forms = wrapper.parentNode.getElementsByTagName('form');
+		crud.listen('readCollectionList', function(data) {
+			self.__fetchedItem(data)
+		})
 		
-		// for (let i = 0; i < forms.length; i++) {
-		// 	let form = forms[i];
-		// 	let valuePassBtn = form.querySelector('.passValueBtn');
-		// 	if (valuePassBtn) logic.__registerValuePassBtnEvent(form, valuePassBtn);
-		// }
+		crud.listen('createDocument', function(data) {
+			self.__addElements(data)
+		})
 		
-		// this.initElement(wrapper)
+		crud.listen('deleteDocument', function(data) {
+			self.__removeElements(data);
+		})
 	},
 
-	__deleteItem: function(data) {
+	__removeElements: function(data) {
 		let collection = data['collection'];
 		let document_id = data['document_id'];
 		
@@ -259,15 +203,15 @@ const CoCreateFetch = {
 			
 			if (data) {
 				if (data.metadata && data.metadata.isRefresh) {
-					this.__removeOldData(item.el);
+					this.__removeAllElements(item.el);
 				}
-				this.__renderData(item.el, data, fetch_name);
+				this.__renderElements(item.el, data, fetch_name);
 			}
 			
 		}
 	},
 
-	__createItem: function(data) {
+	__addElements: function(data) {
 		let collection = data['collection'];
 		const self = this;
 		let itemData = data.data;
@@ -280,10 +224,21 @@ const CoCreateFetch = {
 			item.fetch_ids = [];
 			if (filter.collection === collection && !item.el.getAttribute('data-fetch_name') && self.__checkItemByFilters(itemData, filter.filters)) {
 				// ids.push(data['document_id']);
-				self.__renderData(item.el, render_data)
+				self.__renderElements(item.el, render_data)
 			}
 		})
 	},
+
+	__runLoadMore: function(templateId) {
+		if (!templateId) return;
+		let item = ccfilter.getObjectByFilterId(this.items, templateId);
+		
+		if (!item) return;
+		if (item.filter.count > 0) {
+			ccfilter.fetchData(item.filter)
+		}
+	},
+	
 
 	findTemplateElByChild: function(element) {
 		return utils.getParentFromElement(element, null, ['data-template_id', 'data-fetch_collection']);
