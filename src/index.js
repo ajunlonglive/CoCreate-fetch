@@ -18,17 +18,11 @@ const CoCreateFetch = {
 	},
 	
 	initElements: function(elements){
-		for(let el of elements)
-			this.initElement(el)
+		for(let element of elements)
+			this.initElement(element)
 	},
 	
-	initElement: function(el) {
-		// this.__initEachElement(el, true, true)
-		this.__initEachElement(el)
-	},
-	
-	// __initEachElement: function(element, isInit, checkInit, refresh) {
-	__initEachElement: function(element) {
+	initElement: function(element) {
 		let item_id = element.getAttribute('data-template_id');
 		if (!item_id) return;
 		
