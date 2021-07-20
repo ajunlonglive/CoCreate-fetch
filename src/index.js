@@ -173,6 +173,24 @@ const CoCreateFetch = {
 		})
 	},
 
+	__addElements: function(data) {
+		let collection = data['collection'];
+		const self = this;
+		let itemData = data.data;
+		let render_data = data;
+		render_data.data = [itemData];
+
+		this.items.forEach((item) => {
+			const {filter} = item;
+			let ids = [];
+			item.fetch_ids = [];
+			if (filter.collection === collection && !item.el.getAttribute('data-fetch_name') && self.__checkItemByFilters(itemData, filter.filters)) {
+				// ids.push(data['document_id']);
+				self.__renderElements(item.el, render_data)
+			}
+		})
+	},
+	
 	__removeElements: function(data) {
 		let collection = data['collection'];
 		let document_id = data['document_id'];
@@ -211,23 +229,6 @@ const CoCreateFetch = {
 		}
 	},
 
-	__addElements: function(data) {
-		let collection = data['collection'];
-		const self = this;
-		let itemData = data.data;
-		let render_data = data;
-		render_data.data = [itemData];
-
-		this.items.forEach((item) => {
-			const {filter} = item;
-			let ids = [];
-			item.fetch_ids = [];
-			if (filter.collection === collection && !item.el.getAttribute('data-fetch_name') && self.__checkItemByFilters(itemData, filter.filters)) {
-				// ids.push(data['document_id']);
-				self.__renderElements(item.el, render_data)
-			}
-		})
-	},
 
 	__runLoadMore: function(templateId) {
 		if (!templateId) return;
