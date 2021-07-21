@@ -1,3 +1,13 @@
+## [1.0.23](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.22...v1.0.23) (2021-07-21)
+
+
+### Bug Fixes
+
+* fetch new data when collection, fetchname etc is updated ([db7007d](https://github.com/CoCreate-app/CoCreate-fetch/commit/db7007de599d32a1862bbfcbed1dabb088f88c48))
+* remove isInit, checkInit , refresh from init elements and commented related code ([c648063](https://github.com/CoCreate-app/CoCreate-fetch/commit/c6480639b23d77a205213e4ed58db6c43ebead25))
+* renamed functions for readabilty andremove commented code ([239f85b](https://github.com/CoCreate-app/CoCreate-fetch/commit/239f85bfde90b828229ad6dcd61b78ac5afbf8a9))
+* update to use init ELement directly ([f9f7d84](https://github.com/CoCreate-app/CoCreate-fetch/commit/f9f7d84f413e03b18f128bed7ba3d29b6b9bf8a5))
+
 ## [1.0.22](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.0.21...v1.0.22) (2021-07-19)
 
 
