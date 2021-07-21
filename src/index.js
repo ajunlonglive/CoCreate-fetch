@@ -70,12 +70,6 @@ const CoCreateFetch = {
 		ccfilter.fetchData(filter);
 	},
 	
-	__removeAllElements: function(wrapper) {
-		let item_id = wrapper.getAttribute('data-template_id');
-		let elements = wrapper.querySelectorAll("[templateId='" + item_id + "']");
-		elements.forEach((el) => el.remove())
-	},
-
 	__renderElements: function(wrapper, data, type = "data") {
 
 		let templateId = wrapper.getAttribute('data-template_id');
@@ -129,39 +123,20 @@ const CoCreateFetch = {
 		itemTemplateDiv.appendChild(template.cloneNode(true));
 		return itemTemplateDiv;
 	},
-
-	__initEvents: function() {
-		const self = this;
-		window.addEventListener('dndsuccess', function(e) {
-			const {dropedEl, dragedEl} = e.detail;
-			let dragedElTemplatId = dragedEl.getAttribute('data-template_id')
-			let dragElTemplate = document.querySelector(`[data-fetch_collection][data-template_id='${dragedElTemplatId}']`);
-			let dropElTemplate = self.findTemplateElByChild(dropedEl);
-			
-			if (!dragElTemplate || !dropElTemplate) {
-				return;
-			}
-			
-			if (!dragElTemplate.isSameNode(dropElTemplate)) {
-				//. save template id
-				self.updateParentTemplateOfChild(dropElTemplate, dragedEl)
-				
-				//. reordering
-				self.reorderChildrenOfTemplate(dragElTemplate);
-				self.reorderChildrenOfTemplate(dropElTemplate);
-			} else {
-				self.reorderChildrenOfTemplate(dropElTemplate);
-			}
-		})
-	},
 	
+	__removeAllElements: function(wrapper) {
+		let item_id = wrapper.getAttribute('data-template_id');
+		let elements = wrapper.querySelectorAll("[templateId='" + item_id + "']");
+		elements.forEach((el) => el.remove())
+	},
+
 	__initSocketEvent: function() {
 		const self = this;
 		crud.listen('readDocumentList', function(data) {
-			self.__fetchedItem(data)
+			self.__fetchedData(data)
 		})
 		crud.listen('readCollectionList', function(data) {
-			self.__fetchedItem(data)
+			self.__fetchedData(data)
 		})
 		
 		crud.listen('createDocument', function(data) {
@@ -209,7 +184,7 @@ const CoCreateFetch = {
 		}
 	},
 	
-	__fetchedItem: function(data) {
+	__fetchedData: function(data) {
 		let item_id = data['element'];
 		let item = ccfilter.getObjectByFilterId(this.items, item_id);
 		if (item) {
@@ -229,17 +204,41 @@ const CoCreateFetch = {
 		}
 	},
 
-
-	__runLoadMore: function(templateId) {
-		if (!templateId) return;
-		let item = ccfilter.getObjectByFilterId(this.items, templateId);
+	// __runLoadMore: function(templateId) {
+	// 	if (!templateId) return;
+	// 	let item = ccfilter.getObjectByFilterId(this.items, templateId);
 		
-		if (!item) return;
-		if (item.filter.count > 0) {
-			ccfilter.fetchData(item.filter)
-		}
-	},
+	// 	if (!item) return;
+	// 	if (item.filter.count > 0) {
+	// 		ccfilter.fetchData(item.filter)
+	// 	}
+	// },
 	
+	// dnd event listner to update document positions and orders
+	__initEvents: function() {
+		const self = this;
+		window.addEventListener('dndsuccess', function(e) {
+			const {dropedEl, dragedEl} = e.detail;
+			let dragedElTemplatId = dragedEl.getAttribute('data-template_id')
+			let dragElTemplate = document.querySelector(`[data-fetch_collection][data-template_id='${dragedElTemplatId}']`);
+			let dropElTemplate = self.findTemplateElByChild(dropedEl);
+			
+			if (!dragElTemplate || !dropElTemplate) {
+				return;
+			}
+			
+			if (!dragElTemplate.isSameNode(dropElTemplate)) {
+				//. save template id
+				self.updateParentTemplateOfChild(dropElTemplate, dragedEl)
+				
+				//. reordering
+				self.reorderChildrenOfTemplate(dragElTemplate);
+				self.reorderChildrenOfTemplate(dropElTemplate);
+			} else {
+				self.reorderChildrenOfTemplate(dropElTemplate);
+			}
+		})
+	},
 
 	findTemplateElByChild: function(element) {
 		return utils.getParentFromElement(element, null, ['data-template_id', 'data-fetch_collection']);
