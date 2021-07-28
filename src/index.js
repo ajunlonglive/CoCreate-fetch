@@ -175,7 +175,7 @@ const CoCreateFetch = {
 			
 			if (item.filter.collection == collection) {
 				var tmpId = item.el.getAttribute('data-template_id')
-				var els = item.el.querySelectorAll("[templateId='" + tmpId + "'][data-document_id='" + document_id + "']");
+				var els = item.el.querySelectorAll("[templateId='" + tmpId + "'][document_id='" + document_id + "']");
 				for (let j = 0; j < els.length; j++) {
 					els[j].remove();
 					item.startIndex--;
@@ -253,7 +253,7 @@ const CoCreateFetch = {
 
 		crud.updateDocument({
 			collection	: template.getAttribute('data-fetch_collection'), 
-			document_id : element.getAttribute('data-document_id'), 
+			document_id : element.getAttribute('document_id'), 
 			data: {
 				[name]: value	
 			},
@@ -268,7 +268,7 @@ const CoCreateFetch = {
 		if (!orderField || !template_id) {
 			return;
 		}
-		const children = template.querySelectorAll(`[data-template_id="${template_id}"][data-document_id]:not(.template)`)
+		const children = template.querySelectorAll(`[data-template_id="${template_id}"][document_id]:not(.template)`)
 		
 		const coff = template.getAttribute('data-order_type') !== 'asc' ? -1 : 1;
 		children.forEach((item, index) => {
@@ -277,7 +277,7 @@ const CoCreateFetch = {
 			}
 			crud.updateDocument({
 				collection : template.getAttribute('data-fetch_collection'), 
-				document_id : item.getAttribute('data-document_id'), 
+				document_id : item.getAttribute('document_id'), 
 				data: {
 					[orderField]: index * coff	
 				},
