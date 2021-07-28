@@ -26,41 +26,41 @@
         <tr>
             <th class="position:relative name">
       		  <input type="text" class="floating-label"
-             	  data-filter_name="name" 
+             	  filter-name="name" 
              	  data-value_type="string"
-             	  data-filter_operator=""
-     			      data-template_id="datatable" 
+             	  filter-operator=""
+     			      template_id="datatable" 
              	  placeholder="Name">
                 <span class="position:absolute bottom:18px right:20px float:right font-size:18px z-index:6" >
-                  <a data-order_by="name" value="desc" data-template_id="datatable" data-show="#asc1" data-hide="#sort1" id="sort">
+                  <a order-by="name" value="desc" template_id="datatable" data-show="#asc1" data-hide="#sort1" id="sort">
                     <i class="fas fa-sort"></i>
                   </a>
-                  <a class="hidden" data-order_by="name" value="asc" data-template_id="datatable" data-show="#desc1" data-hide="#asc1" id="asc1">
+                  <a class="hidden" order-by="name" value="asc" template_id="datatable" data-show="#desc1" data-hide="#asc1" id="asc1">
                     <i class="fas fa-sort-up"></i>
                   </a>
-                  <a class="hidden" data-order_by="name" value="desc" data-template_id="datatable" data-show="#asc1" data-hide="#desc1" id="desc1">
+                  <a class="hidden" order-by="name" value="desc" template_id="datatable" data-show="#asc1" data-hide="#desc1" id="desc1">
                     <i class="fas fa-sort-down"></i>
                   </a>
                 </span>
-                <!--<a class="position:absolute bottom:18px right:20px float:right font-size:18px z-index:6" data-order_by="name" value="asc" data-template_id="datatable">-->
+                <!--<a class="position:absolute bottom:18px right:20px float:right font-size:18px z-index:6" order-by="name" value="asc" template_id="datatable">-->
                 <!--  <i class="fas fa-sort"></i>-->
                 <!--</a>-->
             </th>
             <th class="position:relative">
         		  <input type="text" class="floating-label"
-             	  data-filter_name="_id" 
+             	  filter-name="_id" 
              	  data-value_type="string"
-             	  data-filter_operator=""
-     			      data-template_id="datatable" 
+             	  filter-operator=""
+     			      template_id="datatable" 
              	  placeholder="Document_id"/>
                 <span class="position:absolute bottom:18px right:20px float:right font-size:18px z-index:6" >
-                  <a data-order_by="name" value="desc" data-template_id="datatable" data-show="#asc" data-hide="#sort" id="sort">
+                  <a order-by="name" value="desc" template_id="datatable" data-show="#asc" data-hide="#sort" id="sort">
                     <i class="fas fa-sort"></i>
                   </a>
-                  <a class="hidden" data-order_by="_id" value="asc" data-template_id="datatable" data-show="#desc" data-hide="#asc" id="asc">
+                  <a class="hidden" order-by="_id" value="asc" template_id="datatable" data-show="#desc" data-hide="#asc" id="asc">
                     <i class="fas fa-sort-up"></i>
                   </a>
-                  <a class="hidden" data-order_by="_id" value="desc" data-template_id="datatable" data-show="#asc" data-hide="#desc" id="desc">
+                  <a class="hidden" order-by="_id" value="desc" template_id="datatable" data-show="#asc" data-hide="#desc" id="desc">
                     <i class="fas fa-sort-down"></i>
                   </a>
                 </span>
@@ -68,19 +68,19 @@
         </tr>
     </thead>
     <tbody class="template-wrapper"
-        data-fetch_collection="users"
-        data-pass_to="me1234" 
-        data-fetch_name="" 
+        fetch-collection="users"
+        pass_to="me1234" 
+        fetch-name="" 
         data-fetch_value="" 
         data-fetch_count=""
-        data-order_by="name" 
-        data-order_type="asc"
-        data-template_id="datatable"
+        order-by="name" 
+        order-type="asc"
+        template_id="datatable"
         data-search_type="or">
         
         <tr class="template border:bottom">
-            <td class="name"><h4 data-pass_id="me1234" name="name" >No Name</h4></td>
-            <td ><h4 data-pass_id="me1234" name="_id">Document_id</h4></td>
+            <td class="name"><h4 pass_id="me1234" name="name" >No Name</h4></td>
+            <td ><h4 pass_id="me1234" name="_id">Document_id</h4></td>
         </tr>
     </tbody>
 </table>

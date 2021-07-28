@@ -6,7 +6,7 @@ import logic from '@cocreate/logic';
 import render from '@cocreate/render';
 
 const CoCreateFetch = {
-	selector: '[data-template_id][data-fetch_collection]',
+	selector: '[template_id][fetch-collection]',
 	items: [],
 
 	init: function() {
@@ -22,17 +22,17 @@ const CoCreateFetch = {
 	},
 	
 	initElement: function(element) {
-		let item_id = element.getAttribute('data-template_id');
+		let item_id = element.getAttribute('template_id');
 		if (!item_id) return;
 		
-		if (!element.getAttribute('data-fetch_collection')) return;
+		if (!element.getAttribute('fetch-collection')) return;
 		
 		let item = ccfilter.getObjectByFilterId(this.items, item_id);
 		let filter = null;
 		const self = this;
 		
 		if (!item) {
-			filter = ccfilter.setFilter(element, "data-template_id", "template");
+			filter = ccfilter.setFilter(element, "template_id", "template");
 			let fetch_type = element.getAttribute('data-fetch_value_type') || "string";
 			if (!filter) return;
 			
@@ -72,15 +72,15 @@ const CoCreateFetch = {
 	
 	__renderElements: function(wrapper, data, type = "data") {
 
-		let templateId = wrapper.getAttribute('data-template_id');
-		let template = wrapper.querySelector(`.template[data-template_id='${templateId}'`);// || wrapper.querySelector('.template');
+		let templateId = wrapper.getAttribute('template_id');
+		let template = wrapper.querySelector(`.template[template_id='${templateId}'`);// || wrapper.querySelector('.template');
 		if (!template)  {
 			return;
 		}
 		
-		let renderId = wrapper.getAttribute('data-render_id');
+		let renderId = wrapper.getAttribute('render_id');
 		
-		let passTo = wrapper.getAttribute('data-pass_to');
+		let passTo = wrapper.getAttribute('pass_to');
 		let renderData = renderId ? {[renderId] : data} : data;
 		
 		type = type || "data";
@@ -93,7 +93,7 @@ const CoCreateFetch = {
 			data: renderData,
 			passTo: passTo
 		})
-		let removeableTemplate = cloneWrapper.querySelector(`.template[data-template_id="${templateId}"]`);
+		let removeableTemplate = cloneWrapper.querySelector(`.template[template_id="${templateId}"]`);
 		if (removeableTemplate) {
 			removeableTemplate.remove();
 		} else {
@@ -113,11 +113,11 @@ const CoCreateFetch = {
 		template.setAttribute('templateId', templateId);
 
 		if (!type) type = "data"
-		if (!template.getAttribute('data-render_array')) {
-			template.setAttribute('data-render_array', type);
+		if (!template.getAttribute('render-array')) {
+			template.setAttribute('render-array', type);
 		}
-		if (!template.getAttribute('data-render_key') && render_id) {
-			template.setAttribute('data-render_key', render_id);
+		if (!template.getAttribute('render-key') && render_id) {
+			template.setAttribute('render-key', render_id);
 		}
 		
 		itemTemplateDiv.appendChild(template.cloneNode(true));
@@ -125,7 +125,7 @@ const CoCreateFetch = {
 	},
 	
 	__removeAllElements: function(wrapper) {
-		let item_id = wrapper.getAttribute('data-template_id');
+		let item_id = wrapper.getAttribute('template_id');
 		let elements = wrapper.querySelectorAll("[templateId='" + item_id + "']");
 		elements.forEach((el) => el.remove())
 	},
@@ -159,7 +159,7 @@ const CoCreateFetch = {
 			const {filter} = item;
 			let ids = [];
 			item.fetch_ids = [];
-			if (filter.collection === collection && !item.el.getAttribute('data-fetch_name') && self.__checkItemByFilters(itemData, filter.filters)) {
+			if (filter.collection === collection && !item.el.getAttribute('fetch-name') && self.__checkItemByFilters(itemData, filter.filters)) {
 				// ids.push(data['document_id']);
 				self.__renderElements(item.el, render_data)
 			}
@@ -174,7 +174,7 @@ const CoCreateFetch = {
 			let item = this.items[i];
 			
 			if (item.filter.collection == collection) {
-				var tmpId = item.el.getAttribute('data-template_id')
+				var tmpId = item.el.getAttribute('template_id')
 				var els = item.el.querySelectorAll("[templateId='" + tmpId + "'][document_id='" + document_id + "']");
 				for (let j = 0; j < els.length; j++) {
 					els[j].remove();
@@ -189,7 +189,7 @@ const CoCreateFetch = {
 		let item = ccfilter.getObjectByFilterId(this.items, item_id);
 		if (item) {
 			item.filter.startIndex += data['data'].length;
-			let fetch_name = item.el.getAttribute('data-fetch_name');
+			let fetch_name = item.el.getAttribute('fetch-name');
 			if (fetch_name) {
 				data = data.data[0];
 			}
@@ -219,8 +219,8 @@ const CoCreateFetch = {
 		const self = this;
 		window.addEventListener('dndsuccess', function(e) {
 			const {dropedEl, dragedEl} = e.detail;
-			let dragedElTemplatId = dragedEl.getAttribute('data-template_id')
-			let dragElTemplate = document.querySelector(`[data-fetch_collection][data-template_id='${dragedElTemplatId}']`);
+			let dragedElTemplatId = dragedEl.getAttribute('template_id')
+			let dragElTemplate = document.querySelector(`[fetch-collection][template_id='${dragedElTemplatId}']`);
 			let dropElTemplate = self.findTemplateElByChild(dropedEl);
 			
 			if (!dragElTemplate || !dropElTemplate) {
@@ -241,18 +241,18 @@ const CoCreateFetch = {
 	},
 
 	findTemplateElByChild: function(element) {
-		return utils.getParentFromElement(element, null, ['data-template_id', 'data-fetch_collection']);
+		return utils.getParentFromElement(element, null, ['template_id', 'fetch-collection']);
 	},
 	
 	// changes position of documents
 	updateParentTemplateOfChild: function(template, element) {
-		const name = template.getAttribute('data-filter_name')
-		const value = template.getAttribute('data-filter_value')
-		const operator = template.getAttribute('data-filter_operator')
+		const name = template.getAttribute('filter-name')
+		const value = template.getAttribute('filter-value')
+		const operator = template.getAttribute('filter-operator')
 		if (!name || operator != "$eq") return;
 
 		crud.updateDocument({
-			collection	: template.getAttribute('data-fetch_collection'), 
+			collection	: template.getAttribute('fetch-collection'), 
 			document_id : element.getAttribute('document_id'), 
 			data: {
 				[name]: value	
@@ -263,20 +263,20 @@ const CoCreateFetch = {
 	
 	// changes position of documents
 	reorderChildrenOfTemplate: function (template) {
-		const orderField = template.getAttribute('data-order_by')
-		const template_id = template.getAttribute('data-template_id')
+		const orderField = template.getAttribute('order-by')
+		const template_id = template.getAttribute('template_id')
 		if (!orderField || !template_id) {
 			return;
 		}
-		const children = template.querySelectorAll(`[data-template_id="${template_id}"][document_id]:not(.template)`)
+		const children = template.querySelectorAll(`[template_id="${template_id}"][document_id]:not(.template)`)
 		
-		const coff = template.getAttribute('data-order_type') !== 'asc' ? -1 : 1;
+		const coff = template.getAttribute('order-type') !== 'asc' ? -1 : 1;
 		children.forEach((item, index) => {
 			if (item.classList.contains('template')) {
 				return
 			}
 			crud.updateDocument({
-				collection : template.getAttribute('data-fetch_collection'), 
+				collection : template.getAttribute('fetch-collection'), 
 				document_id : item.getAttribute('document_id'), 
 				data: {
 					[orderField]: index * coff	
@@ -349,7 +349,7 @@ const CoCreateFetch = {
 observer.init({ 
 	name: 'CoCreateFetchObserver', 
 	observe: ['attributes'],
-	attributeName: ['data-fetch_collection', 'data-fetch_name', 'data-filter_name', 'data-filter_value'],
+	attributeName: ['fetch-collection', 'fetch-name', 'filter-name', 'filter-value'],
 	callback: function(mutation) {
 		CoCreateFetch.initElement(mutation.target)
 	}
@@ -358,7 +358,7 @@ observer.init({
 observer.init({ 
 	name: 'CoCreateFetchInit', 
 	observe: ['addedNodes'],
-	target: '[data-fetch_collection]',
+	target: '[fetch-collection]',
 	callback: function(mutation) {
 		CoCreateFetch.initElement(mutation.target)
 	}

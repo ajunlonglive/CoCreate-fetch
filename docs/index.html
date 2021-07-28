@@ -88,13 +88,13 @@
 		
 						<pre><code class="language-html">
 	&lt;div class="card"
-		data-template_id="temp2"
-		data-fetch_collection="render_test"
-		data-filter_value="5f5aeace3a7246b7cf2e3ffc"
-		data-filter_name="_id"
-		data-filter_operator="$eq"
-		data-fetch_name="jsonArray"&gt;
-		&lt;div class="template" data-template_id="temp2" data-value="{{email}}"&gt;
+		template_id="temp2"
+		fetch-collection="render_test"
+		filter-value="5f5aeace3a7246b7cf2e3ffc"
+		filter-name="_id"
+		filter-operator="$eq"
+		fetch-name="jsonArray"&gt;
+		&lt;div class="template" template_id="temp2" data-value="{{email}}"&gt;
 			&lt;h4 value="{{email}}" name="email"&gt;&lt;/h4&gt;
 			&lt;h4 value="{{home}}" name="home"&gt;&lt;/h4&gt;
 		&lt;/div&gt;	
@@ -105,21 +105,21 @@
 					<h4 class="margin-top:20px padding:5px_0px">Documents fetch case</h4>
 						<pre><code class="language-html">
 	&lt;div class="card"
-		data-template_id="render_testing"
-		data-fetch_collection="render_test"
-		data-filter_value="render"
-		data-filter_name="type"
+		template_id="render_testing"
+		fetch-collection="render_test"
+		filter-value="render"
+		filter-name="type"
 		data-redner_id="testing"
-		data-filter_operator="$eq"&gt;
-		&lt;div class="template" data-template_id="render_test" data-value="{{testing.data._id}}" data-render_array="testing.data"&gt;
+		filter-operator="$eq"&gt;
+		&lt;div class="template" template_id="render_test" data-value="{{testing.data._id}}" render-array="testing.data"&gt;
 			&lt;h3 data-attribute="email" data-value="{{testing.data.email}}" name="email" value="{{testing.data.email}}"&gt;&lt;/h3&gt;
 			&lt;h4 collection="{{testing.collection}}" name="home" value="{{testing.data.home}}"&gt;&lt;/h4&gt;
 			&lt;h4 name="other_email" value="{{testing.data.personal_info.email}}"&gt;&lt;/h4&gt;
-			&lt;div class="template display:flex justify-content:space-between" data-render_array="testing.data.jsonArray" data-render_key="sub_jsonArray"&gt;
+			&lt;div class="template display:flex justify-content:space-between" render-array="testing.data.jsonArray" render-key="sub_jsonArray"&gt;
 				&lt;h5 name="email" value="{{sub_jsonArray.email}}"&gt;&lt;/h5&gt;
 				&lt;h5 name="home" value="{{sub_jsonArray.home}}"&gt;&lt;/h5&gt;
 			&lt;/div&gt;
-			&lt;div class="template display:flex justify-content:space-between" data-render_array="testing.data.stringArray" data-value="--"&gt;
+			&lt;div class="template display:flex justify-content:space-between" render-array="testing.data.stringArray" data-value="--"&gt;
 				&lt;h5 name="email" value="--"&gt;&lt;/h5&gt;
 			&lt;/div&gt;
 		&lt;/div&gt;
@@ -135,15 +135,15 @@
 				
 	                <ul class="list-style-type:none ">
 						<li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-			        		<h4><span>data-template_id</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge danger">required</span></h4>
+			        		<h4><span>template_id</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge danger">required</span></h4>
 		        			<p>Template identifier. This attribute should be define.</p>
 						</li>
 						<li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-			        		<h4><span>data-fetch_collection</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge danger">required</span></h4>
+			        		<h4><span>fetch-collection</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge danger">required</span></h4>
 		        			<p>Collection name to fetch data. It is required. </p>
 						</li>
 						<li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-			        		<h4><span>data-fetch_name</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge warning">optional</span></h4>
+			        		<h4><span>fetch-name</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge warning">optional</span></h4>
 		        			<p>Define the field name to fetch array</p>
 		        			<p>If this value defined, it will fetch the special field's value</p>
 						</li>
@@ -157,18 +157,18 @@
 		        			<p>Fetch the item's count on page load or when updated. If attribute is empty or not used, total items will be fetch.</p>
 						</li>
 						<li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-			        		<h4><span>data-order_by</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge warning">optional</span></h4>
+			        		<h4><span>order-by</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge warning">optional</span></h4>
 		        			<p>Field name to sorting.</p>
 						</li>
 						<li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-			        		<h4><span>data-order_type</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge warning">optional</span></h4>
+			        		<h4><span>order-type</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge warning">optional</span></h4>
 		        			<p>Available value: asc | desc.</p>
 		        			<p>Fetch order value on page load or when updated. If attribute is empty or not used Default's to asc.</p>
 						</li>
 						<li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-			        		<h4><span>data-render_id</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge warning">optional</span></h4>
+			        		<h4><span>render_id</span> <span class="cocreate-badge success">string</span> <span class="cocreate-badge warning">optional</span></h4>
 		        			<p>This value should define in template wrapper. </p>
-		        			<p>Mulitple template case, data-render_id would use that generate new object by this value</p>
+		        			<p>Mulitple template case, render_id would use that generate new object by this value</p>
 						</li>
 	                </ul>
 	
@@ -178,7 +178,7 @@
 				    </div>
 					<p>CoCreate-fetch works based on cocreate.js and template. </p>
 					
-					<p>To fetch the array data, the template wrapper should define <code class="language-js">data-fetch_document</code>. <code class="language-js">data-template_id</code></p>
+					<p>To fetch the array data, the template wrapper should define <code class="language-js">data-fetch_document</code>. <code class="language-js">template_id</code></p>
 	
 					<div>
 				       <h2 id="fetch-effects" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Effects and Styles</h2>
@@ -202,8 +202,8 @@
 					<div class="position:sticky top:0 padding:15px_0px height:100vh">
 						<div class="container svColumn overflow:hidden card border-radius:2px width:auto height:100%" id="sandbox">
 							<div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" data-show="preview" data-hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px hidden" id="code" data-show="code" data-hide="preview"><i class="fas fa-code"></i></a>
-								<!--<a class="margin-right:10px"><i class="far fa-window-maximize"></i></a>--><a target="modal" href="module_activity_datatable.html" data-pass_collection="modules" data-pass_document_id="" data-pass_fetch_value="" data-pass_prefix="" data-pass_to="render" data-modal_width="600px" data-modal_height="400px"
-									data-modal_color="#229954" data-modal_header="false" class="margin-right:10px">
+								<!--<a class="margin-right:10px"><i class="far fa-window-maximize"></i></a>--><a target="modal" href="module_activity_datatable.html" pass-collection="modules" pass-document_id="" pass-fetch_value="" pass-prefix="" pass_to="render" modal-width="600px" modal-height="400px"
+									modal-color="#229954" modal-header="false" class="margin-right:10px">
 								<i class="fas fa-external-link-alt"></i>
 							 </a> <a class="margin-right:5px" data-fullscreen target="#sandbox"><i class="fas fa-expand"></i></a> </div>
 							<div class="svRow">

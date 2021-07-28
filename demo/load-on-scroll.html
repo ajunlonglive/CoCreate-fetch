@@ -8,27 +8,27 @@
 <body>
   
     <input collection="mycollection" name="name"/>
-    <div data-template_id="filter_test" data-fetch_type="total"></div>
+    <div template_id="filter_test" data-fetch_type="total"></div>
     <div
-      data-fetch_collection="users"
-      data-pass_to="me123" 
-      data-order_by="name" 
-      data-order_type="asc"
-      data-template_id="filter_test"
+      fetch-collection="users"
+      pass_to="me123" 
+      order-by="name" 
+      order-type="asc"
+      template_id="filter_test"
       data-fetch_count="10"
       >
       
-        <div class="card template margin:10px" data-render_array="data" data-pass_id="me1234" data-value="_id">
+        <div class="card template margin:10px" render-array="data" pass_id="me1234" data-value="_id">
           <img document_id="" src="http://via.placeholder.com/300x150/BF00FF/ffffff/" class="card-img-top">
           <div class="card-body padding:15px">
-            <h5 class="card-title" collection="collection" document_id="_id" name="email" data-pass_id="me1234" value="email"></h5>
-            <p class="card-text" collection="collection" document_id="_id" name="_id" data-pass_id="me1234" value="_id"></p>
+            <h5 class="card-title" collection="collection" document_id="_id" name="email" pass_id="me1234" value="email"></h5>
+            <p class="card-text" collection="collection" document_id="_id" name="_id" pass_id="me1234" value="_id"></p>
           </div>
         </div>
-        <div data-template_id="filter_test" data-fetch_type="scroll" class="opacity:0 height:30px"></div>
+        <div template_id="filter_test" data-fetch_type="scroll" class="opacity:0 height:30px"></div>
       </div>
 
-    <button class="padding:0px_20px padding:10px_0px" data-template_id="filter_test" data-fetch_type="loadmore">Load More</button>
+    <button class="padding:0px_20px padding:10px_0px" template_id="filter_test" data-fetch_type="loadmore">Load More</button>
   
 	    <script>
 	      var config = {

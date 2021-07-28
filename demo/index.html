@@ -10,27 +10,27 @@
 <!--------------------- FetchArray (string) ------------------------------>
 		<div 
 			class="card"
-			data-template_id="temp1"
-			data-fetch_collection="render_test"
-			data-filter_name="_id"
-			data-filter_operator="$eq"
-			data-fetch_name="stringArray"
-			data-filter_value="5f5aeace3a7246b7cf2e4004"
+			template_id="temp1"
+			fetch-collection="render_test"
+			filter-name="_id"
+			filter-operator="$eq"
+			fetch-name="stringArray"
+			filter-value="5f5aeace3a7246b7cf2e4004"
 		>
-			<div class="template" data-template_id="temp1" data-value="--">
+			<div class="template" template_id="temp1" data-value="--">
 				<h4 value="--" name="email" data-value="--"></h4>
 			</div>	
 		</div>
 
 <!--------------------- FetchArray (json) ------------------------------>
 		<div class="card"
-			data-template_id="temp2"
-			data-fetch_collection="render_test"
-			data-filter_value="5f5aeace3a7246b7cf2e3ffc"
-			data-filter_name="_id"
-			data-filter_operator="$eq"
-			data-fetch_name="jsonArray">
-			<div class="template" data-template_id="temp2" data-value="{{email}}">
+			template_id="temp2"
+			fetch-collection="render_test"
+			filter-value="5f5aeace3a7246b7cf2e3ffc"
+			filter-name="_id"
+			filter-operator="$eq"
+			fetch-name="jsonArray">
+			<div class="template" template_id="temp2" data-value="{{email}}">
 				<h4 value="{{email}}" name="email"></h4>
 				<h4 value="{{home}}" name="home"></h4>
 			</div>	
@@ -38,15 +38,15 @@
 		
 <!--------------------- Documents ------------------------------->
 		<div class="card"
-			data-template_id="render_testing"
-			data-fetch_collection="render_test"
-			data-filter_value="render"
-			data-filter_name="type"
-			data-filter_operator="$eq"
+			template_id="render_testing"
+			fetch-collection="render_test"
+			filter-value="render"
+			filter-name="type"
+			filter-operator="$eq"
 		>
 			<div 
 				class="template" 
-				data-template_id="render_test" 
+				template_id="render_test" 
 				data-value="_id"
 			>
 				<h3 data-attribute="email" data-value="email" name="email" value="email"></h3>
@@ -54,7 +54,7 @@
 				<h4 name="other_email" value="personal_info.email"></h4>
 				<div 
 					class="template display:flex justify-content:space-between"
-					data-render_array="jsonArray"
+					render-array="jsonArray"
 				>
 					<h5 name="email" value="email"></h5>
 					<h5 name="home" value="home"></h5>
@@ -63,7 +63,7 @@
 				<!--<p>----------------- String Array case ---------------------</p>-->
 				<div 
 					class="template display:flex justify-content:space-between"
-					data-render_array="stringArray"
+					render-array="stringArray"
 					data-value="--"
 				>
 					<h5 name="email" value="--"></h5>
