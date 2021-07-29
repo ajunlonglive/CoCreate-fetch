@@ -33,7 +33,7 @@ const CoCreateFetch = {
 		
 		if (!item) {
 			filter = ccfilter.setFilter(element, "template_id", "template");
-			let fetch_type = element.getAttribute('data-fetch_value_type') || "string";
+			let fetch_type = element.getAttribute('fetch-value_type') || "string";
 			if (!filter) return;
 			
 			if (fetch_type === 'collection') {
