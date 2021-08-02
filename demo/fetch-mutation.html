@@ -16,17 +16,17 @@
 		<form collection="apples1" document_id="" >
 			<h5 name="name">get value from db</h5>
 			<input id="test" type="text" placeholder="name" name="name">
-			<input type="text" placeholder="name" data-get_value="test">
+			<input type="text" placeholder="name" get-value="test">
 			
 			<button class="position:fixed bottom:15px right:15px bg-blue grow-hover round opacity-08" actions="saveDocument"><i class="far fa-save"></i></button>
 		</form>
 
 
-		<a data-show="#module-templates" data-hide="#form" pass-collection="apples2" pass_to="testing1" class="">click<i class="far fa-plus-square"></i></a>
+		<a show="#module-templates" hide="#form" pass-collection="apples2" pass_to="testing1" class="">click<i class="far fa-plus-square"></i></a>
 		<table class="width:100% border-collapse:collapse">
 			<tbody template_id="datatable" fetch-collection="apples1" order-by="name" order-type="asc" pass_id="testing1" pass-refresh="true">
 
-				<tr class="template background:gainsboro:hover border-bottom:1px_solid_darkgray" template_id="datatable" document_id="{{data._id}}" data-toggle="selected">
+				<tr class="template background:gainsboro:hover border-bottom:1px_solid_darkgray" template_id="datatable" document_id="{{data._id}}" toggle="selected">
 					<td class="padding:10px">
 					    <h4 collection="{{collection}}" document_id="{{data._id}}" name="name">Name</h4>
 					</td>
