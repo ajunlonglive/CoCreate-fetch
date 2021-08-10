@@ -25,7 +25,7 @@ const CoCreateFetch = {
 		let item_id = element.getAttribute('template_id');
 		if (!item_id) return;
 		
-		if (!element.getAttribute('fetch-collection')) return;
+		// if (!element.getAttribute('fetch-collection')) return;
 		
 		let item = ccfilter.getObjectByFilterId(this.items, item_id);
 		let filter = null;
