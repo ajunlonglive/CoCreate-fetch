@@ -1,3 +1,12 @@
+## [1.1.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.1.2...v1.1.3) (2021-08-13)
+
+
+### Bug Fixes
+
+* remove action component ([48e01bf](https://github.com/CoCreate-app/CoCreate-fetch/commit/48e01bf46e44600d85bac82ddd31511d0ce1119a))
+* remove logic component ([b936e8d](https://github.com/CoCreate-app/CoCreate-fetch/commit/b936e8dd904330108dc8d3cf7bcd72b0c7cea8d1))
+* replace data-transform with toggle ([5fcff02](https://github.com/CoCreate-app/CoCreate-fetch/commit/5fcff025370d57a78f9bcd1bcdc4ca98ef404557))
+
 ## [1.1.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.1.1...v1.1.2) (2021-08-02)
 
 
