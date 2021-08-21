@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.1.3...v1.1.4) (2021-08-21)
+
+
+### Bug Fixes
+
+* check filers for . to decide to insert new itm in list ([8ebddcb](https://github.com/CoCreate-app/CoCreate-fetch/commit/8ebddcbc4423d85d761ef3ea9bbfab5458e57610))
+
 ## [1.1.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.1.2...v1.1.3) (2021-08-13)
 
 
