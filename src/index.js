@@ -301,7 +301,8 @@ const CoCreateFetch = {
 			
 			switch (operator) {
 				case '$contain':
-					if (!Array.isArray(fieldValue) || !fieldValue.some(x => value.includes(x))) flag = false;
+					// if (!Array.isArray(fieldValue) || !fieldValue.some(x => value.includes(x))) flag = false;
+					if (!fieldValue.includes(value[0])) flag = false; 
 					break;
 				case '$range':
 					if (value[0] !== null && value[1] !== null) {
