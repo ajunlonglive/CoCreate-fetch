@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.0...v1.2.1) (2021-09-06)
+
+
+### Bug Fixes
+
+* add @cocreate/uuid ([c809f8b](https://github.com/CoCreate-app/CoCreate-fetch/commit/c809f8b306203e534c3c086701d05b10d658a782))
+
 # [1.2.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.1.11...v1.2.0) (2021-09-06)
 
 
