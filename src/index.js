@@ -3,6 +3,7 @@ import ccfilter from '@cocreate/filter'
 import utils from '@cocreate/utils';
 import crud from '@cocreate/crud-client';
 import render from '@cocreate/render';
+import uuid from '@cocreate/uuid';
 
 const CoCreateFetch = {
 	selector: '[template_id][fetch-collection]',
@@ -17,14 +18,30 @@ const CoCreateFetch = {
 	
 	initElements: function(elements){
 		for(let element of elements)
-			this.initElement(element)
+			this.initElement(element);
 	},
 	
 	initElement: function(element) {
+		if (!element.getAttribute('fetch-collection')) return;
 		let item_id = element.getAttribute('template_id');
 		if (!item_id) return;
-		
+		if (item_id == 'auto'){
+			item_id = item_id.replace(/auto/g, uuid.generate(6));
+			element.setAttribute('template_id', item_id);
+			let elements = element.querySelectorAll('[template_id="auto"]');
+			for (let el of elements)
+				el.setAttribute('template_id', item_id);
+		}
 		// if (!element.getAttribute('fetch-collection')) return;
+		let parentEls = element.querySelectorAll('[filter-value="parent"]');
+		if (parentEls.length > 0){
+			let ele = element.parentElement.closest('[filter-value]')
+			let value = ele.getAttribute('filter-value')
+			element.setAttribute('template_id', item_id);
+			for (let el of parentEls)
+				el.setAttribute('filter-value', value);
+		}
+
 		
 		let item = ccfilter.getObjectByFilterId(this.items, item_id);
 		let filter = null;
@@ -70,14 +87,20 @@ const CoCreateFetch = {
 	},
 	
 	__renderElements: function(wrapper, data, type = "data") {
-
+		let auto;
 		let templateId = wrapper.getAttribute('template_id');
+
 		let template = wrapper.querySelector(`.template[template_id='${templateId}'`);// || wrapper.querySelector('.template');
 		if (!template)  {
 			return;
 		}
 		
 		let renderId = wrapper.getAttribute('render_id');
+		if (renderId == 'auto'){
+			renderId = renderId.replace(/auto/g, uuid.generate(6));
+			auto = "true";
+			wrapper.setAttribute('render_id', renderId)
+		}
 		
 		let passTo = wrapper.getAttribute('pass_to');
 		let renderData = renderId ? {[renderId] : data} : data;
@@ -85,7 +108,7 @@ const CoCreateFetch = {
 		type = type || "data";
 		type = renderId ? `${renderId}.${type}` : type;
 
-		let cloneWrapper = this.__cloneTemplate(template, templateId, type, renderId);
+		let cloneWrapper = this.__cloneTemplate(template, templateId, type, renderId, auto);
 		
 		render.data({
 			elements: cloneWrapper.children,
@@ -105,7 +128,7 @@ const CoCreateFetch = {
 
 	},
 
-	__cloneTemplate: function(clone_node, templateId, type, render_id) {
+	__cloneTemplate: function(clone_node, templateId, type, render_id, auto) {
 	
 		let itemTemplateDiv = document.createElement(clone_node.parentNode.tagName || 'div');
 		let template = clone_node.cloneNode(true);
@@ -118,7 +141,13 @@ const CoCreateFetch = {
 		if (!template.getAttribute('render-key') && render_id) {
 			template.setAttribute('render-key', render_id);
 		}
-		
+		if (auto == 'true') {
+			template = template.outerHTML.replace(/auto/g, render_id);
+			itemTemplateDiv.innerHTML = template;
+			console.log('test', itemTemplateDiv)
+			return itemTemplateDiv;
+		}
+		else
 		itemTemplateDiv.appendChild(template.cloneNode(true));
 		return itemTemplateDiv;
 	},
