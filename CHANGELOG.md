@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.1.11...v1.2.0) (2021-09-06)
+
+
+### Features
+
+* auto increment template_id and render_id ([5cb29e2](https://github.com/CoCreate-app/CoCreate-fetch/commit/5cb29e262b2887d08a30eaaf2ec30c2b444da805))
+* better support for nested fetch and auto increment id's ([0b3558a](https://github.com/CoCreate-app/CoCreate-fetch/commit/0b3558aa9a24f06eb15f49b71c432f12498499f2))
+
 ## [1.1.11](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.1.10...v1.1.11) (2021-09-04)
 
 
