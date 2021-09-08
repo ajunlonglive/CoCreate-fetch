@@ -26,10 +26,10 @@ const CoCreateFetch = {
 		if (!element.getAttribute('fetch-collection')) return;
 		let item_id = element.getAttribute('template_id');
 		if (!item_id) return;
-		if (item_id == 'auto'){
-			item_id = item_id.replace(/auto/g, uuid.generate(6));
+		if (item_id == '$auto'){
+			item_id = item_id.replace(/\$auto/g, uuid.generate(6));
 			element.setAttribute('template_id', item_id);
-			let elements = element.querySelectorAll('[template_id="auto"]');
+			let elements = element.querySelectorAll('[template_id="$auto"]');
 			for (let el of elements)
 				el.setAttribute('template_id', item_id);
 		}
@@ -99,8 +99,8 @@ const CoCreateFetch = {
 		}
 		
 		let renderId = wrapper.getAttribute('render_id');
-		if (renderId == 'auto'){
-			renderId = renderId.replace(/auto/g, uuid.generate(6));
+		if (renderId == '$auto'){
+			renderId = renderId.replace(/\$auto/g, uuid.generate(6));
 			auto = "true";
 			wrapper.setAttribute('render_id', renderId);
 		}
@@ -146,7 +146,7 @@ const CoCreateFetch = {
 			template.setAttribute('render-key', render_id);
 		}
 		// if (auto) {
-			template = template.outerHTML.replace(/auto/g, render_id);
+			template = template.outerHTML.replace(/\$auto/g, render_id);
 			itemTemplateDiv.innerHTML = template;
 			return itemTemplateDiv;
 		// }
