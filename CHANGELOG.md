@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.2...v1.2.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* CoCreate.config directory, path, name and  public ([389a774](https://github.com/CoCreate-app/CoCreate-fetch/commit/389a774492dad73fb95953d74c2c949d69bba1c6))
+
 ## [1.2.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.1...v1.2.2) (2021-09-08)
 
 
