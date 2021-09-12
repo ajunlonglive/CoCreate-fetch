@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.6...v1.2.7) (2021-09-12)
+
+
+### Bug Fixes
+
+* update sidenav to use resize and toggle ([db27386](https://github.com/CoCreate-app/CoCreate-fetch/commit/db2738643afb32b82507838d67f5be152a3515d4))
+
 ## [1.2.6](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.5...v1.2.6) (2021-09-09)
 
 
