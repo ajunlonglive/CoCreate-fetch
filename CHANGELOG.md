@@ -1,3 +1,10 @@
+## [1.2.14](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.13...v1.2.14) (2021-10-02)
+
+
+### Bug Fixes
+
+* find parent fetch container ([2ac67ee](https://github.com/CoCreate-app/CoCreate-fetch/commit/2ac67ee9021c430424df145b2cd4b7db599e22e2))
+
 ## [1.2.13](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.12...v1.2.13) (2021-10-01)
 
 
