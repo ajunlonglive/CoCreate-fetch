@@ -1,7 +1,6 @@
 /*global CustomEvent*/
 import observer from '@cocreate/observer';
 import ccfilter from '@cocreate/filter';
-import utils from '@cocreate/utils';
 import crud from '@cocreate/crud-client';
 import render from '@cocreate/render';
 import uuid from '@cocreate/uuid';
@@ -252,8 +251,8 @@ const CoCreateFetch = {
 			const {dropedEl, dragedEl} = e.detail;
 			let dragedElTemplatId = dragedEl.getAttribute('template_id');
 			let dragElTemplate = document.querySelector(`[fetch-collection][template_id='${dragedElTemplatId}']`);
-			let dropElTemplate = self.findTemplateElByChild(dropedEl);
-			
+			let dropElTemplate = dropedEl.parentElement.closest('[template_id][fetch-collection]');
+
 			if (!dragElTemplate || !dropElTemplate) {
 				return;
 			}
@@ -271,10 +270,6 @@ const CoCreateFetch = {
 		});
 	},
 
-	findTemplateElByChild: function(element) {
-		return utils.getParentFromElement(element, null, ['template_id', 'fetch-collection']);
-	},
-	
 	// changes position of documents
 	updateParentTemplateOfChild: function(template, element) {
 		const name = template.getAttribute('filter-name');
