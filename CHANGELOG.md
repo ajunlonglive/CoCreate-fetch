@@ -1,3 +1,10 @@
+## [1.2.19](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.18...v1.2.19) (2021-10-13)
+
+
+### Bug Fixes
+
+* update packages ([a167ae2](https://github.com/CoCreate-app/CoCreate-fetch/commit/a167ae260e72fe1d3a9f66ff548c23d5382a8939))
+
 ## [1.2.18](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.17...v1.2.18) (2021-10-06)
 
 
