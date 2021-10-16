@@ -1,3 +1,10 @@
+## [1.2.26](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.25...v1.2.26) (2021-10-16)
+
+
+### Bug Fixes
+
+* update socket package to fix bug in docs ([1dcdd9a](https://github.com/CoCreate-app/CoCreate-fetch/commit/1dcdd9a6901c9ba4dbe7e2e4d54ac4e30a65bb70))
+
 ## [1.2.25](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.24...v1.2.25) (2021-10-15)
 
 
