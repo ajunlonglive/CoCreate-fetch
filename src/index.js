@@ -24,6 +24,9 @@ const CoCreateFetch = {
 	initElement: function(element) {
 		if (!element.getAttribute('fetch-collection')) return;
 		let item_id = element.getAttribute('template_id');
+		if(/{{\s*([\w\W]+)\s*}}/g.test(item_id))
+			return;
+
 		if (!item_id) return;
 		if (item_id == '$auto'){
 			item_id = item_id.replace(/\$auto/g, uuid.generate(6));
@@ -74,6 +77,8 @@ const CoCreateFetch = {
 				ccfilter.fetchData(item.filter);
 			});
 			
+			self.__removeAllElements(element);
+
 		} else {
 			filter = item.filter;
 			ccfilter.changeCollection(filter);
@@ -251,6 +256,7 @@ const CoCreateFetch = {
 			const {dropedEl, dragedEl} = e.detail;
 			let dragedElTemplatId = dragedEl.getAttribute('template_id');
 			let dragElTemplate = document.querySelector(`[fetch-collection][template_id='${dragedElTemplatId}']`);
+			if (!dropedEl.parentElement) return;
 			let dropElTemplate = dropedEl.parentElement.closest('[template_id][fetch-collection]');
 
 			if (!dragElTemplate || !dropElTemplate) {
@@ -369,7 +375,11 @@ const CoCreateFetch = {
 			}
 		});
 		return flag;
-	}
+	},
+		isEmpty: function(obj) { 
+		   for (var x in obj) { return false; }
+		   return true;
+		}
 };
 
 
