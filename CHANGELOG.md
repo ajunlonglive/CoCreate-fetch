@@ -1,3 +1,10 @@
+## [1.2.28](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.27...v1.2.28) (2021-10-29)
+
+
+### Bug Fixes
+
+* clear template before render, check value for template value {{...}} ([86f5228](https://github.com/CoCreate-app/CoCreate-fetch/commit/86f5228dcccd75fdad41272fd785b98ed1641750))
+
 ## [1.2.27](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.26...v1.2.27) (2021-10-17)
 
 
