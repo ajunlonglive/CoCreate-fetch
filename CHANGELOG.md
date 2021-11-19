@@ -1,3 +1,10 @@
+## [1.2.38](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.37...v1.2.38) (2021-11-19)
+
+
+### Bug Fixes
+
+* remove serch-template class from fetch and filter inputs ([e210695](https://github.com/CoCreate-app/CoCreate-fetch/commit/e21069531f5c2d3a2f3803e030be2139b8c44c24))
+
 ## [1.2.37](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.36...v1.2.37) (2021-11-18)
 
 
