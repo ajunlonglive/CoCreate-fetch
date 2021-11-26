@@ -1,3 +1,10 @@
+## [1.2.42](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.41...v1.2.42) (2021-11-26)
+
+
+### Bug Fixes
+
+* docs sidenav width ([e49609a](https://github.com/CoCreate-app/CoCreate-fetch/commit/e49609a678e2b535d048472e0cc5192f4a2a7f8f))
+
 ## [1.2.41](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.40...v1.2.41) (2021-11-23)
 
 
