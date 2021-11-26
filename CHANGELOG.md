@@ -1,3 +1,10 @@
+## [1.2.43](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.42...v1.2.43) (2021-11-26)
+
+
+### Bug Fixes
+
+* doc missing main tag ([8b048eb](https://github.com/CoCreate-app/CoCreate-fetch/commit/8b048ebdc49db7cf97f6c7829599d6dd9e16adf2))
+
 ## [1.2.42](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.41...v1.2.42) (2021-11-26)
 
 
