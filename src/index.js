@@ -254,7 +254,7 @@ const CoCreateFetch = {
 		const self = this;
 		window.addEventListener('dndsuccess', function(e) {
 			const {dropedEl, dragedEl} = e.detail;
-			let dragedElTemplatId = dragedEl.getAttribute('template_id');
+			let dragedElTemplatId = dragedEl.getAttribute('templateid');
 			let dragElTemplate = document.querySelector(`[fetch-collection][template_id='${dragedElTemplatId}']`);
 			if (!dropedEl.parentElement) return;
 			let dropElTemplate = dropedEl.parentElement.closest('[template_id][fetch-collection]');
@@ -300,7 +300,7 @@ const CoCreateFetch = {
 		if (!orderField || !template_id) {
 			return;
 		}
-		const children = template.querySelectorAll(`[template_id="${template_id}"][document_id]:not(.template)`);
+		const children = template.querySelectorAll(`[templateid="${template_id}"][document_id]:not(.template)`);
 		
 		const coff = template.getAttribute('order-type') !== 'asc' ? -1 : 1;
 		children.forEach((item, index) => {
