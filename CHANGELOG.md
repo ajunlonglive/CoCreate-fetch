@@ -1,3 +1,10 @@
+## [1.2.49](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.48...v1.2.49) (2021-12-20)
+
+
+### Bug Fixes
+
+* orderby position using dnd-success event ([c81077f](https://github.com/CoCreate-app/CoCreate-fetch/commit/c81077f33174601247dd07138289833930e5cf4d))
+
 ## [1.2.48](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.47...v1.2.48) (2021-12-15)
 
 
