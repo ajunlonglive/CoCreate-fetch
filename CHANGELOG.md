@@ -1,3 +1,10 @@
+## [1.2.50](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.49...v1.2.50) (2021-12-23)
+
+
+### Bug Fixes
+
+* renamed filter-value_type to filter-value-type ([7ccf5f3](https://github.com/CoCreate-app/CoCreate-fetch/commit/7ccf5f346b8160876dc9e3f9fe9af9bef86d63f7))
+
 ## [1.2.49](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.48...v1.2.49) (2021-12-20)
 
 
