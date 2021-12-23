@@ -376,10 +376,11 @@ const CoCreateFetch = {
 		});
 		return flag;
 	},
-		isEmpty: function(obj) { 
-		   for (var x in obj) { return false; }
-		   return true;
-		}
+	
+	isEmpty: function(obj) { 
+	   for (var x in obj) { return false; }
+	   return true;
+	}
 };
 
 
