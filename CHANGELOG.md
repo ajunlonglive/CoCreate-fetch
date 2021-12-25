@@ -1,3 +1,10 @@
+## [1.2.51](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.50...v1.2.51) (2021-12-25)
+
+
+### Bug Fixes
+
+* removed  data-search_type=or ([c4dfb91](https://github.com/CoCreate-app/CoCreate-fetch/commit/c4dfb915111884f29668672a28742e99ba2e78d7))
+
 ## [1.2.50](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.49...v1.2.50) (2021-12-23)
 
 
