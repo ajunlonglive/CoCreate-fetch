@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.3.0...v1.4.0) (2021-12-27)
+
+
+### Features
+
+* changeFilter function ([d3adaa4](https://github.com/CoCreate-app/CoCreate-fetch/commit/d3adaa403a0a9cef5a9df5e9041ed39df1136913))
+
 # [1.3.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.51...v1.3.0) (2021-12-27)
 
 
