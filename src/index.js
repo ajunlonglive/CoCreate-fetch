@@ -24,10 +24,10 @@ const CoCreateFetch = {
 	initElement: function(element) {
 		if (!element.getAttribute('fetch-collection')) return;
 		let item_id = element.getAttribute('template_id');
+		if (!item_id) return;
 		if(/{{\s*([\w\W]+)\s*}}/g.test(item_id))
 			return;
 
-		if (!item_id) return;
 		if (item_id == '$auto'){
 			item_id = item_id.replace(/\$auto/g, uuid.generate(6));
 			element.setAttribute('template_id', item_id);
@@ -178,6 +178,10 @@ const CoCreateFetch = {
 			self.__addElements(data);
 		});
 		
+		crud.listen('updateDocument', function(data) {
+			self.__addElements(data);
+		});
+		
 		crud.listen('deleteDocument', function(data) {
 			self.__removeElements(data);
 		});
@@ -185,20 +189,33 @@ const CoCreateFetch = {
 
 	__addElements: function(data) {
 		let collection = data['collection'];
+		if(collection == 'crdt-transactions') 
+			return;
 		const self = this;
 		let itemData = data.data;
 		let render_data = data;
+		let items = this.items
 		render_data.data = [itemData];
-
-		this.items.forEach((item) => {
+		
+		for (let item of items) {
 			const {filter} = item;
-			let ids = [];
-			item.fetch_ids = [];
-			if (filter.collection === collection && !item.el.getAttribute('fetch-name') && self.__checkItemByFilters(itemData, filter.filters)) {
-				// ids.push(data['document_id']);
-				self.__renderElements(item.el, render_data);
+
+			if (filter.collection === collection && !item.el.getAttribute('fetch-name')) {
+				let document_id = item.documentList.find((doc) => doc._id === data.document_id)
+				let isFilter = self.__checkItemByFilters(itemData, filter.filters)
+				if(isFilter && !document_id){
+					item.documentList.push(itemData);
+					item.filter.startIndex += 1;
+					self.__renderElements(item.el, render_data);
+				}
+				else if(!isFilter && document_id){
+					const documentList = item.documentList.filter(item => item !== document_id);
+					item.documentList = documentList;
+					item.filter.startIndex -= 1;
+					self.__removeElements(data);
+				}
 			}
-		});
+		}
 	},
 	
 	__removeElements: function(data) {
@@ -230,6 +247,7 @@ const CoCreateFetch = {
 			}
 			
 			if (data) {
+				item.documentList = data.data;
 				if (data.metadata && data.metadata.isRefresh) {
 					this.__removeAllElements(item.el);
 				}
@@ -325,12 +343,12 @@ const CoCreateFetch = {
 		if (!item || !filters) {
 			return false;
 		}
-		
+		console.log(document)
 		if (Array.isArray(item)) return false;
 		filters.forEach(({name, operator, type, value}) => {
 			
 			const fieldValue = item[name];
-			if (!flag) return;
+			// if (!flag) return;
 			
 			switch (operator) {
 				case '$contain':
