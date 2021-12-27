@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.51...v1.3.0) (2021-12-27)
+
+
+### Features
+
+* updateDocument will check to see if filter matches and if item already exist. if filter is a match and item does not exist, the item will be added. if item exist and the filter does not match item will be removed ([5403f5b](https://github.com/CoCreate-app/CoCreate-fetch/commit/5403f5b1d603b61c5895c805a118f0cb95ce1546))
+
 ## [1.2.51](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.2.50...v1.2.51) (2021-12-25)
 
 
