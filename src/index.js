@@ -82,6 +82,7 @@ const CoCreateFetch = {
 		} else {
 			filter = item.filter;
 			ccfilter.changeCollection(filter);
+			ccfilter.changeFilter(filter);
 			// if (refresh) {
 				item.filter.isRefresh = true;
 				self.__removeAllElements(element);
