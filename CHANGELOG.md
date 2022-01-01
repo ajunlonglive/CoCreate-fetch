@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.0...v1.4.1) (2022-01-01)
+
+
+### Bug Fixes
+
+* removed data- from attributes ([52481e8](https://github.com/CoCreate-app/CoCreate-fetch/commit/52481e87dcbadfacf092e6315fb7cf1c212ef9a6))
+
 # [1.4.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.3.0...v1.4.0) (2021-12-27)
 
 
