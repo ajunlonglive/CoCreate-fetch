@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.1...v1.4.2) (2022-01-01)
+
+
+### Bug Fixes
+
+* get-value attribute value now supports a selector added # to all values currently in get-value attributes ([08e3d5e](https://github.com/CoCreate-app/CoCreate-fetch/commit/08e3d5eb2a0d43884851c2c6db81dfb023a8f790))
+
 ## [1.4.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.0...v1.4.1) (2022-01-01)
 
 
