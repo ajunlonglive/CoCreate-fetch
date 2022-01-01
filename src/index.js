@@ -110,7 +110,6 @@ const CoCreateFetch = {
 			wrapper.setAttribute('render_id', renderId);
 		}
 		
-		let passTo = wrapper.getAttribute('pass_to');
 		let renderData = renderId ? {[renderId] : data} : data;
 		
 		type = type || "data";
@@ -121,7 +120,6 @@ const CoCreateFetch = {
 		render.data({
 			elements: cloneWrapper.children,
 			data: renderData,
-			passTo: passTo
 		});
 		
 		let removeableTemplate = cloneWrapper.querySelector(`.template[template_id="${templateId}"]`);

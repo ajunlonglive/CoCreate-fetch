@@ -17,8 +17,8 @@
 			fetch-name="stringArray"
 			filter-value="5f5aeace3a7246b7cf2e4004"
 		>
-			<div class="template" template_id="temp1" data-value="--">
-				<h4 value="--" name="email" data-value="--"></h4>
+			<div class="template" template_id="temp1" value="--">
+				<h4 value="--" name="email" value="--"></h4>
 			</div>	
 		</div>
 
@@ -30,7 +30,7 @@
 			filter-name="_id"
 			filter-operator="$eq"
 			fetch-name="jsonArray">
-			<div class="template" template_id="temp2" data-value="{{email}}">
+			<div class="template" template_id="temp2" value="{{email}}">
 				<h4 value="{{email}}" name="email"></h4>
 				<h4 value="{{home}}" name="home"></h4>
 			</div>	
@@ -47,9 +47,9 @@
 			<div 
 				class="template" 
 				template_id="render_test" 
-				data-value="_id"
+				value="_id"
 			>
-				<h3 data-attribute="email" data-value="email" name="email" value="email"></h3>
+				<h3 data-attribute="email" value="email" name="email" value="email"></h3>
 				<h4 name="home" value="{{home}}"></h4>
 				<h4 name="other_email" value="personal_info.email"></h4>
 				<div 
@@ -64,7 +64,7 @@
 				<div 
 					class="template display:flex justify-content:space-between"
 					render-array="stringArray"
-					data-value="--"
+					value="--"
 				>
 					<h5 name="email" value="--"></h5>
 				</div>

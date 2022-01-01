@@ -94,7 +94,7 @@
 		filter-name="_id"
 		filter-operator="$eq"
 		fetch-name="jsonArray"&gt;
-		&lt;div class="template" template_id="temp2" data-value="{{email}}"&gt;
+		&lt;div class="template" template_id="temp2" value="{{email}}"&gt;
 			&lt;h4 value="{{email}}" name="email"&gt;&lt;/h4&gt;
 			&lt;h4 value="{{home}}" name="home"&gt;&lt;/h4&gt;
 		&lt;/div&gt;	
@@ -111,15 +111,15 @@
 		filter-name="type"
 		data-redner_id="testing"
 		filter-operator="$eq"&gt;
-		&lt;div class="template" template_id="render_test" data-value="{{testing.data._id}}" render-array="testing.data"&gt;
-			&lt;h3 data-attribute="email" data-value="{{testing.data.email}}" name="email" value="{{testing.data.email}}"&gt;&lt;/h3&gt;
+		&lt;div class="template" template_id="render_test" value="{{testing.data._id}}" render-array="testing.data"&gt;
+			&lt;h3 data-attribute="email" value="{{testing.data.email}}" name="email" value="{{testing.data.email}}"&gt;&lt;/h3&gt;
 			&lt;h4 collection="{{testing.collection}}" name="home" value="{{testing.data.home}}"&gt;&lt;/h4&gt;
 			&lt;h4 name="other_email" value="{{testing.data.personal_info.email}}"&gt;&lt;/h4&gt;
 			&lt;div class="template display:flex justify-content:space-between" render-array="testing.data.jsonArray" render-key="sub_jsonArray"&gt;
 				&lt;h5 name="email" value="{{sub_jsonArray.email}}"&gt;&lt;/h5&gt;
 				&lt;h5 name="home" value="{{sub_jsonArray.home}}"&gt;&lt;/h5&gt;
 			&lt;/div&gt;
-			&lt;div class="template display:flex justify-content:space-between" render-array="testing.data.stringArray" data-value="--"&gt;
+			&lt;div class="template display:flex justify-content:space-between" render-array="testing.data.stringArray" value="--"&gt;
 				&lt;h5 name="email" value="--"&gt;&lt;/h5&gt;
 			&lt;/div&gt;
 		&lt;/div&gt;
