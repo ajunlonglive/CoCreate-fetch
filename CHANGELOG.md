@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.2...v1.4.3) (2022-01-13)
+
+
+### Bug Fixes
+
+* if data.data._id is undefined return ([bfffd8d](https://github.com/CoCreate-app/CoCreate-fetch/commit/bfffd8dad91e458504788b22b5f171162d691916))
+
 ## [1.4.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.1...v1.4.2) (2022-01-01)
 
 
