@@ -187,6 +187,7 @@ const CoCreateFetch = {
 	},
 
 	__addElements: function(data) {
+		if (!data.data._id) return;
 		let collection = data['collection'];
 		if(collection == 'crdt-transactions') 
 			return;
