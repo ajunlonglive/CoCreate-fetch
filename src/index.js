@@ -80,6 +80,7 @@ const CoCreateFetch = {
 			self.__removeAllElements(element);
 
 		} else {
+			item.el = element;
 			filter = item.filter;
 			ccfilter.changeCollection(filter);
 			ccfilter.changeFilter(filter);
@@ -99,9 +100,7 @@ const CoCreateFetch = {
 		let templateId = wrapper.getAttribute('template_id');
 
 		let template = wrapper.querySelector(`.template[template_id='${templateId}'`);// || wrapper.querySelector('.template');
-		if (!template)  {
-			return;
-		}
+		if (!template) return;
 		
 		let renderId = wrapper.getAttribute('render_id');
 		if (renderId == '$auto'){
