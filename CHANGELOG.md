@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.3...v1.4.4) (2022-01-15)
+
+
+### Bug Fixes
+
+* When a document is updated check filters and add or remove element ([92ea159](https://github.com/CoCreate-app/CoCreate-fetch/commit/92ea15935dc63d410011b44dc30b113a71fa379e))
+
 ## [1.4.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.2...v1.4.3) (2022-01-13)
 
 
