@@ -1,3 +1,10 @@
+## [1.4.5](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.4...v1.4.5) (2022-01-15)
+
+
+### Bug Fixes
+
+* If new fetch element is added and item already exist update item.el so new el can be found and and data rendered ([842493e](https://github.com/CoCreate-app/CoCreate-fetch/commit/842493ec49177ec64e3d290a33998b25753294ab))
+
 ## [1.4.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.3...v1.4.4) (2022-01-15)
 
 
