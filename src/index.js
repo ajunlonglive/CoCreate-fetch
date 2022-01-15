@@ -186,33 +186,50 @@ const CoCreateFetch = {
 		});
 	},
 
-	__addElements: function(data) {
-		if (!data.data._id) return;
+	__addElements: async function(data) {
+		let Data;
+		if (Array.isArray(data.data))
+			Data = data.data[0];
+		else
+			Data = data.data;
+		if (!Data._id) return;
 		let collection = data['collection'];
-		if(collection == 'crdt-transactions') 
-			return;
+		if(collection == 'crdt-transactions') return;
 		const self = this;
-		let itemData = data.data;
-		let render_data = data;
-		let items = this.items
-		render_data.data = [itemData];
-		
+		let items = this.items;
+
 		for (let item of items) {
 			const {filter} = item;
-
+			let itemData;
+			
 			if (filter.collection === collection && !item.el.getAttribute('fetch-name')) {
-				let document_id = item.documentList.find((doc) => doc._id === data.document_id)
-				let isFilter = self.__checkItemByFilters(itemData, filter.filters)
+				let document_id = item.documentList.get(data.document_id);
+				if(!item.documentList.has(data.document_id)){
+					let documentData = await crud.readDocument({collection, document_id: data.document_id});
+					itemData = documentData.data;
+				}
+				else {
+					itemData = {...document_id, ...Data};
+				}
+				
+				let render_data = data;
+				render_data.data = [itemData];
+				document_id = item.documentList.get(data.document_id)
+				let isFilter = self.__checkItemByFilters(itemData, filter.filters, document_id)
 				if(isFilter && !document_id){
-					item.documentList.push(itemData);
+					item.documentList.set(data.document_id, itemData);
 					item.filter.startIndex += 1;
 					self.__renderElements(item.el, render_data);
 				}
 				else if(!isFilter && document_id){
-					const documentList = item.documentList.filter(item => item !== document_id);
-					item.documentList = documentList;
+					item.documentList.delete(data.document_id);
 					item.filter.startIndex -= 1;
-					self.__removeElements(data);
+					var tmpId = item.el.getAttribute('template_id');
+					var els = item.el.querySelectorAll("[templateId='" + tmpId + "'][document_id='" + data.document_id + "']");
+					for (let j = 0; j < els.length; j++) {
+						els[j].remove();
+						item.startIndex--;
+					}
 				}
 			}
 		}
@@ -247,7 +264,7 @@ const CoCreateFetch = {
 			}
 			
 			if (data) {
-				item.documentList = data.data;
+				item.documentList = new Map(data.data.map(key => [key._id, key]));
 				if (data.metadata && data.metadata.isRefresh) {
 					this.__removeAllElements(item.el);
 				}
@@ -337,19 +354,18 @@ const CoCreateFetch = {
 	},
 	
 	// ToDo: Looks like it should be a utility of filter.. 
-	__checkItemByFilters: function(item, filters) {
+	__checkItemByFilters: function(item, filters, document_id) {
 		//. $contain, $range, $eq, $ne, $lt, $lte, $gt, $gte, $in, $nin, $geoWithin
 		let flag = true;
 		if (!item || !filters) {
 			return false;
 		}
-		console.log(document)
 		if (Array.isArray(item)) return false;
 		filters.forEach(({name, operator, type, value}) => {
 			
 			const fieldValue = item[name];
 			// if (!flag) return;
-			
+			if(fieldValue === undefined && document_id) return;
 			switch (operator) {
 				case '$contain':
 					// if (!Array.isArray(fieldValue) || !fieldValue.some(x => value.includes(x))) flag = false;
@@ -369,7 +385,7 @@ const CoCreateFetch = {
 					if (fieldValue != value[0]) flag = false; 
 					break;
 				case '$ne':
-					if (fieldValue == null || fieldValue == value[0]) flag = false;
+					if (fieldValue == value[0]) flag = false;
 					break;
 				case '$lt':
 					if (fieldValue >= value[0]) flag = false;
