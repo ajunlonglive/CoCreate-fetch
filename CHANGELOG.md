@@ -1,3 +1,10 @@
+## [1.4.6](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.5...v1.4.6) (2022-01-16)
+
+
+### Bug Fixes
+
+* updated saveDocument to save and createDocument replaced with save, reset ([ddce79a](https://github.com/CoCreate-app/CoCreate-fetch/commit/ddce79a9332d3d93a16c7969fb85d3f97be028e8))
+
 ## [1.4.5](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.4...v1.4.5) (2022-01-15)
 
 
