@@ -1,3 +1,10 @@
+## [1.4.7](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.6...v1.4.7) (2022-01-21)
+
+
+### Bug Fixes
+
+* relocated is emoty function to utils. remove conmmented unsed code ([7fc10cf](https://github.com/CoCreate-app/CoCreate-fetch/commit/7fc10cf76be9428024786410f38b9c3a8c208506))
+
 ## [1.4.6](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.5...v1.4.6) (2022-01-16)
 
 
