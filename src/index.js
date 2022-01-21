@@ -36,8 +36,6 @@ const CoCreateFetch = {
 				el.setAttribute('template_id', item_id);
 		}
 		
-		// if (!element.getAttribute('fetch-collection')) return;
-		// let parentEls = element.querySelectorAll("[filter-value='parent']");
 		let parentEls = element.getAttribute('filter-value');
 		if (parentEls == 'parent'){
 			let ele = element.parentElement.closest('[filter-value]');
@@ -84,12 +82,10 @@ const CoCreateFetch = {
 			filter = item.filter;
 			ccfilter.changeCollection(filter);
 			ccfilter.changeFilter(filter);
-			// if (refresh) {
-				item.filter.isRefresh = true;
-				self.__removeAllElements(element);
-				filter.isRefresh = true;
-				filter.startIndex = 0;
-			// }
+			item.filter.isRefresh = true;
+			self.__removeAllElements(element);
+			filter.isRefresh = true;
+			filter.startIndex = 0;
 		}
 		
 		ccfilter.fetchData(filter);
@@ -147,14 +143,10 @@ const CoCreateFetch = {
 		if (!template.getAttribute('render-key') && render_id) {
 			template.setAttribute('render-key', render_id);
 		}
-		// if (auto) {
-			template = template.outerHTML.replace(/\$auto/g, render_id);
-			itemTemplateDiv.innerHTML = template;
-			return itemTemplateDiv;
-		// }
-		// else
-		// itemTemplateDiv.appendChild(template.cloneNode(true));
-		// return itemTemplateDiv;
+		
+		template = template.outerHTML.replace(/\$auto/g, render_id);
+		itemTemplateDiv.innerHTML = template;
+		return itemTemplateDiv;
 	},
 	
 	__removeAllElements: function(wrapper) {
@@ -408,14 +400,8 @@ const CoCreateFetch = {
 			}
 		});
 		return flag;
-	},
-	
-	isEmpty: function(obj) { 
-	   for (var x in obj) { return false; }
-	   return true;
 	}
 };
-
 
 observer.init({ 
 	name: 'CoCreateFetchObserver', 
