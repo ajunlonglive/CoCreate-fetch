@@ -6,7 +6,7 @@ import render from '@cocreate/render';
 import uuid from '@cocreate/uuid';
 
 const CoCreateFetch = {
-	selector: '[template_id][fetch-collection]',
+	selector: '[template_id][fetch-collection], [template_id][fetch-collections]',
 	items: [],
 
 	init: function() {
@@ -22,7 +22,11 @@ const CoCreateFetch = {
 	},
 	
 	initElement: function(element) {
-		if (!element.getAttribute('fetch-collection')) return;
+		let isCollections;
+		if (!element.getAttribute('fetch-collection')) {
+			isCollections = element.hasAttribute('fetch-collections');
+			if (!isCollections) return;
+		}
 		let item_id = element.getAttribute('template_id');
 		if (!item_id) return;
 		if(/{{\s*([\w\W]+)\s*}}/g.test(item_id))
@@ -52,10 +56,9 @@ const CoCreateFetch = {
 		
 		if (!item) {
 			filter = ccfilter.setFilter(element, "template_id", "template");
-			let fetch_type = element.getAttribute('fetch-value_type') || "string";
 			if (!filter) return;
 			
-			if (fetch_type === 'collection') {
+			if (isCollections) {
 				filter.is_collection = true;
 			}
 			
@@ -63,7 +66,6 @@ const CoCreateFetch = {
 				el: element,
 				filter: filter,
 				templateId: item_id,
-				fetch_type: fetch_type
 			};
 			
 			this.items.push(item);
