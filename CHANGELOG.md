@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.7...v1.5.0) (2022-01-23)
+
+
+### Features
+
+* fetch-collections attribute to return a list of collections ([06d6f95](https://github.com/CoCreate-app/CoCreate-fetch/commit/06d6f953c2eaa8bf26139d4bace37b4669f5ed1c))
+
 ## [1.4.7](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.6...v1.4.7) (2022-01-21)
 
 
