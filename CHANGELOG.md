@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.1...v1.5.2) (2022-01-28)
+
+
+### Bug Fixes
+
+* for loop items.values() ([3a5dde6](https://github.com/CoCreate-app/CoCreate-fetch/commit/3a5dde643fba4dc9c34d0845005adaa4d12e89c1))
+
 ## [1.5.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.0...v1.5.1) (2022-01-28)
 
 
