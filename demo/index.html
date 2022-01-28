@@ -2,87 +2,31 @@
 <html>
 	<head>
 	  <title>Fetch | CoCreateJS</title>
-	  <!-- CoCreate Favicon -->
 	  <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
-	</head>
-	<body>
+	  <link parse="true">
+	
+	<body class="padding:20px">
 
-<!--------------------- FetchArray (string) ------------------------------>
-		<div 
-			class="card"
-			template_id="temp1"
-			fetch-collection="render_test"
-			filter-name="_id"
-			filter-operator="$eq"
-			fetch-name="stringArray"
-			filter-value="5f5aeace3a7246b7cf2e4004"
-		>
-			<div class="template" template_id="temp1" value="--">
-				<h4 value="--" name="email" value="--"></h4>
-			</div>	
-		</div>
+		<form collection="contacts" document_id="">
+			<input name="fullname" pass_id="form-fields">
+			<button actions="save, reset" class="display:inline margin:10px">Save</button>
+		</form>
+		
+		<input template_id="grid" filter-name="fullname">
+		
+		<div class="display:flex flex-wrap:wrap" fetch-collection="contacts" template_id="grid">
 
-<!--------------------- FetchArray (json) ------------------------------>
-		<div class="card"
-			template_id="temp2"
-			fetch-collection="render_test"
-			filter-value="5f5aeace3a7246b7cf2e3ffc"
-			filter-name="_id"
-			filter-operator="$eq"
-			fetch-name="jsonArray">
-			<div class="template" template_id="temp2" value="{{email}}">
-				<h4 value="{{email}}" name="email"></h4>
-				<h4 value="{{home}}" name="home"></h4>
-			</div>	
+			<div template_id="grid" class="template card margin:10px padding:20px background:gainsboro:hover">
+				<a pass_to="form-fields" pass-document_id="{{data._id}}">
+					<h4 collection="contacts" document_id="{{data._id}}" name="fullname">Name</h4>
+					<h4>{{data._id}}</h4>
+				</a>
+			</div>
+
 		</div>
 		
-<!--------------------- Documents ------------------------------->
-		<div class="card"
-			template_id="render_testing"
-			fetch-collection="render_test"
-			filter-value="render"
-			filter-name="type"
-			filter-operator="$eq"
-		>
-			<div 
-				class="template" 
-				template_id="render_test" 
-				value="_id"
-			>
-				<h3 data-attribute="email" value="email" name="email" value="email"></h3>
-				<h4 name="home" value="{{home}}"></h4>
-				<h4 name="other_email" value="personal_info.email"></h4>
-				<div 
-					class="template display:flex justify-content:space-between"
-					render-array="jsonArray"
-				>
-					<h5 name="email" value="email"></h5>
-					<h5 name="home" value="home"></h5>
-				</div>
-				
-				<!--<p>----------------- String Array case ---------------------</p>-->
-				<div 
-					class="template display:flex justify-content:space-between"
-					render-array="stringArray"
-					value="--"
-				>
-					<h5 name="email" value="--"></h5>
-				</div>
-			</div>
-		</div>
-
-		 <h1>Paste in your browser console</h1>
-		 
-		 
-	    <script>
-	      var config = {
-	        apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
-	        organization_Id: '5de0387b12e200ea63204d6c',
-	        host: 'ws.cocreate.app'
-	      }
-	    </script>
-	    
 	    <!--<script src="../dist/CoCreate-fetch.js"></script>-->
+        <!--<script src="https://cdn.cocreate.app/latest/CoCreate.min.js"></script>-->
 	    <script src="../../../CoCreateJS/dist/CoCreate.js" ></script>
 
 	</body>

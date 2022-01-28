@@ -7,7 +7,7 @@ import uuid from '@cocreate/uuid';
 
 const CoCreateFetch = {
 	selector: '[template_id][fetch-collection], [template_id][fetch-collections]',
-	items: [],
+	items: new Map(),
 
 	init: function() {
 		let elements =  document.querySelectorAll(this.selector);
@@ -50,12 +50,10 @@ const CoCreateFetch = {
 			}
 		}
 
-		let item = ccfilter.getObjectByFilterId(this.items, item_id);
-		let filter = null;
-		const self = this;
-		
+		let item = this.items.get(item_id);
+
 		if (!item) {
-			filter = ccfilter.setFilter(element, "template_id", "template");
+			let filter = ccfilter.setFilter(element, "template_id", "template");
 			if (!filter) return;
 			
 			if (isCollections) {
@@ -64,40 +62,31 @@ const CoCreateFetch = {
 			
 			item = {
 				el: element,
-				filter: filter,
+				filter,
 				templateId: item_id,
 			};
 			
-			this.items.push(item);
+			this.items.set(item_id, item);
 
 			element.addEventListener("changeFilterInput", function(e) {
-				self.__removeAllElements(item.el);
 				item.filter.startIndex = 0;
-				item.filter.isRefresh = true;
 				ccfilter.fetchData(item.filter);
 			});
 			
-			self.__removeAllElements(element);
-
 		} else {
 			item.el = element;
-			filter = item.filter;
-			ccfilter.changeCollection(filter);
-			ccfilter.changeFilter(filter);
-			item.filter.isRefresh = true;
-			self.__removeAllElements(element);
-			filter.isRefresh = true;
-			filter.startIndex = 0;
+			item.filter.collection = element.getAttribute('fetch-collection');
+			item.filter.startIndex = 0;
 		}
 		
-		ccfilter.fetchData(filter);
+		ccfilter.fetchData(item.filter);
 	},
 	
 	__renderElements: function(wrapper, data, type = "data") {
 		let auto;
 		let templateId = wrapper.getAttribute('template_id');
 
-		let template = wrapper.querySelector(`.template[template_id='${templateId}'`);// || wrapper.querySelector('.template');
+		let template = wrapper.querySelector(`.template[template_id='${templateId}'`);
 		if (!template) return;
 		
 		let renderId = wrapper.getAttribute('render_id');
@@ -188,10 +177,9 @@ const CoCreateFetch = {
 		if (!Data._id) return;
 		let collection = data['collection'];
 		if(collection == 'crdt-transactions') return;
-		const self = this;
-		let items = this.items;
 
-		for (let item of items) {
+		for (let item of this.items) {
+			item = item[1]
 			const {filter} = item;
 			let itemData;
 			
@@ -207,12 +195,14 @@ const CoCreateFetch = {
 				
 				let render_data = data;
 				render_data.data = [itemData];
-				document_id = item.documentList.get(data.document_id)
-				let isFilter = self.__checkItemByFilters(itemData, filter.filters, document_id)
+				document_id = item.documentList.get(data.document_id);
+				let isFilter = true;
+				if (!document_id)
+					isFilter = ccfilter.filterItem(itemData, filter.filters);
 				if(isFilter && !document_id){
 					item.documentList.set(data.document_id, itemData);
 					item.filter.startIndex += 1;
-					self.__renderElements(item.el, render_data);
+					this.__renderElements(item.el, render_data);
 				}
 				else if(!isFilter && document_id){
 					item.documentList.delete(data.document_id);
@@ -234,6 +224,7 @@ const CoCreateFetch = {
 		
 		for (let i = 0; i < this.items.length; i++) {
 			let item = this.items[i];
+			item = item[1]
 			
 			if (item.filter.collection == collection) {
 				var tmpId = item.el.getAttribute('template_id');
@@ -248,7 +239,7 @@ const CoCreateFetch = {
 	
 	__fetchedData: function(data) {
 		let item_id = data['element'];
-		let item = ccfilter.getObjectByFilterId(this.items, item_id);
+		let item = this.items.get(item_id);
 		if (item) {
 			item.filter.startIndex += data['data'].length;
 			let fetch_name = item.el.getAttribute('fetch-name');
@@ -257,9 +248,12 @@ const CoCreateFetch = {
 			}
 			
 			if (data) {
-				item.documentList = new Map(data.data.map(key => [key._id, key]));
-				if (data.metadata && data.metadata.isRefresh) {
+				if (data.operator.startIndex === 0) {
+					item.documentList = new Map(data.data.map(key => [key._id, key]));
 					this.__removeAllElements(item.el);
+				} else {
+					for (let documentItem of data.data)
+						item.documentList.set(documentItem._id, documentItem);
 				}
 				this.__renderElements(item.el, data, fetch_name);
 			}
@@ -267,16 +261,6 @@ const CoCreateFetch = {
 		}
 	},
 
-	// __runLoadMore: function(templateId) {
-	// 	if (!templateId) return;
-	// 	let item = ccfilter.getObjectByFilterId(this.items, templateId);
-		
-	// 	if (!item) return;
-	// 	if (item.filter.count > 0) {
-	// 		ccfilter.fetchData(item.filter)
-	// 	}
-	// },
-	
 	// dnd event listner to update document positions and orders
 	__initEvents: function() {
 		const self = this;
@@ -344,71 +328,13 @@ const CoCreateFetch = {
 				broadcast: false,
 			});
 		});
-	},
-	
-	// ToDo: Looks like it should be a utility of filter.. 
-	__checkItemByFilters: function(item, filters, document_id) {
-		//. $contain, $range, $eq, $ne, $lt, $lte, $gt, $gte, $in, $nin, $geoWithin
-		let flag = true;
-		if (!item || !filters) {
-			return false;
-		}
-		if (Array.isArray(item)) return false;
-		filters.forEach(({name, operator, type, value}) => {
-			
-			const fieldValue = item[name];
-			// if (!flag) return;
-			if(fieldValue === undefined && document_id) return;
-			switch (operator) {
-				case '$contain':
-					// if (!Array.isArray(fieldValue) || !fieldValue.some(x => value.includes(x))) flag = false;
-					if (!fieldValue.includes(value[0])) flag = false; 
-					break;
-				case '$range':
-					if (value[0] !== null && value[1] !== null) {
-						if (value[0] > fieldValue || value[1] <= fieldValue)
-							flag = false;
-					} else if (item.value[0] == null && value[1] >= fieldValue) {
-						flag = false;
-					} else if (item.value[1] == null && value[0] <= fieldValue) {
-						flag = false;
-					}
-					break;
-				case '$eq':
-					if (fieldValue != value[0]) flag = false; 
-					break;
-				case '$ne':
-					if (fieldValue == value[0]) flag = false;
-					break;
-				case '$lt':
-					if (fieldValue >= value[0]) flag = false;
-					break;
-				case '$lte':
-					if (fieldValue > value[0]) flag = false;
-					break;
-				case '$gt':
-					if (fieldValue <= value[0]) flag = false;
-					break;
-				case '$gte':
-					if (fieldValue < value[0]) flag = false;
-					break;
-				case '$in':
-					if (!Array.isArray(fieldValue) || !fieldValue.some(x => value.includes(x))) flag = false;
-					break;
-				case '$nin':
-					if (Array.isArray(fieldValue) && fieldValue.some(x => value.includes(x))) flag = false;
-					break;
-
-			}
-		});
-		return flag;
 	}
 };
 
 observer.init({ 
 	name: 'CoCreateFetchObserver', 
 	observe: ['attributes'],
-	attributeName: ['fetch-collection', 'fetch-name', 'filter-name', 'filter-value'],
+	attributeName: ['fetch-collection', 'fetch-name'],
 	callback: function(mutation) {
 		CoCreateFetch.initElement(mutation.target);
 	}
