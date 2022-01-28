@@ -178,8 +178,7 @@ const CoCreateFetch = {
 		let collection = data['collection'];
 		if(collection == 'crdt-transactions') return;
 
-		for (let item of this.items) {
-			item = item[1]
+		for (let item of this.items.values()) {
 			const {filter} = item;
 			let itemData;
 			
@@ -222,10 +221,7 @@ const CoCreateFetch = {
 		let collection = data['collection'];
 		let document_id = data['document_id'];
 		
-		for (let i = 0; i < this.items.length; i++) {
-			let item = this.items[i];
-			item = item[1]
-			
+		for (let item of this.items.values()) {
 			if (item.filter.collection == collection) {
 				var tmpId = item.el.getAttribute('template_id');
 				var els = item.el.querySelectorAll("[templateId='" + tmpId + "'][document_id='" + document_id + "']");
