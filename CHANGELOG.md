@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.0...v1.5.1) (2022-01-28)
+
+
+### Bug Fixes
+
+* relocated checkFilter to filter.js, converted items array to map, and cleaned code ([b5ab575](https://github.com/CoCreate-app/CoCreate-fetch/commit/b5ab57587126f47a40f9fef83d2bf8a74287ccd8))
+
 # [1.5.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.4.7...v1.5.0) (2022-01-23)
 
 
