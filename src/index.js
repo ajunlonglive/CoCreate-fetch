@@ -330,7 +330,7 @@ const CoCreateFetch = {
 observer.init({ 
 	name: 'CoCreateFetchObserver', 
 	observe: ['attributes'],
-	attributeName: ['fetch-collection', 'fetch-name'],
+	attributeName: ['fetch-collection', 'fetch-name', 'filter-name', 'filter-value'],
 	callback: function(mutation) {
 		CoCreateFetch.initElement(mutation.target);
 	}
