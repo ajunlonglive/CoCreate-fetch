@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.3...v1.5.4) (2022-01-30)
+
+
+### Bug Fixes
+
+* filter observe atributes rlocated to CoCreate-filters ([b74ae44](https://github.com/CoCreate-app/CoCreate-fetch/commit/b74ae4462c1b82d6a142ee7203766c38e1427083))
+
 ## [1.5.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.2...v1.5.3) (2022-01-29)
 
 
