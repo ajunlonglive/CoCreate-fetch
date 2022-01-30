@@ -234,6 +234,8 @@ const CoCreateFetch = {
 	},
 	
 	__fetchedData: function(data) {
+		if(data.collection == 'crdt-transactions')
+			return;
 		let item_id = data['element'];
 		let item = this.items.get(item_id);
 		if (item) {
@@ -330,7 +332,7 @@ const CoCreateFetch = {
 observer.init({ 
 	name: 'CoCreateFetchObserver', 
 	observe: ['attributes'],
-	attributeName: ['fetch-collection', 'fetch-name', 'filter-name', 'filter-value'],
+	attributeName: ['fetch-collection', 'fetch-name'],
 	callback: function(mutation) {
 		CoCreateFetch.initElement(mutation.target);
 	}
