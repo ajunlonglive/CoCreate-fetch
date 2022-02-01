@@ -1,3 +1,10 @@
+## [1.5.5](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.4...v1.5.5) (2022-02-01)
+
+
+### Bug Fixes
+
+* removed if case causing value not to be removed if filter is false ([0dc3a71](https://github.com/CoCreate-app/CoCreate-fetch/commit/0dc3a71632702b389c232b27ee8183f90db5be9c))
+
 ## [1.5.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.3...v1.5.4) (2022-01-30)
 
 
