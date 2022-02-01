@@ -195,9 +195,7 @@ const CoCreateFetch = {
 				let render_data = data;
 				render_data.data = [itemData];
 				document_id = item.documentList.get(data.document_id);
-				let isFilter = true;
-				if (!document_id)
-					isFilter = ccfilter.filterItem(itemData, filter.filters);
+				let isFilter = ccfilter.filterItem(itemData, filter.filters);
 				if(isFilter && !document_id){
 					item.documentList.set(data.document_id, itemData);
 					item.filter.startIndex += 1;
