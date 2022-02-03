@@ -1,3 +1,10 @@
+## [1.5.7](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.6...v1.5.7) (2022-02-03)
+
+
+### Bug Fixes
+
+* replaced show and hide class hidden with attribute hidden ([667464b](https://github.com/CoCreate-app/CoCreate-fetch/commit/667464bf01cb0d73efc2c5a88b7018e7b6c90cf9))
+
 ## [1.5.6](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.5...v1.5.6) (2022-02-01)
 
 
