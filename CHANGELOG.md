@@ -1,3 +1,10 @@
+## [1.5.8](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.7...v1.5.8) (2022-02-06)
+
+
+### Bug Fixes
+
+* add broadcast_sender: false to updateDocument ([9f5a5ce](https://github.com/CoCreate-app/CoCreate-fetch/commit/9f5a5cefe0e953bb1acf618abd482448dedb0dc0))
+
 ## [1.5.7](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.6...v1.5.7) (2022-02-03)
 
 
