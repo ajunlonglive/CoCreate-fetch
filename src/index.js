@@ -292,12 +292,13 @@ const CoCreateFetch = {
 		if (!name || operator != "$eq") return;
 
 		crud.updateDocument({
-			collection	: template.getAttribute('fetch-collection'), 
-			document_id : element.getAttribute('document_id'), 
+			collection: template.getAttribute('fetch-collection'), 
+			document_id: element.getAttribute('document_id'), 
 			data: {
 				[name]: value	
 			},
-			broadcast	: false
+			broadcast: false,
+			broadcast_sender: false
 		});
 	},
 	
@@ -316,12 +317,13 @@ const CoCreateFetch = {
 				return;
 			}
 			crud.updateDocument({
-				collection : template.getAttribute('fetch-collection'), 
-				document_id : item.getAttribute('document_id'), 
+				collection: template.getAttribute('fetch-collection'), 
+				document_id: item.getAttribute('document_id'), 
 				data: {
 					[orderField]: index * coff	
 				},
 				broadcast: false,
+				broadcast_sender: false
 			});
 		});
 	}
