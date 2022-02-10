@@ -1,3 +1,10 @@
+## [1.5.10](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.9...v1.5.10) (2022-02-10)
+
+
+### Bug Fixes
+
+* _addElement if no item.DOcumentList return ([429e4a5](https://github.com/CoCreate-app/CoCreate-fetch/commit/429e4a5d0dbf81c811077ad07a5f85aa1505707d))
+
 ## [1.5.9](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.8...v1.5.9) (2022-02-07)
 
 
