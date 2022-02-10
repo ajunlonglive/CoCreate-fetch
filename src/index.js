@@ -182,7 +182,7 @@ const CoCreateFetch = {
 			const {filter} = item;
 			let itemData;
 			
-			if (filter.collection === collection && !item.el.getAttribute('fetch-name')) {
+			if (filter.collection === collection && !item.el.getAttribute('fetch-name') && item.documentList) {
 				let document_id = item.documentList.get(data.document_id);
 				if(!item.documentList.has(data.document_id)){
 					let documentData = await crud.readDocument({collection, document_id: data.document_id});
