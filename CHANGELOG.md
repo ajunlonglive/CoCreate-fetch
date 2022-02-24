@@ -1,3 +1,10 @@
+## [1.5.13](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.12...v1.5.13) (2022-02-24)
+
+
+### Bug Fixes
+
+* CoCreate.config replace CoCreate.app with * ([342c6f4](https://github.com/CoCreate-app/CoCreate-fetch/commit/342c6f4f0e126edefb14b5f5f45cfc818791cfba))
+
 ## [1.5.12](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.11...v1.5.12) (2022-02-16)
 
 
