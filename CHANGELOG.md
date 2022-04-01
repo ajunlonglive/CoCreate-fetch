@@ -1,3 +1,10 @@
+## [1.5.14](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.13...v1.5.14) (2022-04-01)
+
+
+### Bug Fixes
+
+* if isCollections return ([d12ce7b](https://github.com/CoCreate-app/CoCreate-fetch/commit/d12ce7b67beb25fd0d02ec8a3860fc583d1f2e16))
+
 ## [1.5.13](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.12...v1.5.13) (2022-02-24)
 
 
