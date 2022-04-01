@@ -26,6 +26,10 @@ const CoCreateFetch = {
 		if (!element.getAttribute('fetch-collection')) {
 			isCollections = element.hasAttribute('fetch-collections');
 			if (!isCollections) return;
+			// if (isCollections) {
+			// 	let request = {}
+			// 	crud.readCollections(request);
+			// } else return
 		}
 		let item_id = element.getAttribute('template_id');
 		if (!item_id) return;
@@ -151,7 +155,7 @@ const CoCreateFetch = {
 		crud.listen('readDocumentList', function(data) {
 			self.__fetchedData(data);
 		});
-		crud.listen('readCollectionList', function(data) {
+		crud.listen('readCollections', function(data) {
 			self.__fetchedData(data);
 		});
 		
