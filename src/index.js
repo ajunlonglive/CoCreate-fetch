@@ -248,12 +248,14 @@ const CoCreateFetch = {
 			}
 			
 			if (data) {
-				if (data.operator.startIndex === 0) {
-					item.documentList = new Map(data.data.map(key => [key._id, key]));
-					this.__removeAllElements(item.el);
-				} else {
-					for (let documentItem of data.data)
-						item.documentList.set(documentItem._id, documentItem);
+				if (!fetch_name) {
+					if (data.operator && data.operator.startIndex === 0) {
+						item.documentList = new Map(data.data.map(key => [key._id, key]));
+						this.__removeAllElements(item.el);
+					} else {
+						for (let documentItem of data.data)
+							item.documentList.set(documentItem._id, documentItem);
+					}
 				}
 				this.__renderElements(item.el, data, fetch_name);
 			}
