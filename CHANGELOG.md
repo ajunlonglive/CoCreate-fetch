@@ -1,3 +1,10 @@
+## [1.5.15](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.14...v1.5.15) (2022-04-15)
+
+
+### Bug Fixes
+
+* if !fetch_name check operator if  fetch_name  render ([ade5f13](https://github.com/CoCreate-app/CoCreate-fetch/commit/ade5f13ed15a78d90e3f5527451eeb760f71b6cc))
+
 ## [1.5.14](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.13...v1.5.14) (2022-04-01)
 
 
