@@ -1,3 +1,10 @@
+## [1.5.16](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.15...v1.5.16) (2022-05-06)
+
+
+### Bug Fixes
+
+* update config organization_Id to organization_id ([007484a](https://github.com/CoCreate-app/CoCreate-fetch/commit/007484a19db024fcfb1553662be2a9747d99ba35))
+
 ## [1.5.15](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.14...v1.5.15) (2022-04-15)
 
 
