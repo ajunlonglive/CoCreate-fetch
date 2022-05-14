@@ -152,7 +152,7 @@ const CoCreateFetch = {
 
 	__initSocketEvent: function() {
 		const self = this;
-		crud.listen('readDocumentList', function(data) {
+		crud.listen('readDocuments', function(data) {
 			self.__fetchedData(data);
 		});
 		crud.listen('readCollections', function(data) {
