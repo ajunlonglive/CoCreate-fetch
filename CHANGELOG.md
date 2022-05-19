@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.0...v1.6.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* update document_id on link index.css ([d77cb5f](https://github.com/CoCreate-app/CoCreate-fetch/commit/d77cb5f0e0d57077967ae60f8b044471c00428c2))
+
 # [1.6.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.5.16...v1.6.0) (2022-05-14)
 
 
