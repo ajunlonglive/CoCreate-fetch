@@ -248,7 +248,9 @@ const CoCreateFetch = {
 			}
 			
 			if (data) {
-				if (!fetch_name) {
+				if (fetch_name) {
+					this.__removeAllElements(item.el);
+				} else {
 					if (data.operator && data.operator.startIndex === 0) {
 						item.documentList = new Map(data.data.map(key => [key._id, key]));
 						this.__removeAllElements(item.el);
