@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.2...v1.6.3) (2022-05-25)
+
+
+### Bug Fixes
+
+* if fetch_name and startIndex = 0 removeELements ([aa98bf1](https://github.com/CoCreate-app/CoCreate-fetch/commit/aa98bf1664fd4582454f986e682da17962bfb92f))
+
 ## [1.6.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.1...v1.6.2) (2022-05-23)
 
 
