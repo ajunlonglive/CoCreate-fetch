@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.3...v1.6.4) (2022-05-30)
+
+
+### Bug Fixes
+
+* if case for data.document_id ([31c8a1d](https://github.com/CoCreate-app/CoCreate-fetch/commit/31c8a1d00da2256089b6947fd69511cc552b2881))
+
 ## [1.6.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.2...v1.6.3) (2022-05-25)
 
 
