@@ -174,11 +174,14 @@ const CoCreateFetch = {
 
 	__addElements: async function(data) {
 		let Data;
-		if (Array.isArray(data.data))
+		if (Array.isArray(data.data)){
 			Data = data.data[0];
-		else
+			if (!Data._id) return;
+		} else {
 			Data = data.data;
-		if (!Data._id) return;
+			if (!data.document_id) return;
+		}
+		
 		let collection = data['collection'];
 		if(collection == 'crdt-transactions') return;
 
