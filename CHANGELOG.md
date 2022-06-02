@@ -1,3 +1,10 @@
+## [1.6.5](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.4...v1.6.5) (2022-06-02)
+
+
+### Bug Fixes
+
+* add element to map to reduce repetitive reads. ([a8c7f1b](https://github.com/CoCreate-app/CoCreate-fetch/commit/a8c7f1bb1b67f27ea0ef5a21ec4ddeaa6e617cd3))
+
 ## [1.6.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.3...v1.6.4) (2022-05-30)
 
 
