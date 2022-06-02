@@ -8,6 +8,7 @@ import uuid from '@cocreate/uuid';
 const CoCreateFetch = {
 	selector: '[template_id][fetch-collection], [template_id][fetch-collections]',
 	items: new Map(),
+	initializing: new Map(),
 
 	init: function() {
 		let elements =  document.querySelectorAll(this.selector);
@@ -23,6 +24,8 @@ const CoCreateFetch = {
 	
 	initElement: function(element) {
 		let isCollections;
+		let collection = element.getAttribute('fetch-collection')
+		let name = element.getAttribute('fetch-name')
 		if (!element.getAttribute('fetch-collection')) {
 			isCollections = element.hasAttribute('fetch-collections');
 			if (!isCollections) return;
@@ -31,6 +34,12 @@ const CoCreateFetch = {
 			// 	crud.readCollections(request);
 			// } else return
 		}
+		
+		let initialize = this.initializing.get(element)
+		if (!initialize || initialize.collection != collection && initialize.name != name){
+			this.initializing.set(element, {collection, name});
+		}
+
 		let item_id = element.getAttribute('template_id');
 		if (!item_id) return;
 		if(/{{\s*([\w\W]+)\s*}}/g.test(item_id))
@@ -264,7 +273,7 @@ const CoCreateFetch = {
 				}
 				this.__renderElements(item.el, data, fetch_name);
 			}
-			
+			this.initializing.delete(item.el)
 		}
 	},
 
