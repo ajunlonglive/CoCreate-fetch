@@ -1,3 +1,11 @@
+## [1.6.6](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.5...v1.6.6) (2022-06-12)
+
+
+### Bug Fixes
+
+* update dependencies ([3c625fa](https://github.com/CoCreate-app/CoCreate-fetch/commit/3c625fa4f3a47d39e0f14f26072bdee3afe030d0))
+* update docs css document_id ([36a0295](https://github.com/CoCreate-app/CoCreate-fetch/commit/36a0295169c9679e6cac75bfcd46282a7fe87d0a))
+
 ## [1.6.5](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.4...v1.6.5) (2022-06-02)
 
 
