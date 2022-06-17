@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.6...v1.7.0) (2022-06-17)
+
+
+### Features
+
+* Replace element with template to insert updated placehlder values in realtime.  Reorder items when an item is updated and has filters ([b905b65](https://github.com/CoCreate-app/CoCreate-fetch/commit/b905b651bb29f112f9d604e7021d0450b26ae515))
+
 ## [1.6.6](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.5...v1.6.6) (2022-06-12)
 
 
