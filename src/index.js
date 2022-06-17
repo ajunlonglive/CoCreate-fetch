@@ -95,7 +95,7 @@ const CoCreateFetch = {
 		ccfilter.fetchData(item.filter);
 	},
 	
-	__renderElements: function(wrapper, data, type = "data") {
+	__renderElements: function(wrapper, data, type = "data", replaceNode, index) {
 		let auto;
 		let templateId = wrapper.getAttribute('template_id');
 
@@ -128,7 +128,20 @@ const CoCreateFetch = {
 			return;
 		}
 
-		template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
+		if (index) {
+			let els = wrapper.querySelectorAll(`[templateId="${templateId}"]`)
+			if (els[index])
+				els[index].insertAdjacentElement('beforebegin', cloneWrapper.firstElementChild);
+			else if (els[index - 1])
+				els[index - 1].insertAdjacentElement('afterend', cloneWrapper.firstElementChild);
+			else
+				template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
+		}
+		else if (replaceNode)
+			wrapper.replaceChild(cloneWrapper.firstElementChild, replaceNode);
+			// replaceNode.replaceWith(replaceNode)
+		else
+			template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
 		var evt = new CustomEvent('fetchedTemplate', { bubbles: true });
 		wrapper.dispatchEvent(evt);
 
@@ -200,7 +213,7 @@ const CoCreateFetch = {
 			
 			if (filter.collection === collection && !item.el.getAttribute('fetch-name') && item.documentList) {
 				let document_id = item.documentList.get(data.document_id);
-				if(!item.documentList.has(data.document_id)){
+				if(!document_id){
 					let documentData = await crud.readDocument({collection, document_id: data.document_id});
 					itemData = documentData.data;
 				}
@@ -210,21 +223,48 @@ const CoCreateFetch = {
 				
 				let render_data = data;
 				render_data.data = [itemData];
-				document_id = item.documentList.get(data.document_id);
+				let orderField = item.el.getAttribute('order-by');
+				let orderType = item.el.getAttribute('order-type');
+				let orderValueType = item.el.getAttribute('filter-value-type');
 				let isFilter = ccfilter.filterItem(itemData, filter.filters);
-				if(isFilter && !document_id){
-					item.documentList.set(data.document_id, itemData);
-					item.filter.startIndex += 1;
-					this.__renderElements(item.el, render_data);
-				}
-				else if(!isFilter && document_id){
+				if(!isFilter && document_id){
 					item.documentList.delete(data.document_id);
 					item.filter.startIndex -= 1;
-					var tmpId = item.el.getAttribute('template_id');
-					var els = item.el.querySelectorAll("[templateId='" + tmpId + "'][document_id='" + data.document_id + "']");
-					for (let j = 0; j < els.length; j++) {
-						els[j].remove();
+					let el = item.el.querySelector("[templateId='" + item.templateId + "'][document_id='" + data.document_id + "']");
+					if (el) {
+						el.remove();
 						item.startIndex--;
+					}
+				} else {
+					let index;
+					item.documentList.set(data.document_id, itemData);
+					if (orderField) {
+						let sort;
+						if (orderType == 'desc') {
+							if (orderValueType == 'number')
+								sort = [...item.documentList.entries()].sort((a, b) => b[1][orderField] - a[1][orderField]);
+							else
+								sort = [...item.documentList.entries()].sort((a, b) => b[1][orderField].localeCompare(a[1][orderField]));
+						} else {
+							if (orderValueType == 'number')
+								sort = [...item.documentList.entries()].sort((a, b) => a[1][orderField] - b[1][orderField]);
+							else
+								sort = [...item.documentList.entries()].sort((a, b) => a[1][orderField].localeCompare(b[1][orderField]));
+						}
+						index = sort.findIndex(x => x[0] === data.document_id);	
+					}	
+
+					if(isFilter && !document_id){
+						item.filter.startIndex += 1;
+						this.__renderElements(item.el, render_data, '', '', index);
+					}
+					else if( isFilter && document_id) {
+						let replaceNode = item.el.querySelector("[templateId='" + item.templateId + "'][document_id='" + data.document_id + "']");
+						if (index && replaceNode){
+							replaceNode.remove();
+							replaceNode = '';
+						}
+						this.__renderElements(item.el, render_data, '', replaceNode, index);
 					}
 				}
 			}
