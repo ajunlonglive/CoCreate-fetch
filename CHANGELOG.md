@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.0...v1.7.1) (2022-06-18)
+
+
+### Bug Fixes
+
+* bump dependencies ([92097f9](https://github.com/CoCreate-app/CoCreate-fetch/commit/92097f925cbe0bf051b8c1b6b187b0e7e04dce31))
+
 # [1.7.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.6.6...v1.7.0) (2022-06-17)
 
 
