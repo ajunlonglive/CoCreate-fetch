@@ -391,7 +391,7 @@ const CoCreateFetch = {
 observer.init({ 
 	name: 'CoCreateFetchObserver', 
 	observe: ['attributes'],
-	attributeName: ['fetch-collection', 'fetch-name'],
+	attributeName: ['fetch-collections', 'fetch-collection', 'fetch-name'],
 	callback: function(mutation) {
 		CoCreateFetch.initElement(mutation.target);
 	}
@@ -400,7 +400,7 @@ observer.init({
 observer.init({ 
 	name: 'CoCreateFetchInit', 
 	observe: ['addedNodes'],
-	target: '[fetch-collection]',
+	target: '[fetch-collection], [fetch-collections]',
 	callback: function(mutation) {
 		CoCreateFetch.initElement(mutation.target);
 	}
