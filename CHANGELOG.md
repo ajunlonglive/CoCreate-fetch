@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.1...v1.7.2) (2022-06-23)
+
+
+### Bug Fixes
+
+* observe attribute fetch-collections ([e15d280](https://github.com/CoCreate-app/CoCreate-fetch/commit/e15d280a6bdba496d2443df5a9bc9173166f23f6))
+
 ## [1.7.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.0...v1.7.1) (2022-06-18)
 
 
