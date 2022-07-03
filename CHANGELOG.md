@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.2...v1.7.3) (2022-07-03)
+
+
+### Bug Fixes
+
+* update pass-fetch and pass-filter attributes ([e400088](https://github.com/CoCreate-app/CoCreate-fetch/commit/e40008824ec0671f60771ca0625583eff9db2db8))
+
 ## [1.7.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.1...v1.7.2) (2022-06-23)
 
 
