@@ -159,9 +159,13 @@ const CoCreateFetch = {
 		if (!template.getAttribute('render-key') && render_id) {
 			template.setAttribute('render-key', render_id);
 		}
-		
-		template = template.outerHTML.replace(/\$auto/g, render_id);
-		itemTemplateDiv.innerHTML = template;
+		if (render_id) {
+			template = template.outerHTML.replace(/\$auto/g, render_id);
+			itemTemplateDiv.innerHTML = template;
+		} else {
+			template = template.outerHTML;
+			itemTemplateDiv.innerHTML = template;
+		}
 		return itemTemplateDiv;
 	},
 	

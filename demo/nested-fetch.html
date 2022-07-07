@@ -1,0 +1,52 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+       <div class="padding:5px min-width:260px">
+                        
+            <div class="overflow:auto height:90vh">                
+                <!-- Files -->
+                    <!-- Search Files -->
+                    <form class="padding:0px_5px_20px_5px">
+                        <input type="text" class="floating-label" pass-value_to="results">
+                        <span class="passValueBtn position:relative bottom:28px right:14px float:right font-size:18px">
+        					<a target="modal" pass_to="render" collection="website-pages" document_id="" pass-name="src" modal-width="900px" modal-color="#229954">
+        						<i class="fas fa-search"></i>
+        					</a>
+        				</span>
+                    </form>
+                    <!-- File Tree -->
+                    <div class="padding:5px">
+                        <span class=""><i class="fa fa-caret-down" toggle="fa-caret-right, fa-caret-down"></i></span>
+                        <span class="margin-left:5px" collection="websites" document_id="" name="name">Project name</span>
+                        <div id="fetch-files" class="fetch-files margin-left:10px " sortable template_id="$auto" fetch-collection="files" filter-name="directory" filter-value="/" filter-operator="$eq" order-by="name" order-type="asc" render_id="$auto">
+                            <div template_id="$auto" filter-name="content-type" filter-value="text/directory"></div>
+                            <!--Folder Template -->
+                            <div class="template padding:5px" template_id="$auto" document_id="{{$auto._id}}">
+                                <span class="" show="#directory{{$auto._id}}" hide="#directory{{$auto._id}}" toggle="fa-caret-down, fa-caret-right" toggle-target="#icon{{$auto._id}}">
+                                    <i id="icon{{$auto._id}}" class="fa fa-caret-right" ></i>
+                                </span>
+                                <span class="margin-left:5px" collection="files" document_id="{{$auto._id}}" name="name"></span>
+                                
+                                <!-- fetches folder and file template. This loops until tree ends -->
+                                <div id="directory{{$auto._id}}" class="domEditor margin-left:10px" hidden collection="files" document_id="611ab5d9251afa96bd20f6cc" name="src" filter-value="{{$auto.path}}"></div>
+                            </div>
+                        </div>
+                        <div class="fetch-files margin-left:10px " sortable template_id="$auto" fetch-collection="" filter-name="directory" filter-value="/"  filter-operator="$eq" order-by="name" render_id="auto">
+                            <div template_id="$auto" filter-name="content-type" filter-value="text/directory" filter-operator="$ne"></div>
+
+                             <!-- File Template -->
+                            <div class="template padding:5px" template_id="$auto" document_id="{{$auto._id}}">
+                                <span class="{{$auto.content-type}}"><i class="fab fa-html5"></i></span>
+                                <span class="margin-left:5px" collection="files" document_id="{{$auto._id}}" name="name"></span>
+                            </div>
+                        </div>
+                    </div>
+                                        
+            </div>
+        </div>
+
+        <script src="../../../CoCreateJS/dist/CoCreate.js" ></script>
+    </body>
+</html>
