@@ -1,3 +1,11 @@
+## [1.7.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.3...v1.7.4) (2022-07-08)
+
+
+### Bug Fixes
+
+* if render_id find and replace $auto with render_id ([626354c](https://github.com/CoCreate-app/CoCreate-fetch/commit/626354c655ceea9701abec5964447331870c67dc))
+* sort arry function for filtervalue-type numbe ([f55137c](https://github.com/CoCreate-app/CoCreate-fetch/commit/f55137c9c18bfc66e323c72a56b8f632f1818f59))
+
 ## [1.7.3](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.2...v1.7.3) (2022-07-03)
 
 
