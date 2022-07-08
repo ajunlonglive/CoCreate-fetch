@@ -245,14 +245,23 @@ const CoCreateFetch = {
 						let sort;
 						if (orderType == 'desc') {
 							if (orderValueType == 'number')
-								sort = [...item.documentList.entries()].sort((a, b) => b[1][orderField] - a[1][orderField]);
+								sort = [...item.documentList.entries()].sort((a, b) => 
+									b[1][orderField] - a[1][orderField]
+								);
 							else
-								sort = [...item.documentList.entries()].sort((a, b) => b[1][orderField].localeCompare(a[1][orderField]));
+								sort = [...item.documentList.entries()].sort((a, b) => 
+									b[1][orderField].localeCompare(a[1][orderField])
+								);
 						} else {
 							if (orderValueType == 'number')
-								sort = [...item.documentList.entries()].sort((a, b) => a[1][orderField] - b[1][orderField]);
+								sort = [...item.documentList.entries()].sort((a, b) => 
+									a[1][orderField] - b[1][orderField]
+								);
 							else
-								sort = [...item.documentList.entries()].sort((a, b) => a[1][orderField].localeCompare(b[1][orderField]));
+								sort = [...item.documentList.entries()].sort((a, b) => 
+									a[1][orderField].localeCompare(b[1][orderField])
+								);
+							
 						}
 						index = sort.findIndex(x => x[0] === data.document_id);	
 					}	
