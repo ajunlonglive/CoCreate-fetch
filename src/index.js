@@ -113,34 +113,40 @@ const CoCreateFetch = {
 		
 		type = type || "data";
 		type = renderId ? `${renderId}.${type}` : type;
-
-		let cloneWrapper = this.__cloneTemplate(template, templateId, type, renderId, auto);
+		
+		let elements, cloneWrapper;
+		if (replaceNode)
+			elements = [replaceNode];
+		else
+			cloneWrapper = this.__cloneTemplate(template, templateId, type, renderId, auto);
 		
 		render.data({
-			elements: cloneWrapper.children,
+			elements: elements || cloneWrapper.children,
 			data: renderData,
 		});
 		
-		let removeableTemplate = cloneWrapper.querySelector(`.template[template_id="${templateId}"]`);
-		if (removeableTemplate) {
-			removeableTemplate.remove();
-		} else {
-			return;
-		}
+		if (cloneWrapper) {
+			let removeableTemplate = cloneWrapper.querySelector(`.template[template_id="${templateId}"]`);
+			if (removeableTemplate) {
+				removeableTemplate.remove();
+			} else {
+				return;
+			}
 
-		if (index) {
-			let els = wrapper.querySelectorAll(`[templateId="${templateId}"]`)
-			if (els[index])
-				els[index].insertAdjacentElement('beforebegin', cloneWrapper.firstElementChild);
-			else if (els[index - 1])
-				els[index - 1].insertAdjacentElement('afterend', cloneWrapper.firstElementChild);
+			if (index) {
+				let els = wrapper.querySelectorAll(`[templateId="${templateId}"]`)
+				if (els[index])
+					els[index].insertAdjacentElement('beforebegin', cloneWrapper.firstElementChild);
+				else if (els[index - 1])
+					els[index - 1].insertAdjacentElement('afterend', cloneWrapper.firstElementChild);
+				else
+					template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
+			}
+			else if (replaceNode)
+				wrapper.replaceChild(cloneWrapper.firstElementChild, replaceNode);
 			else
 				template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
 		}
-		else if (replaceNode)
-			wrapper.replaceChild(cloneWrapper.firstElementChild, replaceNode);
-		else
-			template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
 		var evt = new CustomEvent('fetchedTemplate', { bubbles: true });
 		wrapper.dispatchEvent(evt);
 
