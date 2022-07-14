@@ -144,8 +144,11 @@ const CoCreateFetch = {
 			}
 			else if (replaceNode)
 				wrapper.replaceChild(cloneWrapper.firstElementChild, replaceNode);
-			else
-				template.insertAdjacentHTML('beforebegin', cloneWrapper.innerHTML);
+			else {
+				Array.from(cloneWrapper.children).forEach(child => {
+					template.insertAdjacentElement('beforebegin', child)
+				});
+			}
 		}
 		var evt = new CustomEvent('fetchedTemplate', { bubbles: true });
 		wrapper.dispatchEvent(evt);
