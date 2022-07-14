@@ -1,3 +1,10 @@
+## [1.7.5](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.4...v1.7.5) (2022-07-14)
+
+
+### Bug Fixes
+
+* replace insertAdjacentHTML with insertAdjacentElement ([389502d](https://github.com/CoCreate-app/CoCreate-fetch/commit/389502dd3472b6862d7780edeb84c6fb9dde25e4))
+
 ## [1.7.4](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.3...v1.7.4) (2022-07-08)
 
 
