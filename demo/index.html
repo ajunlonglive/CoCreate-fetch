@@ -16,9 +16,9 @@
 		
 		<div class="display:flex flex-wrap:wrap" fetch-collection="contacts" template_id="grid">
 
-			<div template_id="grid" class="template card margin:10px padding:20px background:gainsboro:hover">
+			<div template_id="grid" class="template card margin:10px padding:20px background:gainsboro:hover" document_id="{{data._id}}">
 				<a pass_to="form-fields" pass-document_id="{{data._id}}">
-					<h4 collection="contacts" document_id="{{data._id}}" name="fullname">Name</h4>
+					<h4 test="{{data.fullname}}">{{data.fullname}}</h4>
 					<h4>{{data._id}}</h4>
 				</a>
 			</div>
@@ -26,8 +26,8 @@
 		</div>
 		
 	    <!--<script src="../dist/CoCreate-fetch.js"></script>-->
-        <!-- <script src="https://cdn.cocreate.app/latest/CoCreate.min.js"></script> -->
-	    <script src="../../../CoCreateJS/dist/CoCreate.js" ></script>
+        <script src="https://cdn.cocreate.app/latest/CoCreate.min.js"></script>
+	    <!-- <script src="../../../CoCreateJS/dist/CoCreate.js" ></script> -->
 
 	</body>
 </html>
