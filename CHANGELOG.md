@@ -1,3 +1,11 @@
+## [1.7.6](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.5...v1.7.6) (2022-07-25)
+
+
+### Bug Fixes
+
+* get order-by and order-type from instance ([0196fa4](https://github.com/CoCreate-app/CoCreate-fetch/commit/0196fa4274457410022026d7a56837d83d4be129))
+* only send updateData to render unles document rendering for first time ([4681c50](https://github.com/CoCreate-app/CoCreate-fetch/commit/4681c50d144f8d9caa88dc82208bbe957dcc208b))
+
 ## [1.7.5](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.4...v1.7.5) (2022-07-14)
 
 
