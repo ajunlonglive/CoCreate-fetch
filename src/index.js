@@ -224,17 +224,17 @@ const CoCreateFetch = {
 			let itemData;
 			
 			if (filter.collection === collection && !item.el.getAttribute('fetch-name') && item.documentList) {
+				let render_data = data;
 				let document_id = item.documentList.get(data.document_id);
 				if(!document_id){
 					let documentData = await crud.readDocument({collection, document_id: data.document_id});
 					itemData = documentData.data;
+					render_data.data = [itemData];
 				}
 				else {
 					itemData = {...document_id, ...Data};
 				}
 				
-				let render_data = data;
-				render_data.data = [itemData];
 				let orderField = item.el.getAttribute('order-by');
 				let orderType = item.el.getAttribute('order-type');
 				let orderValueType = item.el.getAttribute('filter-value-type');
