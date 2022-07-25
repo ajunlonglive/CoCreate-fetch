@@ -385,14 +385,16 @@ const CoCreateFetch = {
 	
 	// changes position of documents
 	reorderChildrenOfTemplate: function (template) {
-		const orderField = template.getAttribute('order-by');
 		const template_id = template.getAttribute('template_id');
+		let item = this.items.get(template_id)
+		const orderField = item.filter.orders[0].name
+
 		if (!orderField || !template_id) {
 			return;
 		}
 		const children = template.querySelectorAll(`[templateid="${template_id}"][document_id]:not(.template)`);
 		
-		const coff = template.getAttribute('order-type') !== 'asc' ? -1 : 1;
+		const coff = item.filter.orders[0].type
 		children.forEach((item, index) => {
 			if (item.classList.contains('template')) {
 				return;
