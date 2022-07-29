@@ -71,6 +71,7 @@ const CoCreateFetch = {
 			
 			if (isCollections) {
 				filter.is_collection = true;
+				filter.collection = 'collections'
 			}
 			
 			item = {
@@ -204,6 +205,35 @@ const CoCreateFetch = {
 		crud.listen('deleteDocument', function(data) {
 			self.__removeElements(data);
 		});
+
+		crud.listen('createCollection', function(data) {
+			self.__collections(data)
+		});
+		
+		crud.listen('updateCollection', function(data) {
+			self.__collections(data, 'updateCollection')
+		});
+		
+		crud.listen('deleteCollection', function(data) {
+			self.__collections(data, 'deleteCollection')
+		});
+	},
+
+	__collections: async function(data, action) {
+		data['document_id'] = data.collection
+		data['data'] = {}
+		data.data['_id'] = data.collection
+		data.data['name'] = data.collection
+		data.collection = 'collections'
+		if (action == 'updateCollection') {
+			data.data['_id'] = data.target
+			data.data['name'] = data.target
+			this.__addElements(data)
+		}
+		else if (action == 'deleteCollection')
+			this.__removeElements(data)
+		else
+			this.__addElements(data)
 	},
 
 	__addElements: async function(data) {
@@ -224,15 +254,25 @@ const CoCreateFetch = {
 			let itemData;
 			
 			if (filter.collection === collection && !item.el.getAttribute('fetch-name') && item.documentList) {
-				let render_data = data;
+				let render_data = {...data};
+				// render_data.data = [render_data.data]
 				let document_id = item.documentList.get(data.document_id);
-				if(!document_id){
+				if(collection == 'collections'){
+					itemData = Data;
+					render_data.data = [itemData];
+					if(document_id) {
+						item.documentList.delete(data.document_id);
+						// data.document_id = itemData._id
+					}
+				}
+				else if(!document_id){
 					let documentData = await crud.readDocument({collection, document_id: data.document_id});
 					itemData = documentData.data;
 					render_data.data = [itemData];
 				}
 				else {
 					itemData = {...document_id, ...Data};
+					render_data.data = [itemData];
 				}
 				
 				let orderField = item.el.getAttribute('order-by');
@@ -247,9 +287,10 @@ const CoCreateFetch = {
 						el.remove();
 						item.startIndex--;
 					}
-				} else {
+				} else if(isFilter) {
 					let index;
-					item.documentList.set(data.document_id, itemData);
+					let _id = Data._id || data.document_id
+					item.documentList.set(_id, itemData);
 					if (orderField) {
 						let sort;
 						if (orderType == 'desc') {
@@ -272,7 +313,7 @@ const CoCreateFetch = {
 								);
 							
 						}
-						index = sort.findIndex(x => x[0] === data.document_id);	
+						index = sort.findIndex(x => x[0] === _id);	
 					}	
 
 					if(isFilter && !document_id){
@@ -325,7 +366,10 @@ const CoCreateFetch = {
 					this.__removeAllElements(item.el);
 				} else {
 					if (data.operator && data.operator.startIndex === 0) {
-						item.documentList = new Map(data.data.map(key => [key._id, key]));
+						if (data.collection == 'collections')
+							item.documentList = new Map(data.data.map(key => [key.name, key]));
+						else
+							item.documentList = new Map(data.data.map(key => [key._id, key]));
 						this.__removeAllElements(item.el);
 					} else {
 						for (let documentItem of data.data)
