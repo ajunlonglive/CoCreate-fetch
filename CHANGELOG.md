@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.6...v1.8.0) (2022-07-29)
+
+
+### Features
+
+* support for collection crud ([148709b](https://github.com/CoCreate-app/CoCreate-fetch/commit/148709b894b5291d85418338616133ca9fc2fbf4))
+
 ## [1.7.6](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.5...v1.7.6) (2022-07-25)
 
 
