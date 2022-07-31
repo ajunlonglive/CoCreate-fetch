@@ -169,6 +169,9 @@ const CoCreateFetch = {
 		if (!template.getAttribute('render-key') && render_id) {
 			template.setAttribute('render-key', render_id);
 		}
+		if (!template.getAttribute('document_id')) {
+			template.setAttribute('document_id', '{{data._id}}');
+		}
 		if (render_id) {
 			template = template.outerHTML.replace(/\$auto/g, render_id);
 			itemTemplateDiv.innerHTML = template;
