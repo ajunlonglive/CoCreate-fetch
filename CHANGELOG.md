@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.8.0...v1.8.1) (2022-08-01)
+
+
+### Bug Fixes
+
+* dynamically add document_id to template for updating, deleting, etc. ([40f1e70](https://github.com/CoCreate-app/CoCreate-fetch/commit/40f1e70c39cce444f01876f3e2b76274c8d4553f))
+
 # [1.8.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.7.6...v1.8.0) (2022-07-29)
 
 
