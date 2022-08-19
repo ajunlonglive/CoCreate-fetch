@@ -278,8 +278,8 @@ const CoCreateFetch = {
 					render_data.data = [itemData];
 				}
 				
-				let orderField = item.el.getAttribute('order-by');
-				let orderType = item.el.getAttribute('order-type');
+				let orderField = item.el.getAttribute('filter-order-name');
+				let orderType = item.el.getAttribute('filter-order-type');
 				let orderValueType = item.el.getAttribute('filter-value-type');
 				let isFilter = ccfilter.filterItem(itemData, filter.filters);
 				if(!isFilter && document_id){

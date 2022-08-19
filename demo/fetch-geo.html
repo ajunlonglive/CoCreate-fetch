@@ -32,17 +32,17 @@
      			      template_id="datatable" 
              	  placeholder="Name">
                 <span class="position:absolute bottom:18px right:20px float:right font-size:18px z-index:6" >
-                  <a order-by="name" value="desc" template_id="datatable" show="#asc1" hide="#sort1" id="sort">
+                  <a filter-order-name="name" value="desc" template_id="datatable" show="#asc1" hide="#sort1" id="sort">
                     <i class="fas fa-sort"></i>
                   </a>
-                  <a hidden order-by="name" value="asc" template_id="datatable" show="#desc1" hide="#asc1" id="asc1">
+                  <a hidden filter-order-name="name" value="asc" template_id="datatable" show="#desc1" hide="#asc1" id="asc1">
                     <i class="fas fa-sort-up"></i>
                   </a>
-                  <a hidden order-by="name" value="desc" template_id="datatable" show="#asc1" hide="#desc1" id="desc1">
+                  <a hidden filter-order-name="name" value="desc" template_id="datatable" show="#asc1" hide="#desc1" id="desc1">
                     <i class="fas fa-sort-down"></i>
                   </a>
                 </span>
-                <!--<a class="position:absolute bottom:18px right:20px float:right font-size:18px z-index:6" order-by="name" value="asc" template_id="datatable">-->
+                <!--<a class="position:absolute bottom:18px right:20px float:right font-size:18px z-index:6" filter-order-name="name" value="asc" template_id="datatable">-->
                 <!--  <i class="fas fa-sort"></i>-->
                 <!--</a>-->
             </th>
@@ -54,13 +54,13 @@
      			      template_id="datatable" 
              	  placeholder="Document_id"/>
                 <span class="position:absolute bottom:18px right:20px float:right font-size:18px z-index:6" >
-                  <a order-by="name" value="desc" template_id="datatable" show="#asc" hide="#sort" id="sort">
+                  <a filter-order-name="name" value="desc" template_id="datatable" show="#asc" hide="#sort" id="sort">
                     <i class="fas fa-sort"></i>
                   </a>
-                  <a hidden order-by="_id" value="asc" template_id="datatable" show="#desc" hide="#asc" id="asc">
+                  <a hidden filter-order-name="_id" value="asc" template_id="datatable" show="#desc" hide="#asc" id="asc">
                     <i class="fas fa-sort-up"></i>
                   </a>
-                  <a hidden order-by="_id" value="desc" template_id="datatable" show="#asc" hide="#desc" id="desc">
+                  <a hidden filter-order-name="_id" value="desc" template_id="datatable" show="#asc" hide="#desc" id="desc">
                     <i class="fas fa-sort-down"></i>
                   </a>
                 </span>
@@ -73,8 +73,8 @@
         fetch-name="" 
         filter-value="" 
         fetch-count=""
-        order-by="name" 
-        order-type="asc"
+        filter-order-name="name" 
+        filter-order-type="asc"
         template_id="datatable"
        >
         

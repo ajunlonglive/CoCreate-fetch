@@ -61,15 +61,15 @@
 
         <div class="card margin:10px padding:10px">
           <h3>Order</h3>
-          <!--<input type="radio" name="category_order" order-by="category" value="asc" id="category_order_asc"><label>Order by Category: ASC</label><br>-->
-          <!--<input type="radio" name="category_order" order-by="category" value="desc" id="category_order_desc"><label>Order by Category: DESC</label><br>-->
+          <!--<input type="radio" name="category_order" filter-order-name="category" value="asc" id="category_order_asc"><label>Order by Category: ASC</label><br>-->
+          <!--<input type="radio" name="category_order" filter-order-name="category" value="desc" id="category_order_desc"><label>Order by Category: DESC</label><br>-->
           <div class="font-bold padding-top:10px">Name</div>
-          <input type="radio" name="name_order" order-by="name" value="none"><label>None</label><br>
-          <input type="radio" name="name_order" order-by="name" value="asc" ><label>Order by Name: ASC</label><br>
-          <input type="radio" name="name_order" order-by="name" value="desc"><label>Order by Name: DESC</label><br>
+          <input type="radio" name="name_order" filter-order-name="name" value="none"><label>None</label><br>
+          <input type="radio" name="name_order" filter-order-name="name" value="asc" ><label>Order by Name: ASC</label><br>
+          <input type="radio" name="name_order" filter-order-name="name" value="desc"><label>Order by Name: DESC</label><br>
 
           <div class="padding-top:10px font-bold">Price</div>
-          <select order-by="price" placeholder="Select">
+          <select filter-order-name="price" placeholder="Select">
     	      <option value="none">None</option>
             <option value="asc">ASC</option>
             <option value="desc">DESC</option>
@@ -79,7 +79,7 @@
 	 </form>
 	</div>
 	
-      	   <select order-by="price" placeholder="Select" template_id="filter_test">
+      	   <select filter-order-name="price" placeholder="Select" template_id="filter_test">
       	      <option value="none">None</option>
               <option value="asc">ASC</option>
               <option value="desc">DESC</option>
@@ -88,8 +88,8 @@
     <div class="display:flex flex-wrap:wrap"
       fetch-collection="module_activity"
       fetch-count=""
-      order-by="name" 
-      order-type="asc"
+      filter-order-name="name" 
+      filter-order-type="asc"
       template_id="filter_test"
      
       >
