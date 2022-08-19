@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.8.1...v1.8.2) (2022-08-19)
+
+
+### Bug Fixes
+
+* renamed order-by and order-type to filter-order-name and filter-order-type ([b016890](https://github.com/CoCreate-app/CoCreate-fetch/commit/b0168909f1917fa28fa732288a4eef6d79c8bc7c))
+
 ## [1.8.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.8.0...v1.8.1) (2022-08-01)
 
 
