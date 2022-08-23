@@ -4,6 +4,7 @@ import ccfilter from '@cocreate/filter';
 import crud from '@cocreate/crud-client';
 import render from '@cocreate/render';
 import uuid from '@cocreate/uuid';
+import {dotNotationToObject} from '@cocreate/utils';
 
 const CoCreateFetch = {
 	selector: '[template_id][fetch-collection], [template_id][fetch-collections]',
@@ -240,7 +241,7 @@ const CoCreateFetch = {
 	},
 
 	__addElements: async function(data) {
-		let Data;
+		let Data, isRendered;
 		if (Array.isArray(data.data)){
 			Data = data.data[0];
 			if (!Data._id) return;
@@ -258,14 +259,12 @@ const CoCreateFetch = {
 			
 			if (filter.collection === collection && !item.el.getAttribute('fetch-name') && item.documentList) {
 				let render_data = {...data};
-				// render_data.data = [render_data.data]
 				let document_id = item.documentList.get(data.document_id);
 				if(collection == 'collections'){
 					itemData = Data;
 					render_data.data = [itemData];
 					if(document_id) {
 						item.documentList.delete(data.document_id);
-						// data.document_id = itemData._id
 					}
 				}
 				else if(!document_id){
@@ -276,6 +275,7 @@ const CoCreateFetch = {
 				else {
 					itemData = {...document_id, ...Data};
 					render_data.data = [itemData];
+					isRendered = true;
 				}
 				
 				let orderField = item.el.getAttribute('filter-order-name');
@@ -328,6 +328,9 @@ const CoCreateFetch = {
 						if (index && replaceNode){
 							replaceNode.remove();
 							replaceNode = '';
+						}
+						if (isRendered) {
+							render_data.data = dotNotationToObject(Data)
 						}
 						this.__renderElements(item.el, render_data, '', replaceNode, index);
 					}
