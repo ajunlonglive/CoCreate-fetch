@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.8.2...v1.9.0) (2022-08-23)
+
+
+### Features
+
+* add Acocreate/utils dotNotationToObject functio, convert string to object befeore render ([50e8032](https://github.com/CoCreate-app/CoCreate-fetch/commit/50e8032949ca9a13f2837de5979a344ec3f09f10))
+
 ## [1.8.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.8.1...v1.8.2) (2022-08-19)
 
 
