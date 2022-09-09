@@ -90,7 +90,7 @@ const CoCreateFetch = {
 			
 		} else {
 			item.el = element;
-			item.filter.collection = element.getAttribute('fetch-collection');
+			item.collection = element.getAttribute('fetch-collection');
 			item.filter.startIndex = 0;
 		}
 		
