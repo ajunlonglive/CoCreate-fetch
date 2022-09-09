@@ -281,7 +281,7 @@ const CoCreateFetch = {
 				let orderField = item.el.getAttribute('filter-order-name');
 				let orderType = item.el.getAttribute('filter-order-type');
 				let orderValueType = item.el.getAttribute('filter-value-type');
-				let isFilter = ccfilter.filterItem(itemData, filter.filters);
+				let isFilter = ccfilter.queryData(itemData, filter.filters);
 				if(!isFilter && document_id){
 					item.documentList.delete(data.document_id);
 					item.filter.startIndex -= 1;
