@@ -77,7 +77,7 @@ const CoCreateFetch = {
 			
 			item = {
 				el: element,
-				filter,
+				...filter,
 				templateId: item_id,
 			};
 			
@@ -94,7 +94,7 @@ const CoCreateFetch = {
 			item.filter.startIndex = 0;
 		}
 		
-		ccfilter.fetchData(item.filter);
+		ccfilter.fetchData(item);
 	},
 	
 	__renderElements: function(wrapper, data, type = "data", replaceNode, index) {
@@ -358,7 +358,7 @@ const CoCreateFetch = {
 	__fetchedData: function(data) {
 		if(data.collection == 'crdt-transactions')
 			return;
-		let item_id = data['element'];
+		let item_id = data.filter.id;
 		let item = this.items.get(item_id);
 		if (item) {
 			item.filter.startIndex += data['data'].length;
@@ -371,7 +371,7 @@ const CoCreateFetch = {
 				if (fetch_name) {
 					this.__removeAllElements(item.el);
 				} else {
-					if (data.operator && data.operator.startIndex === 0) {
+					if (data.filter && data.filter.startIndex === 0) {
 						if (data.collection == 'collections')
 							item.documentList = new Map(data.data.map(key => [key.name, key]));
 						else
