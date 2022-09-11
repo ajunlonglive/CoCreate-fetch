@@ -254,10 +254,9 @@ const CoCreateFetch = {
 		if(collection == 'crdt-transactions') return;
 
 		for (let item of this.items.values()) {
-			const {filter} = item;
 			let itemData;
 			
-			if (filter.collection === collection && !item.el.getAttribute('fetch-name') && item.documentList) {
+			if (item.collection === collection && !item.el.getAttribute('fetch-name') && item.documentList) {
 				let render_data = {...data};
 				let document_id = item.documentList.get(data.document_id);
 				if(collection == 'collections'){
@@ -281,7 +280,7 @@ const CoCreateFetch = {
 				let orderField = item.el.getAttribute('filter-order-name');
 				let orderType = item.el.getAttribute('filter-order-type');
 				let orderValueType = item.el.getAttribute('filter-value-type');
-				let isFilter = ccfilter.queryData(itemData, filter.filters);
+				let isFilter = ccfilter.queryData(itemData, item.filter.query);
 				if(!isFilter && document_id){
 					item.documentList.delete(data.document_id);
 					item.filter.startIndex -= 1;
