@@ -67,36 +67,40 @@ const CoCreateFetch = {
 		let item = this.items.get(item_id);
 
 		if (!item) {
-			let filter = ccfilter.setFilter(element, "template_id", "template");
-			if (!filter) return;
+			item = ccfilter.setFilter(element, "template_id", "template");
+			if (!item) return;
 			
 			if (isCollections) {
-				filter.is_collection = true;
-				filter.collection = 'collections'
+				item.filter.is_collection = true;
+				item.filter.collection = 'collections'
 			}
-			
-			item = {
-				el: element,
-				...filter,
-				templateId: item_id,
-			};
-			
+						
 			this.items.set(item_id, item);
 
 			element.addEventListener("changeFilterInput", function(e) {
 				item.filter.startIndex = 0;
-				ccfilter.fetchData(item.filter);
+				this.fetchData(item);
 			});
 			
 		} else {
-			item.el = element;
+			item.filter.el = element;
 			item.collection = element.getAttribute('fetch-collection');
 			item.filter.startIndex = 0;
 		}
 		
-		ccfilter.fetchData(item);
+		this.fetchData(item);
 	},
 	
+	fetchData: async function(item) {
+		let data;
+		if (item.filter['is_collection'])
+			data = await crud.readCollections(item);
+		else
+			data = await crud.readDocuments(item);
+		if (data)
+			this.__fetchedData(data)
+	},
+
 	__renderElements: function(wrapper, data, type = "data", replaceNode, index) {
 		let auto;
 		let templateId = wrapper.getAttribute('template_id');
@@ -191,13 +195,6 @@ const CoCreateFetch = {
 
 	__initSocketEvent: function() {
 		const self = this;
-		crud.listen('readDocuments', function(data) {
-			self.__fetchedData(data);
-		});
-		crud.listen('readCollections', function(data) {
-			self.__fetchedData(data);
-		});
-		
 		crud.listen('createDocument', function(data) {
 			self.__addElements(data);
 		});
@@ -256,7 +253,7 @@ const CoCreateFetch = {
 		for (let item of this.items.values()) {
 			let itemData;
 			
-			if (item.collection === collection && !item.el.getAttribute('fetch-name') && item.documentList) {
+			if (item.collection === collection && !item.filter.el.getAttribute('fetch-name') && item.documentList) {
 				let render_data = {...data};
 				let document_id = item.documentList.get(data.document_id);
 				if(collection == 'collections'){
@@ -277,17 +274,17 @@ const CoCreateFetch = {
 					isRendered = true;
 				}
 				
-				let orderField = item.el.getAttribute('filter-order-name');
-				let orderType = item.el.getAttribute('filter-order-type');
-				let orderValueType = item.el.getAttribute('filter-value-type');
+				let orderField = item.filter.el.getAttribute('filter-order-name');
+				let orderType = item.filter.el.getAttribute('filter-order-type');
+				let orderValueType = item.filter.el.getAttribute('filter-value-type');
 				let isFilter = ccfilter.queryData(itemData, item.filter.query);
 				if(!isFilter && document_id){
 					item.documentList.delete(data.document_id);
 					item.filter.startIndex -= 1;
-					let el = item.el.querySelector("[templateId='" + item.templateId + "'][document_id='" + data.document_id + "']");
+					let el = item.filter.el.querySelector("[templateId='" + item.filter.id + "'][document_id='" + data.document_id + "']");
 					if (el) {
 						el.remove();
-						item.startIndex--;
+						item.filter.startIndex--;
 					}
 				} else if(isFilter) {
 					let index;
@@ -320,10 +317,10 @@ const CoCreateFetch = {
 
 					if(isFilter && !document_id){
 						item.filter.startIndex += 1;
-						this.__renderElements(item.el, render_data, '', '', index);
+						this.__renderElements(item.filter.el, render_data, '', '', index);
 					}
 					else if( isFilter && document_id) {
-						let replaceNode = item.el.querySelector("[templateId='" + item.templateId + "'][document_id='" + data.document_id + "']");
+						let replaceNode = item.filter.el.querySelector("[templateId='" + item.filter.id + "'][document_id='" + data.document_id + "']");
 						if (index && replaceNode){
 							replaceNode.remove();
 							replaceNode = '';
@@ -331,7 +328,7 @@ const CoCreateFetch = {
 						if (isRendered) {
 							render_data.data = dotNotationToObject(Data)
 						}
-						this.__renderElements(item.el, render_data, '', replaceNode, index);
+						this.__renderElements(item.filter.el, render_data, '', replaceNode, index);
 					}
 				}
 			}
@@ -344,11 +341,11 @@ const CoCreateFetch = {
 		
 		for (let item of this.items.values()) {
 			if (item.filter.collection == collection) {
-				var tmpId = item.el.getAttribute('template_id');
-				var els = item.el.querySelectorAll("[templateId='" + tmpId + "'][document_id='" + document_id + "']");
+				var tmpId = item.filter.el.getAttribute('template_id');
+				var els = item.filter.el.querySelectorAll("[templateId='" + tmpId + "'][document_id='" + document_id + "']");
 				for (let j = 0; j < els.length; j++) {
 					els[j].remove();
-					item.startIndex--;
+					item.filter.startIndex--;
 				}
 			}
 		}
@@ -360,30 +357,30 @@ const CoCreateFetch = {
 		let item_id = data.filter.id;
 		let item = this.items.get(item_id);
 		if (item) {
-			item.filter.startIndex += data['data'].length;
-			let fetch_name = item.el.getAttribute('fetch-name');
+			let fetch_name = item.filter.el.getAttribute('fetch-name');
 			if (fetch_name) {
 				data = data.data[0];
 			}
 			
 			if (data) {
 				if (fetch_name) {
-					this.__removeAllElements(item.el);
+					this.__removeAllElements(item.filter.el);
 				} else {
 					if (data.filter && data.filter.startIndex === 0) {
 						if (data.collection == 'collections')
 							item.documentList = new Map(data.data.map(key => [key.name, key]));
 						else
 							item.documentList = new Map(data.data.map(key => [key._id, key]));
-						this.__removeAllElements(item.el);
+						this.__removeAllElements(item.filter.el);
 					} else {
 						for (let documentItem of data.data)
 							item.documentList.set(documentItem._id, documentItem);
 					}
 				}
-				this.__renderElements(item.el, data, fetch_name);
+				item.filter.startIndex += data['data'].length
+				this.__renderElements(item.filter.el, data, fetch_name);
 			}
-			this.initializing.delete(item.el)
+			this.initializing.delete(item.filter.el)
 		}
 	},
 
