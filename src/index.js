@@ -97,8 +97,8 @@ const CoCreateFetch = {
 			data = await crud.readCollections(item);
 		else
 			data = await crud.readDocuments(item);
-		if (data)
-			this.__fetchedData(data)
+		// if (data)
+		// 	this.__fetchedData(data)
 	},
 
 	__renderElements: function(wrapper, data, type = "data", replaceNode, index) {
@@ -195,6 +195,12 @@ const CoCreateFetch = {
 
 	__initSocketEvent: function() {
 		const self = this;
+		crud.listen('readDocuments', function(data) {
+			self.__fetchedData(data);
+		});
+		crud.listen('readCollections', function(data) {
+			self.__fetchedData(data);
+		});
 		crud.listen('createDocument', function(data) {
 			self.__addElements(data);
 		});
