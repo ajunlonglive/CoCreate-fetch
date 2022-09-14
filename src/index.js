@@ -290,7 +290,7 @@ const CoCreateFetch = {
 					let el = item.filter.el.querySelector("[templateId='" + item.filter.id + "'][document_id='" + data.document_id + "']");
 					if (el) {
 						el.remove();
-						item.filter.startIndex--;
+						// item.filter.startIndex--;
 					}
 				} else if(isFilter) {
 					let index;
