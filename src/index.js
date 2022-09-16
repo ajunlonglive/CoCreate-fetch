@@ -30,10 +30,6 @@ const CoCreateFetch = {
 		if (!element.getAttribute('fetch-collection')) {
 			isCollections = element.hasAttribute('fetch-collections');
 			if (!isCollections) return;
-			// if (isCollections) {
-			// 	let request = {}
-			// 	crud.readCollections(request);
-			// } else return
 		}
 		
 		let initialize = this.initializing.get(element)
@@ -83,20 +79,22 @@ const CoCreateFetch = {
 			});
 			
 		} else {
-			item.filter.el = element;
+			item.el = element;
 			item.collection = element.getAttribute('fetch-collection');
 			item.filter.startIndex = 0;
 		}
-		
+
 		this.fetchData(item);
 	},
 	
 	fetchData: async function(item) {
 		let data;
+		let Item = {...item}
+		delete Item.el
 		if (item.filter['is_collection'])
-			data = await crud.readCollections(item);
+			data = await crud.readCollections(Item);
 		else
-			data = await crud.readDocuments(item);
+			data = await crud.readDocuments(Item);
 		// if (data)
 		// 	this.__fetchedData(data)
 	},
@@ -259,7 +257,7 @@ const CoCreateFetch = {
 		for (let item of this.items.values()) {
 			let itemData;
 			
-			if (item.collection === collection && !item.filter.el.getAttribute('fetch-name') && item.documentList) {
+			if (item.collection === collection && !item.el.getAttribute('fetch-name') && item.documentList) {
 				let render_data = {...data};
 				let document_id = item.documentList.get(data.document_id);
 				if(collection == 'collections'){
@@ -280,14 +278,14 @@ const CoCreateFetch = {
 					isRendered = true;
 				}
 				
-				let orderField = item.filter.el.getAttribute('filter-order-name');
-				let orderType = item.filter.el.getAttribute('filter-order-type');
-				let orderValueType = item.filter.el.getAttribute('filter-value-type');
+				let orderField = item.el.getAttribute('filter-order-name');
+				let orderType = item.el.getAttribute('filter-order-type');
+				let orderValueType = item.el.getAttribute('filter-value-type');
 				let isFilter = ccfilter.queryData(itemData, item.filter.query);
 				if(!isFilter && document_id){
 					item.documentList.delete(data.document_id);
 					item.filter.startIndex -= 1;
-					let el = item.filter.el.querySelector("[templateId='" + item.filter.id + "'][document_id='" + data.document_id + "']");
+					let el = item.el.querySelector("[templateId='" + item.filter.id + "'][document_id='" + data.document_id + "']");
 					if (el) {
 						el.remove();
 						// item.filter.startIndex--;
@@ -323,10 +321,10 @@ const CoCreateFetch = {
 
 					if(isFilter && !document_id){
 						item.filter.startIndex += 1;
-						this.__renderElements(item.filter.el, render_data, '', '', index);
+						this.__renderElements(item.el, render_data, '', '', index);
 					}
 					else if( isFilter && document_id) {
-						let replaceNode = item.filter.el.querySelector("[templateId='" + item.filter.id + "'][document_id='" + data.document_id + "']");
+						let replaceNode = item.el.querySelector("[templateId='" + item.filter.id + "'][document_id='" + data.document_id + "']");
 						if (index && replaceNode){
 							replaceNode.remove();
 							replaceNode = '';
@@ -334,7 +332,7 @@ const CoCreateFetch = {
 						if (isRendered) {
 							render_data.data = dotNotationToObject(Data)
 						}
-						this.__renderElements(item.filter.el, render_data, '', replaceNode, index);
+						this.__renderElements(item.el, render_data, '', replaceNode, index);
 					}
 				}
 			}
@@ -347,8 +345,8 @@ const CoCreateFetch = {
 		
 		for (let item of this.items.values()) {
 			if (item.filter.collection == collection) {
-				var tmpId = item.filter.el.getAttribute('template_id');
-				var els = item.filter.el.querySelectorAll("[templateId='" + tmpId + "'][document_id='" + document_id + "']");
+				var tmpId = item.el.getAttribute('template_id');
+				var els = item.el.querySelectorAll("[templateId='" + tmpId + "'][document_id='" + document_id + "']");
 				for (let j = 0; j < els.length; j++) {
 					els[j].remove();
 					item.filter.startIndex--;
@@ -363,30 +361,30 @@ const CoCreateFetch = {
 		let item_id = data.filter.id;
 		let item = this.items.get(item_id);
 		if (item) {
-			let fetch_name = item.filter.el.getAttribute('fetch-name');
+			let fetch_name = item.el.getAttribute('fetch-name');
 			if (fetch_name) {
 				data = data.data[0];
 			}
 			
 			if (data) {
 				if (fetch_name) {
-					this.__removeAllElements(item.filter.el);
+					this.__removeAllElements(item.el);
 				} else {
 					if (data.filter && data.filter.startIndex === 0) {
 						if (data.collection == 'collections')
 							item.documentList = new Map(data.data.map(key => [key.name, key]));
 						else
 							item.documentList = new Map(data.data.map(key => [key._id, key]));
-						this.__removeAllElements(item.filter.el);
+						this.__removeAllElements(item.el);
 					} else {
 						for (let documentItem of data.data)
 							item.documentList.set(documentItem._id, documentItem);
 					}
 				}
 				item.filter.startIndex += data['data'].length
-				this.__renderElements(item.filter.el, data, fetch_name);
+				this.__renderElements(item.el, data, fetch_name);
 			}
-			this.initializing.delete(item.filter.el)
+			this.initializing.delete(item.el)
 		}
 	},
 
