@@ -175,6 +175,9 @@ const CoCreateFetch = {
 		if (!template.getAttribute('document_id')) {
 			template.setAttribute('document_id', '{{data._id}}');
 		}
+		if (!template.getAttribute('renderedkey')) {
+			template.setAttribute('renderedkey', '{{data._id}}');
+		}
 		if (render_id) {
 			template = template.outerHTML.replace(/\$auto/g, render_id);
 			itemTemplateDiv.innerHTML = template;
@@ -241,7 +244,7 @@ const CoCreateFetch = {
 			this.__addElements(data)
 	},
 
-	__addElements: async function(data) {
+	__addElements: async function(data) {			
 		let Data, isRendered;
 		if (Array.isArray(data.data)){
 			Data = data.data[0];
