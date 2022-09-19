@@ -261,6 +261,28 @@ const CoCreateFetch = {
 			let itemData;
 			
 			if (item.collection === collection && !item.el.getAttribute('fetch-name') && item.documentList) {
+				if (data.updateName) {
+					// if (!Array.isArray(data.deleteName))
+					// data.deleteName = [data.deleteName]
+					for (const name of Object.keys(data.updateName)) {
+						let el = item.el.querySelector("[renderedkey='" + name + "']");
+						if (el) {
+							el.remove();
+						}
+					}	
+				}
+
+				if (data.deleteName) {
+					if (!Array.isArray(data.deleteName))
+						data.deleteName = [data.deleteName]
+					for (let name of data.deleteName) {
+						let el = item.el.querySelector("[renderedkey='" + name + "']");
+						if (el) {
+							el.remove();
+						}
+					}
+				}
+		
 				let render_data = {...data};
 				let document_id = item.documentList.get(data.document_id);
 				if(collection == 'collections'){
