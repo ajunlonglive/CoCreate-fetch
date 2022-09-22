@@ -1,3 +1,24 @@
+# [1.10.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.9.2...v1.10.0) (2022-09-22)
+
+
+### Bug Fixes
+
+* // item.filter.startIndex-- ([55cafd4](https://github.com/CoCreate-app/CoCreate-fetch/commit/55cafd42a15e536c3c9336891029944eb5dddd77))
+* addElement sends data as an object for rendering ([b4acab6](https://github.com/CoCreate-app/CoCreate-fetch/commit/b4acab627b2b8558c52c28821842b452eaa0ae4e))
+* data.filter, data.filter._id and replace operator with filter ([25ad40c](https://github.com/CoCreate-app/CoCreate-fetch/commit/25ad40c7a774196eacd424c7266c70db9e29c70c))
+* fetchedData triggered by listner instead of await ([0794790](https://github.com/CoCreate-app/CoCreate-fetch/commit/0794790aa7dfd18caea8286e19e647ea941a809e))
+* moved item.filter.el to item.el inorder to remove el from shallow copy ([3e66005](https://github.com/CoCreate-app/CoCreate-fetch/commit/3e660052d306ce15f97704b4cf50061be17d9f33))
+* rename variable item.filter.collection to item.collection ([b109e9d](https://github.com/CoCreate-app/CoCreate-fetch/commit/b109e9d9464b0a711934d1882b8621c9089e56af))
+* replacd filter.filtrItem with filter.queryData ([9911cf9](https://github.com/CoCreate-app/CoCreate-fetch/commit/9911cf9926506a2a05de1ab5a6bd40cde698a277))
+* startIndex optimization ([b1a1484](https://github.com/CoCreate-app/CoCreate-fetch/commit/b1a1484ffdc5f24974f949cfa699759cccc3dae7))
+* update to item.filte. depreciated makeFetchOptions ([86fcb25](https://github.com/CoCreate-app/CoCreate-fetch/commit/86fcb25427c6b8bcc47f872fa9167bc7c3be1358))
+
+
+### Features
+
+* attribute renderkey  so render can apply changes to keys and there values ([7ee0e5f](https://github.com/CoCreate-app/CoCreate-fetch/commit/7ee0e5f75518ed717caba917dd5ac83031b22584))
+* supports updateName and deleteNme ([8fdf6b5](https://github.com/CoCreate-app/CoCreate-fetch/commit/8fdf6b5f11d9f1184c800f8826339ebb6144ccc7))
+
 ## [1.9.2](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.9.1...v1.9.2) (2022-09-01)
 
 
