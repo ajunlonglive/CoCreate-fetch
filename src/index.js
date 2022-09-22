@@ -394,6 +394,7 @@ const CoCreateFetch = {
 			if (data) {
 				if (fetch_name) {
 					this.__removeAllElements(item.el);
+					item.filter.startIndex += data[fetch_name].length
 				} else {
 					if (data.filter && data.filter.startIndex === 0) {
 						if (data.collection == 'collections')
@@ -405,8 +406,8 @@ const CoCreateFetch = {
 						for (let documentItem of data.data)
 							item.documentList.set(documentItem._id, documentItem);
 					}
+					item.filter.startIndex += data['data'].length
 				}
-				item.filter.startIndex += data['data'].length
 				this.__renderElements(item.el, data, fetch_name);
 			}
 			this.initializing.delete(item.el)
