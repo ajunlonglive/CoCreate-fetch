@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.10.0...v1.10.1) (2022-09-29)
+
+
+### Bug Fixes
+
+* config renameed to CoCreateConfig ([7e3aa4d](https://github.com/CoCreate-app/CoCreate-fetch/commit/7e3aa4d0d4b487f83af570df60746db4e3013564))
+
 # [1.10.0](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.9.2...v1.10.0) (2022-09-22)
 
 
