@@ -1,3 +1,11 @@
+## [1.10.9](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.10.8...v1.10.9) (2022-10-02)
+
+
+### Bug Fixes
+
+* const self ([0fac4be](https://github.com/CoCreate-app/CoCreate-fetch/commit/0fac4be7a94415edbca0a2f24a159493690d9880))
+* minor bug fixes ([eb4c7eb](https://github.com/CoCreate-app/CoCreate-fetch/commit/eb4c7eb96f614ce790b0736c6ab6046307237193))
+
 ## [1.10.8](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.10.7...v1.10.8) (2022-10-02)
 
 
