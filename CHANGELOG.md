@@ -1,3 +1,10 @@
+## [1.10.8](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.10.7...v1.10.8) (2022-10-02)
+
+
+### Bug Fixes
+
+* bump @cocreate/hosting and @cocreate/socket-client ([9387364](https://github.com/CoCreate-app/CoCreate-fetch/commit/9387364a63c9a447ebd08401dd172515b3de556c))
+
 ## [1.10.7](https://github.com/CoCreate-app/CoCreate-fetch/compare/v1.10.6...v1.10.7) (2022-10-01)
 
 
