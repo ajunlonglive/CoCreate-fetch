@@ -24,6 +24,7 @@ const CoCreateFetch = {
 	},
 	
 	initElement: function(element) {
+		const self = this;
 		let isCollections;
 		let collection = element.getAttribute('fetch-collection')
 		let name = element.getAttribute('fetch-name')
@@ -75,7 +76,7 @@ const CoCreateFetch = {
 
 			element.addEventListener("changeFilterInput", function(e) {
 				item.filter.startIndex = 0;
-				this.fetchData(item);
+				self.fetchData(item);
 			});
 			
 		} else {
